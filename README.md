@@ -42,6 +42,3 @@ bat
 karabiner
 kitty
 lvim
-nvim
-
-
