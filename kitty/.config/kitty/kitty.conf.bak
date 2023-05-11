@@ -42,9 +42,9 @@ tab_bar_style slant
 # inactive_tab_background #f2e5bc
 
 # Tab style for Gruvbox light
-active_tab_background   #f2e5bc
-inactive_tab_background #f2e5bc
-inactive_tab_background #d5c4a1
+# active_tab_background   #f2e5bc
+# inactive_tab_background #f2e5bc
+# inactive_tab_background #d5c4a1
 
 # Tab style for Gruvbox dark
 # active_tab_foreground   #f2e5bc
@@ -101,6 +101,6 @@ map cmd+v        paste_from_clipboard
 
 
 # BEGIN_KITTY_THEME
-# Gruvbox Material Light Soft
+# Rosé Pine
 include current-theme.conf
 # END_KITTY_THEME
