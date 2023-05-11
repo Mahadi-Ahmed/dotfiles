@@ -39,7 +39,6 @@ using ls -al in the terminal to see where symblinks are connected to.
 --- Files with .config folder ---
 alacritty/
 bat
-iterm2
 karabiner
 kitty
 lvim
