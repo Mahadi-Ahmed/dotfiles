@@ -6,7 +6,7 @@ source "/usr/local/opt/spaceship/spaceship.zsh"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/mahadiahmed/.oh-my-zsh"
-export MANPAGER='lvim +Man!'
+export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
