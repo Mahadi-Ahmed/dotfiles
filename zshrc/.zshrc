@@ -8,6 +8,8 @@ source "/usr/local/opt/spaceship/spaceship.zsh"
 export ZSH="/Users/mahadiahmed/.oh-my-zsh"
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
+export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
