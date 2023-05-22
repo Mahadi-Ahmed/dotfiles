@@ -29,16 +29,3 @@ having 2 different directories. One for recording videos, one for normal use.
 using ls -al in the terminal to see where symblinks are connected to.
 
 #### [Your unofficial guide to dotfiles on GitHub](https://dotfiles.github.io)
-
-
-## Todo to stow
-
-* ~/.zshrc
-* ~/.ssh (only config)
-* ~/.oh-my-zsh/custom/aliases.zsh
---- Files with .config folder ---
-alacritty/
-bat
-karabiner
-kitty
-lvim
