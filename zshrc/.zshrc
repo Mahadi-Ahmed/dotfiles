@@ -2,7 +2,7 @@
 #export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:/usr/local/opt/avr-gcc@8/bin:$PATH
 
-source "/usr/local/opt/spaceship/spaceship.zsh"
+# source "/usr/local/opt/spaceship/spaceship.zsh"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/mahadiahmed/.oh-my-zsh"
@@ -124,6 +124,23 @@ source $ZSH/oh-my-zsh.sh
 # precmd () {
 #   print -Pn "\e]2;%n@%M | %~\a" 
 # } 
+#
+
+function zsh_directory_name() {
+  emulate -L zsh
+  [[ $1 == d ]] || return
+  while [[ $2 != / ]]; do
+    if [[ -e $2/.git ]]; then
+      typeset -ga reply=(${2:t} $#2)
+      # echo ${2:t} $#2
+      # echo ${2:t} 
+      # echo ${2:h} 
+      return
+    fi
+    2=${2:h}
+  done
+  return 1
+}
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -184,3 +201,8 @@ unset __conda_setup
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
