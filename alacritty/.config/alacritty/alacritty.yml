@@ -1,7 +1,7 @@
 import:
   # - ~/.config/alacritty/themes/rose-pine-moon.yml
-  # - ~/.config/alacritty/themes/rose-pine.yml
-  - ~/.config/alacritty/themes/gruvbox_light.yaml
+  - ~/.config/alacritty/themes/rose-pine.yml
+  # - ~/.config/alacritty/themes/gruvbox_light.yaml
 
 window:
   # Window dimensions (changes require restart)
@@ -44,7 +44,7 @@ window:
   decorations: buttonless
 
 # Allow terminal applications to change Alacritty's window title.
-  title: Alacritty
+  # title: Alacritty
   dynamic_title: true
 
   # Background opacity
