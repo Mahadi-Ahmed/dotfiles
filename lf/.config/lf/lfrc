@@ -1,0 +1,11 @@
+# ██╗     ███████╗
+# ██║     ██╔════╝
+# ██║     █████╗
+# ██║     ██╔══╝
+# ███████╗██║
+# ╚══════╝╚═╝
+# Terminal file manager
+# https://github.com/gokcehan/lf
+
+set hidden on
+set icons
