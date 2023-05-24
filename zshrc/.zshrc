@@ -196,7 +196,6 @@ unset __conda_setup
 [[ -f /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/sls.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-. ~/.config/z.sh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -204,5 +203,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
+eval "$(zoxide init zsh)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
