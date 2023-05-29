@@ -3,30 +3,32 @@
  `lvim` is the global options object
 ]]
 -- vim options
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
-vim.opt.relativenumber = true
-vim.opt.updatetime = 300
-vim.opt.timeoutlen = 350
-vim.g["sneak#label"] = true
+vim.opt.shiftwidth                                  = 2
+vim.opt.tabstop                                     = 2
+vim.opt.relativenumber                              = true
+vim.opt.updatetime                                  = 300
+vim.opt.timeoutlen                                  = 350
+vim.g["sneak#label"]                                = true
+vim.opt.termguicolors                               = true -- set term gui colors (most terminals support this)
 
 -- general
-lvim.log.level = "info"
-lvim.format_on_save = {
+lvim.log.level                                      = "info"
+lvim.format_on_save                                 = {
   enabled = true,
   pattern = "*.lua",
   timeout = 1000,
 }
 
 -- lvim.builtin.lualine.style = "lvim"
-lvim.builtin.indentlines = "disable"
+lvim.builtin.indentlines                            = "disable"
+lvim.transparent_window                             = true
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
 -- keymappings <https://www.lunarvim.org/docs/configuration/keybindings>
-lvim.leader = "space"
+lvim.leader                                         = "space"
 -- add your own keymapping
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<C-s>"]                      = ":w<cr>"
 
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
@@ -35,7 +37,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
-lvim.builtin.which_key.mappings["j"] = {
+lvim.builtin.which_key.mappings["j"]                = {
   name = "Harpoon",
   m = { ':lua require("harpoon.ui").toggle_quick_menu()<cr>', 'toggle menu' },
   i = { '<cmd>lua require("harpoon.mark").add_file()<cr>', 'add file' },
@@ -48,29 +50,29 @@ lvim.builtin.which_key.mappings["j"] = {
 }
 
 -- UndoTree --
-lvim.builtin.which_key.mappings["u"] = {
+lvim.builtin.which_key.mappings["u"]                = {
   name = "UndoTree",
   f = { ':UndotreeToggle<cr>', 'toggle menu' }
 }
 
 -- add your own keymapping
-lvim.builtin.which_key.mappings["bm"] = {
+lvim.builtin.which_key.mappings["bm"]               = {
   ":MaximizerToggle<cr>", "maximize split toggle"
 }
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<C-s>"]                      = ":w<cr>"
 
 -- -- Change theme settings
 -- lvim.colorscheme = "lunar"
-lvim.colorscheme = "rose-pine"
+lvim.colorscheme                                    = "rose-pine"
 
-lvim.builtin.alpha.active = true
-lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
+lvim.builtin.alpha.active                           = true
+lvim.builtin.alpha.mode                             = "dashboard"
+lvim.builtin.terminal.active                        = true
+lvim.builtin.nvimtree.setup.view.side               = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- Automatically install missing parsers when entering buffer
-lvim.builtin.treesitter.auto_install = true
+lvim.builtin.treesitter.auto_install                = true
 
 -- lvim.builtin.treesitter.ignore_install = { "haskell" }
 
@@ -124,7 +126,7 @@ lvim.builtin.treesitter.auto_install = true
 -- }
 
 -- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
-lvim.plugins = {
+lvim.plugins                                        = {
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
