@@ -195,6 +195,10 @@ unset __conda_setup
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/sls.zsh
 
+# export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+# export FZF_DEFAULT_OPTS='--height 40% --border'
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
