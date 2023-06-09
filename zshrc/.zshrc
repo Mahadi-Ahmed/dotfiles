@@ -44,7 +44,7 @@ export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-DISABLE_AUTO_TITLE="true"
+# DISABLE_AUTO_TITLE="true"
 # echo -n -e "\033]0;CLIENT\007"
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -74,57 +74,12 @@ plugins=(git zsh-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
-# SPACESHIP
-# SPACESHIP_PROMPT_ORDER=(
-#   user
-#   host
-#   dir
-#   node
-#   package
-#   python
-#   rust
-#   java
-#   lua
-#   docker
-#   aws
-#   kubectl
-#   golang
-#   async
-#   git
-#   line_sep
-#   char
-# )
-
-# # SPACESHIP_PROMPT_ASYNC=true
-# SPACESHIP_NODE_ASYNC=false
-# SPACESHIP_ASYNC_SHOW_COUNT=true
-# SPACESHIP_GIT_BRANCH_ASYNC=true
-# SPACESHIP_GIT_ASYNC=false
-
-# SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=false	
-# SPACESHIP_TIME_SHOW=true
-
-# SPACESHIP_PROMPT_ORDER=(
-#   user
-#   host
-#   dir
-#   git
-#   node
-#   docker
-#   aws
-#   python
-#   java
-#   conda
-#   async
-#   line_sep
-#   char
-# )
-
+# NOTE: Dont remember where this is from
 # title bar prompt
 # precmd () {
 #   print -Pn "\e]2;%n@%M | %~\a" 
 # } 
-#
+
 
 function zsh_directory_name() {
   emulate -L zsh
