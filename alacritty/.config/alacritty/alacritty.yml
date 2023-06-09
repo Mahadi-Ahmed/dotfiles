@@ -2,6 +2,7 @@ import:
   # - ~/.config/alacritty/themes/rose-pine-moon.yml
   - ~/.config/alacritty/themes/rose-pine.yml
   # - ~/.config/alacritty/themes/gruvbox_light.yaml
+  # - ~/.config/alacritty/themes/gruvbox_dark.yaml
 
 window:
   # Window dimensions (changes require restart)
@@ -104,11 +105,19 @@ font:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  #style: Block
+  style: Beam
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
   #unfocused_hollow: true
+
+  # Vi mode cursor style
+  #
+  # If the vi mode cursor style is `None` or not specified, it will fall back to
+  # the style of the active value of the normal cursor.
+  #
+  # See `cursor.style` for available options.
+  vi_mode_style: Block
 
 env:
   TERM: xterm-256color
