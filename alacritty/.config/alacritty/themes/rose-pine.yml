@@ -4,7 +4,8 @@ colors:
     foreground: "0xe0def4"
   cursor:
     text: "0xe0def4"
-    cursor: "0x524f67"
+    # cursor: "0x524f67"
+    cursor: "0x31748f"
   vi_mode_cursor:
     text: "0xe0def4"
     cursor: "0x524f67"
