@@ -25,3 +25,4 @@ alias moveSc='/Users/mahadiahmed/Code/mahadia/Util-Scripts/screenshot_mover/scre
 alias lg='lazygit'
 alias cdlv='cd /Users/mahadiahmed/.local/share/lunarvim/lvim'
 alias cpdir='cp -rf'
+alias vimdiff='nvim -d'
