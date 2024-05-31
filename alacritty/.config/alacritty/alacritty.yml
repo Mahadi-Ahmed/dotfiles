@@ -4,6 +4,9 @@ import:
   # - ~/.config/alacritty/themes/rose-pine-dawn.yml
   # - ~/.config/alacritty/themes/gruvbox_light.yaml
   # - ~/.config/alacritty/themes/gruvbox_dark.yaml
+  # - ~/.config/alacritty/themes/kanagawa.yml
+  # - ~/.config/alacritty/themes/kanagawa_dragon.yml
+  # - ~/.config/alacritty/themes/kanagawa_lotus.yaml
 
 window:
   # Window dimensions (changes require restart)
