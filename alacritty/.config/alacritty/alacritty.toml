@@ -1,10 +1,11 @@
 # enable_rgb = true
 # import = ["/Users/mahadiahmed/.config/alacritty/themes/rose-pine.toml"]
-import = ["/Users/mahadiahmed/.config/alacritty/themes/rose-pine-moon.toml"]
+# import = ["/Users/mahadiahmed/.config/alacritty/themes/rose-pine-moon.toml"]
 # import = ["/Users/mahadiahmed/.config/alacritty/themes/rose-pine-dawn.toml"]
 # import = ["/Users/mahadiahmed/.config/alacritty/themes/gruvbox_dark.toml"]
-# import = ["/Users/mahadiahmed/.config/alacritty/themes/gruvbox_light.toml"]
+import = ["/Users/mahadiahmed/.config/alacritty/themes/gruvbox_light.toml"]
 # import = ["/Users/mahadiahmed/.config/alacritty/themes/kanagawa.toml"]
+# import = ["/Users/mahadiahmed/.config/alacritty/themes/lotus.toml"]
 live_config_reload = true
 
 [env]
