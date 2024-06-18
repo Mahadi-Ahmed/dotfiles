@@ -124,6 +124,9 @@ function codeauth () {
     node /Users/mahadiahmed/Code/snippets/tokenCodeClipboard/index.js $1
 }
 
+function zed() {
+    open "$1" -a Zed
+}
 echo "IBN5100: Lab Member 003 Suuppar Hacker: El Psy Congroo "
 
 # Set typewritten ZSH as a prompt
