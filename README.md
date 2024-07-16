@@ -1,5 +1,7 @@
 # dotfiles
 
+[nvim config](https://github.com/Mahadi-Ahmed/nvim)
+
 ## Manage dotfiles with [gnu stow](https://www.gnu.org/software/stow/)
 
 Greate article on stow:
