@@ -5,11 +5,12 @@
 
 # ===== Config =====
 
-font_family      FiraCode Nerd Font Mono Retina
-bold_font        FiraCode Nerd Font Mono Bold
-italic_font      FiraCode Nerd Font Mono Regular
-bold_italic_font FiraCode Nerd Font Mono SemiBold
-font_size 15.0
+# font_family      FiraCode Nerd Font Mono Retina
+font_family      FiraCode Nerd Font 
+bold_font        FiraCode Nerd Font 
+italic_font      FiraCode Nerd Font 
+bold_italic_font FiraCode Nerd Font 
+font_size 16.0
 
 draw_minimal_borders yes
 inactive_text_alpha 0.7
@@ -104,6 +105,6 @@ map cmd+v        paste_from_clipboard
 
 
 # BEGIN_KITTY_THEME
-# Gruvbox Material Light Soft
+# Gruvbox Material Light Medium
 include current-theme.conf
 # END_KITTY_THEME
