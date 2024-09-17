@@ -10,6 +10,7 @@ export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
 export FZF_TMUX_OPTS="-p 55%,60%"
+export ATAC_KEY_BINDINGS="/Users/mahadiahmed/.config/atac/vim_key_bindings.toml"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -72,7 +73,6 @@ export FZF_TMUX_OPTS="-p 55%,60%"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-vi-mode)
-
 source $ZSH/oh-my-zsh.sh
 
 # NOTE: Dont remember where this is from
@@ -171,3 +171,12 @@ eval "$(zoxide init zsh)"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/mahadiahmed/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mahadiahmed/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/mahadiahmed/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mahadiahmed/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
