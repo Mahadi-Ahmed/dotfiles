@@ -1,3 +1,5 @@
+# Volta path
+export PATH="$HOME/.volta/bin:$PATH"
 # If you come from bash you might have to change your $PATH.
 #export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:/usr/local/opt/avr-gcc@8/bin:$PATH
@@ -166,7 +168,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-eval "$(zoxide init zsh)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -180,3 +181,4 @@ if [ -f '/Users/mahadiahmed/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/mahadiahmed/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mahadiahmed/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+eval "$(zoxide init zsh)"
