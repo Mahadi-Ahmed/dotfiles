@@ -74,7 +74,7 @@ export ATAC_KEY_BINDINGS="/Users/mahadiahmed/.config/atac/vim_key_bindings.toml"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-vi-mode)
+plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # NOTE: Dont remember where this is from
@@ -178,6 +178,23 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/mahadiahmed/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mahadiahmed/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
+}
+
+zle     -N             sesh-sessions
+bindkey -M emacs '^s' sesh-sessions
+bindkey -M vicmd '^s' sesh-sessions
+bindkey -M viins '^s' sesh-sessions
+
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/mahadiahmed/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mahadiahmed/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
