@@ -95,7 +95,12 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 
 # Ignore specific commands in history
 HISTORY_IGNORE="(ls|cd|pwd|exit|clear|export*)"
-
+# Function to ignore specific commands in history
+zshaddhistory() {
+    local line=${1%%$'\n'}
+    local cmd=${line%% *}
+    [[ ${cmd} != (ls|cd|pwd|exit|clear|export) ]]
+}
 
 function zsh_directory_name() {
   emulate -L zsh
