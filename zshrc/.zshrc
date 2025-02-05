@@ -1,8 +1,5 @@
-# Volta path
-export PATH="$HOME/.volta/bin:$PATH"
-# If you come from bash you might have to change your $PATH.
-#export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$HOME/.local/bin:/usr/local/opt/avr-gcc@8/bin:$PATH
+# Path configurations
+export PATH="$HOME/.volta/bin:$HOME/.local/bin:/usr/local/opt/avr-gcc@8/bin:$PATH"
 
 # source "/usr/local/opt/spaceship/spaceship.zsh"
 
