@@ -55,7 +55,6 @@
                     },
                     {
                         "description": "Toggle caps_lock by pressing left_shift then right_shift",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
