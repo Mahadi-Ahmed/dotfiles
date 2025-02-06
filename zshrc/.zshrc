@@ -1,5 +1,11 @@
 # Path configurations
-export PATH="$HOME/.volta/bin:$HOME/.local/bin:/usr/local/opt/avr-gcc@8/bin:$PATH"
+typeset -U path  # Ensure unique entries
+path=(
+  $HOME/.volta/bin
+  $HOME/.local/bin
+  /usr/local/opt/avr-gcc@8/bin
+  $path
+)
 
 # source "/usr/local/opt/spaceship/spaceship.zsh"
 
@@ -161,6 +167,8 @@ conda-init() {
 [[ -f /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/sls.zsh
 
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+# Optimize FZF
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 # export FZF_DEFAULT_OPTS='--height 40% --border'
 # export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
