@@ -1,3 +1,6 @@
+# Add to .zshrc
+zmodload zsh/zprof  # Top of file
+zmodload zsh/datetime  # For timestamps
 # Path configurations
 typeset -U path  # Ensure unique entries
 path=(
@@ -211,3 +214,14 @@ if [ -f '/Users/mahadiahmed/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mah
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/mahadiahmed/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mahadiahmed/google-cloud-sdk/completion.zsh.inc'; fi
+
+# At the bottom of .zshrc
+# Log zsh profiling data with timestamp
+zsh-profile-log() {
+  local log_file="$HOME/.zsh_profile_log"
+  local timestamp=$(strftime '%Y-%m-%d %H:%M:%S' $EPOCHSECONDS)
+  echo "=== Profile data for $timestamp ===" >> "$log_file"
+  zprof >> "$log_file"
+  echo -e "\n\n" >> "$log_file"
+}
+zsh-profile-log  # Bottom of file (uncomment to debug)
