@@ -218,10 +218,16 @@ if [ -f '/Users/mahadiahmed/google-cloud-sdk/completion.zsh.inc' ]; then . '/Use
 # At the bottom of .zshrc
 # Log zsh profiling data with timestamp
 zsh-profile-log() {
-  local log_file="$HOME/.zsh_profile_log"
-  local timestamp=$(strftime '%Y-%m-%d %H:%M:%S' $EPOCHSECONDS)
-  echo "=== Profile data for $timestamp ===" >> "$log_file"
+  local log_dir="$HOME/.zsh_profile_logs"
+  mkdir -p "$log_dir"  # Create directory if it doesn't exist
+  
+  # Create filename with timestamp
+  local timestamp=$(strftime '%Y%m%d_%H%M%S' $EPOCHSECONDS)
+  local log_file="$log_dir/zsh_profile_$timestamp.log"
+  
+  # Write profile data to file
+  echo "=== Profile data for $(strftime '%Y-%m-%d %H:%M:%S' $EPOCHSECONDS) ===" > "$log_file"
   zprof >> "$log_file"
-  echo -e "\n\n" >> "$log_file"
 }
+
 zsh-profile-log  # Bottom of file (uncomment to debug)
