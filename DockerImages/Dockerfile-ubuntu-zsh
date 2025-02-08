@@ -3,6 +3,11 @@ FROM ubuntu:22.04
 # Prevent tzdata from requesting user input during installation
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Set environment variables early
+ENV HOME=/root
+ENV PYTHONPATH=/usr/local/lib/python3/site-packages:${HOME}/.local/lib/python3/site-packages
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${HOME}/.local/bin
+
 # Install basic dependencies including zsh
 RUN apt-get update && apt-get install -y \
     git \
@@ -11,11 +16,25 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     python3 \
     python3-pip \
+    python3-venv \
     unzip \
     software-properties-common \
     locales \
     zsh \
     fontconfig \
+    xclip \
+    xsel \
+    # Perl and its dependencies
+    perl \
+    cpanminus \
+    libperl-dev \
+    make \
+    # Tree-sitter dependencies
+    pkg-config \
+    lua5.1 \
+    luarocks \
+    # Additional dependencies
+    fzf \
     && rm -rf /var/lib/apt/lists/*
 
 # Set up locale
@@ -24,10 +43,10 @@ ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
-# Install Node.js
+# Install Node.js and tree-sitter CLI
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
-    && npm install -g neovim
+    && npm install -g neovim tree-sitter-cli
 
 # Install latest Neovim
 RUN apt-get update && apt-get install -y ninja-build gettext cmake && \
@@ -49,7 +68,7 @@ RUN apt-get update && apt-get install -y \
     fd-find \
     && rm -rf /var/lib/apt/lists/*
 
-# Install fzf
+# Install fzf from source
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
     && ~/.fzf/install --all
 
@@ -60,10 +79,31 @@ RUN LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygi
     && install lazygit /usr/local/bin \
     && rm lazygit lazygit.tar.gz
 
+# Install Perl module dependencies and Neovim::Ext
+RUN cpanm --notest Module::Build && \
+    cpanm --notest Neovim::Ext
+
 # Create a non-root user
 RUN useradd -m -s /usr/bin/zsh developer
 USER developer
 WORKDIR /home/developer
+
+# Update environment variables for the new user
+ENV HOME=/home/developer
+ENV PYTHONPATH=/usr/local/lib/python3/site-packages:${HOME}/.local/lib/python3/site-packages
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${HOME}/.local/bin
+
+# Set up Python environment and dependencies
+RUN python3 -m pip install --user pynvim wheel
+
+# Set up Lua and LuaRocks
+RUN mkdir -p ${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin && \
+    curl -o hererocks.py https://raw.githubusercontent.com/luarocks/hererocks/latest/hererocks.py && \
+    python3 hererocks.py ${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin -l 5.1 -r latest && \
+    rm hererocks.py
+
+# Add LuaRocks to PATH
+ENV PATH="${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin:${PATH}"
 
 # Install Oh My Zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -72,19 +112,25 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Install Nerd Font (FiraCode)
-RUN mkdir -p ~/.local/share/fonts \
-    && cd ~/.local/share/fonts \
+RUN mkdir -p ${HOME}/.local/share/fonts \
+    && cd ${HOME}/.local/share/fonts \
     && curl -fLO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip \
     && unzip FiraCode.zip \
     && rm FiraCode.zip \
     && fc-cache -fv
 
 # Set up zsh configuration
-RUN echo 'export PATH=$PATH:~/.local/bin' >> ~/.zshrc && \
-    echo 'ZSH_THEME="powerlevel10k/powerlevel10k"' >> ~/.zshrc
+RUN echo "export PATH=\$PATH:\$HOME/.local/bin:\$HOME/.local/share/nvim/lazy-rocks/hererocks/bin" >> ${HOME}/.zshrc && \
+    echo 'ZSH_THEME="powerlevel10k/powerlevel10k"' >> ${HOME}/.zshrc
 
-# Create config directory for Neovim
-RUN mkdir -p ~/.config/nvim
+# Create config directory for Neovim and add basic configuration
+RUN mkdir -p ${HOME}/.config/nvim && \
+    echo 'vim.opt.clipboard = "unnamedplus"' > ${HOME}/.config/nvim/init.lua && \
+    echo 'vim.g.loaded_perl_provider = 0' >> ${HOME}/.config/nvim/init.lua
+
+# Set Lua environment variables
+ENV LUA_PATH="${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/share/lua/5.1/?.lua;${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/share/lua/5.1/?/init.lua;;"
+ENV LUA_CPATH="${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/lib/lua/5.1/?.so;;"
 
 # Set default command to zsh
 CMD ["zsh"]
