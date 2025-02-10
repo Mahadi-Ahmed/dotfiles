@@ -20,6 +20,8 @@ zinit wait lucid light-mode for \
     blockf atpull'zinit creinstall -q .' \
         zsh-users/zsh-completions
 
+source ~/.config/zsh/aliases.zsh
+
 # Completion styling and cache settings
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
