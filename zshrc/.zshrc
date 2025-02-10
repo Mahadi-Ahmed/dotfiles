@@ -6,30 +6,19 @@ fi
 zmodload zsh/zprof  # Top of file
 zmodload zsh/datetime  # For timestamps
 
-# Path configurations
-typeset -U path  # Ensure unique entries
-path=(
-  $HOME/.volta/bin
-  $HOME/.local/bin
-  /usr/local/opt/avr-gcc@8/bin
-  $path
-)
+source "${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git/zinit.zsh"
 
-# source "/usr/local/opt/spaceship/spaceship.zsh"
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
 
-export MANPAGER='nvim +Man!'
-export MANWIDTH=999
-export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
-export FZF_TMUX_OPTS="-p 55%,60%"
-export ATAC_KEY_BINDINGS="/Users/mahadiahmed/.config/atac/vim_key_bindings.toml"
-
-# Completion system optimization
-autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-  compinit;
-else
-  compinit -C;
-fi
+# Load core plugins
+zinit wait lucid light-mode for \
+    atinit"zicompinit; zicdreplay" \
+        zdharma-continuum/fast-syntax-highlighting \
+    atload"_zsh_autosuggest_start" \
+        zsh-users/zsh-autosuggestions \
+    blockf atpull'zinit creinstall -q .' \
+        zsh-users/zsh-completions
 
 # Completion styling and cache settings
 zstyle ':completion:*' accept-exact '*(N)'
@@ -67,10 +56,13 @@ setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks
 setopt HIST_FCNTL_LOCK           # Faster file locking
+setopt HIST_FIND_NO_DUPS         # Don't display duplicates in search
+setopt EXTENDED_HISTORY          # Save timestamp and duration
 unsetopt HIST_SAVE_BY_COPY       # Don't create temporary files
 
 # Ignore specific commands in history
 HISTORY_IGNORE="(ls|cd|pwd|exit|clear|export*)"
+
 # Function to ignore specific commands in history
 zshaddhistory() {
     local line=${1%%$'\n'}
@@ -95,27 +87,24 @@ function zsh_directory_name() {
 }
 
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-# Optimize FZF
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git' # Optimize FZF
 # export FZF_DEFAULT_OPTS='--height 40% --border'
 # export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+zinit ice as"completion"
+zinit snippet /usr/local/bin/terraform
 
 zle     -N             sesh-sessions
 bindkey -M emacs '^s' sesh-sessions
 bindkey -M vicmd '^s' sesh-sessions
 bindkey -M viins '^s' sesh-sessions
 
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd j)" # NOTE: Rename z prefix to j
 
 function codeauth () {
     node /Users/mahadiahmed/Code/snippets/tokenCodeClipboard/index.js $1
