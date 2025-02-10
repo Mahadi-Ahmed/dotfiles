@@ -1,6 +1,11 @@
-# Add to .zshrc
+# Enable Powerlevel10k instant prompt (must be at the very top)
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 zmodload zsh/zprof  # Top of file
 zmodload zsh/datetime  # For timestamps
+
 # Path configurations
 typeset -U path  # Ensure unique entries
 path=(
@@ -12,84 +17,39 @@ path=(
 
 # source "/usr/local/opt/spaceship/spaceship.zsh"
 
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/mahadiahmed/.oh-my-zsh"
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
 export FZF_TMUX_OPTS="-p 55%,60%"
 export ATAC_KEY_BINDINGS="/Users/mahadiahmed/.config/atac/vim_key_bindings.toml"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# Completion system optimization
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit;
+else
+  compinit -C;
+fi
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# Completion styling and cache settings
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*' menu select
+mkdir -p ~/.zsh/cache
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-# echo -n -e "\033]0;CLIENT\007"
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use anuother custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/mahadiahmed/.oh-my-zsh"
+DISABLE_AUTO_UPDATE="false"
+UPDATE_ZSH_DAYS=25
+DISABLE_UPDATE_PROMPT="true"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
-# NOTE: Dont remember where this is from
-# title bar prompt
-# precmd () {
-#   print -Pn "\e]2;%n@%M | %~\a" 
-# } 
-
 # zsh history settings
+HISTSIZE=50000    # Number of commands in memory
+SAVEHIST=50000    # Number of commands saved to HISTFILE
+HISTFILE=~/.zsh_history  # Where history is saved
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
@@ -98,6 +58,9 @@ setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event i
 setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks
+setopt HIST_FCNTL_LOCK           # Faster file locking
+unsetopt HIST_SAVE_BY_COPY       # Don't create temporary files
 
 # Ignore specific commands in history
 HISTORY_IGNORE="(ls|cd|pwd|exit|clear|export*)"
@@ -124,51 +87,6 @@ function zsh_directory_name() {
   return 1
 }
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
-   export EDITOR='lvim'
- fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Look into the file in ~/.oh-my-zsh/custom/aliases.zsh for list of custom aliases
-
-function codeauth () {
-    node /Users/mahadiahmed/Code/snippets/tokenCodeClipboard/index.js $1
-}
-
-function zed() {
-    open "$1" -a Zed
-}
-echo "IBN5100: Lab Member 003 Suuppar Hacker: El Psy Congroo "
-
-# Set typewritten ZSH as a prompt
-
-# Lazy load conda
-conda-init() {
-  eval "$('/Users/mahadiahmed/opt/anaconda3/bin/conda' 'shell.zsh' 'hook')"
-}
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/sls.zsh
-
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 # Optimize FZF
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
@@ -177,19 +95,56 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
+
+zle     -N             sesh-sessions
+bindkey -M emacs '^s' sesh-sessions
+bindkey -M vicmd '^s' sesh-sessions
+bindkey -M viins '^s' sesh-sessions
+
+eval "$(zoxide init zsh)"
+
+function codeauth () {
+    node /Users/mahadiahmed/Code/snippets/tokenCodeClipboard/index.js $1
+}
+
+function zed() {
+    open "$1" -a Zed
+}
+
+# TODO: Figure out how to only show this when Last login msg is printed
+# echo "IBN5100: Lab Member 003 Suuppar Hacker: El Psy Congroo "
+
+# Set typewritten ZSH as a prompt
+
+# Lazy load conda
+conda-init() {
+  eval "$('/Users/mahadiahmed/opt/anaconda3/bin/conda' 'shell.zsh' 'hook')"
+}
+
+# Optimize serverless completions
+function serverless() {
+    unfunction serverless
+    # Load completions only when first using serverless
+    if [[ -f /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/serverless.zsh ]]; then
+        . /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/serverless.zsh
+        . /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/sls.zsh
+    fi
+    serverless "$@"
+}
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 function sesh-sessions() {
   {
@@ -202,18 +157,14 @@ function sesh-sessions() {
   }
 }
 
-zle     -N             sesh-sessions
-bindkey -M emacs '^s' sesh-sessions
-bindkey -M vicmd '^s' sesh-sessions
-bindkey -M viins '^s' sesh-sessions
-
-eval "$(zoxide init zsh)"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/mahadiahmed/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mahadiahmed/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/mahadiahmed/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mahadiahmed/google-cloud-sdk/completion.zsh.inc'; fi
+function gcloud() {
+    unfunction gcloud
+    if [ -f '/Users/mahadiahmed/google-cloud-sdk/path.zsh.inc' ]; then 
+        . '/Users/mahadiahmed/google-cloud-sdk/path.zsh.inc'
+        . '/Users/mahadiahmed/google-cloud-sdk/completion.zsh.inc'
+    fi
+    gcloud "$@"
+}
 
 # At the bottom of .zshrc
 # Log zsh profiling data with timestamp
