@@ -38,13 +38,20 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle ':completion:*' menu select
 mkdir -p ~/.zsh/cache
 
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/mahadiahmed/.oh-my-zsh"
-DISABLE_AUTO_UPDATE="false"
-UPDATE_ZSH_DAYS=25
-DISABLE_UPDATE_PROMPT="true"
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
+# Path configurations
+typeset -U path
+path=(
+  ${HOME}/.volta/bin(N)
+  ${HOME}/.local/bin(N)
+  /usr/local/opt/avr-gcc@8/bin(N)
+  $path[@]
+)
+
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
+export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
+export FZF_TMUX_OPTS="-p 55%,60%"
+export ATAC_KEY_BINDINGS="/Users/mahadiahmed/.config/atac/vim_key_bindings.toml"
 
 # zsh history settings
 HISTSIZE=50000    # Number of commands in memory
