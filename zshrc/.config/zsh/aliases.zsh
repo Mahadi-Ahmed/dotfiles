@@ -38,6 +38,7 @@ alias f='open -a Finder ./'
 alias subl='open -a /Applications/Sublime\ Text.app'
 alias warp='open -n /Applications/Warp.app'
 alias lg='lazygit'
+alias lvim='NVIM_APPNAME=lvim nvim'
 
 # Directory shortcuts
 alias cdlv='cd /Users/mahadiahmed/.local/share/lunarvim/lvim'
