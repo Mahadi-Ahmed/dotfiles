@@ -89,6 +89,7 @@ automatically-unhide-macos-hidden-apps = true
     alt-ctrl-minus = 'resize smart -50'
     alt-ctrl-equal = 'resize smart +50'
 
+    # NOTE: Maybe setup mnemonic workspaces, ie , s for slack , w for work , t for terminal
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
     alt-ctrl-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
     alt-ctrl-s = 'workspace S'
@@ -145,3 +146,17 @@ automatically-unhide-macos-hidden-apps = true
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
+
+# Monitor sequence number from left to right. 1-based indexing
+[workspace-to-monitor-force-assignment]
+A = ['ASUS', 'main']
+S = ['ASUS', 'main']
+D = ['ASUS', 'main']
+F = ['ASUS', 'main']
+
+1 = ['FS233','secondary']
+2 = ['FS233','secondary']
+3 = ['FS233','secondary']
+4 = ['FS233','secondary']
+
+5 = ['^built-in retina display$',3]
