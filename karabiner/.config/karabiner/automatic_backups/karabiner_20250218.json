@@ -1,5 +1,4 @@
 {
-    "global": { "show_in_menu_bar": false },
     "profiles": [
         {
             "name": "Default profile",
@@ -9,22 +8,7 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "CMD + h to NOTHING",
-                        "enabled": false,
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": { "mandatory": ["left_command"] }
-                                },
-                                "to": [],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "CAPS_LOCK to HYPER (SHIFT+COMMAND+OPTION+CONTROL) or ESCAPE (If Alone)",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -202,7 +186,6 @@
                     },
                     {
                         "description": "Hyper + SPACE : Toggle Alfred",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -232,7 +215,6 @@
                     },
                     {
                         "description": "Hyper + i/j/k/l == vim directional Keys",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
