@@ -80,6 +80,10 @@ run = 'layout floating'
     alt-ctrl-slash = 'layout tiles horizontal vertical'
     alt-ctrl-comma = 'layout accordion horizontal vertical'
 
+    # Make windows fullscreen
+    # See: https://nikitabobko.github.io/AeroSpace/commands#fullscreen
+    alt-ctrl-enter = 'fullscreen'
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     alt-ctrl-h = 'focus left'
     alt-ctrl-j = 'focus down'
