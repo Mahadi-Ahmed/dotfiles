@@ -42,6 +42,13 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = true
 
+[[on-window-detected]]
+if.app-name-regex-substring = 'finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'mail'
+run = 'layout floating'
 
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -86,8 +93,8 @@ automatically-unhide-macos-hidden-apps = true
     alt-ctrl-shift-l = 'move right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-    alt-ctrl-minus = 'resize smart -50'
-    alt-ctrl-equal = 'resize smart +50'
+    alt-ctrl-m = 'resize smart -50'
+    alt-ctrl-p = 'resize smart +50'
 
     # NOTE: Maybe setup mnemonic workspaces, ie , s for slack , w for work , t for terminal
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
