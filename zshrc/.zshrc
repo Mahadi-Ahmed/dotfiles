@@ -33,6 +33,7 @@ mkdir -p ~/.zsh/cache
 # Path configurations
 typeset -U path
 path=(
+  /opt/homebrew/bin(N)
   ${HOME}/.volta/bin(N)
   ${HOME}/.local/bin(N)
   /usr/local/opt/avr-gcc@8/bin(N)
