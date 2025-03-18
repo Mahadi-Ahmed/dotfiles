@@ -183,3 +183,11 @@ zsh-profile-log() {
 }
 
 # zsh-profile-log  # Bottom of file (uncomment to debug)
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/mahadiahmed/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+# bun completions
+[ -s "/Users/mahadiahmed/.bun/_bun" ] && source "/Users/mahadiahmed/.bun/_bun"
