@@ -4,24 +4,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Only enable zprof if debugging performance
 # zmodload zsh/zprof  # Top of file
 # zmodload zsh/datetime  # For timestamps
 
-source "${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git/zinit.zsh"
-
-zinit ice depth=1
-zinit light romkatv/powerlevel10k
-
-# Load core plugins
-zinit wait lucid light-mode for \
-    atinit"zicompinit; zicdreplay" \
-        zdharma-continuum/fast-syntax-highlighting \
-    atload"_zsh_autosuggest_start" \
-        zsh-users/zsh-autosuggestions \
-    blockf atpull'zinit creinstall -q .' \
-        zsh-users/zsh-completions
-
-source ~/.config/zsh/aliases.zsh
+# Optimize compinit - only check for new functions once per day
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 
 # Completion styling and cache settings
 zstyle ':completion:*' accept-exact '*(N)'
@@ -40,6 +33,22 @@ path=(
   /usr/local/opt/avr-gcc@8/bin(N)
   $path[@]
 )
+
+source "${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git/zinit.zsh"
+
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
+
+# Load core plugins
+zinit wait lucid light-mode for \
+    atinit"zicompinit; zicdreplay" \
+        zdharma-continuum/fast-syntax-highlighting \
+    atload"_zsh_autosuggest_start" \
+        zsh-users/zsh-autosuggestions \
+    blockf atpull'zinit creinstall -q .' \
+        zsh-users/zsh-completions
+
+source ~/.config/zsh/aliases.zsh
 
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
@@ -167,22 +176,23 @@ function gcloud() {
     gcloud "$@"
 }
 
+eval "$(direnv hook zsh)"
+
 # At the bottom of .zshrc
 # Log zsh profiling data with timestamp
-zsh-profile-log() {
-  local log_dir="$HOME/.zsh_profile_logs"
-  mkdir -p "$log_dir"  # Create directory if it doesn't exist
-  
-  # Create filename with timestamp
-  local timestamp=$(strftime '%Y%m%d_%H%M%S' $EPOCHSECONDS)
-  local log_file="$log_dir/zsh_profile_$timestamp.log"
-  
-  # Write profile data to file
-  echo "=== Profile data for $(strftime '%Y-%m-%d %H:%M:%S' $EPOCHSECONDS) ===" > "$log_file"
-  zprof >> "$log_file"
-}
+# zsh-profile-log() {
+#   local log_dir="$HOME/.zsh_profile_logs"
+#   mkdir -p "$log_dir"  # Create directory if it doesn't exist
+#   
+#   # Create filename with timestamp
+#   local timestamp=$(strftime '%Y%m%d_%H%M%S' $EPOCHSECONDS)
+#   local log_file="$log_dir/zsh_profile_$timestamp.log"
+#   
+#   # Write profile data to file
+#   echo "=== Profile data for $(strftime '%Y-%m-%d %H:%M:%S' $EPOCHSECONDS) ===" > "$log_file"
+#   zprof >> "$log_file"
+# }
 
-# zsh-profile-log  # Bottom of file (uncomment to debug)
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/mahadiahmed/.docker/completions $fpath)
 autoload -Uz compinit
@@ -191,3 +201,5 @@ compinit
 
 # bun completions
 [ -s "/Users/mahadiahmed/.bun/_bun" ] && source "/Users/mahadiahmed/.bun/_bun"
+
+# zsh-profile-log  # Bottom of file (uncomment to debug)
