@@ -138,17 +138,6 @@ conda-init() {
   eval "$('/Users/mahadiahmed/opt/anaconda3/bin/conda' 'shell.zsh' 'hook')"
 }
 
-# Optimize serverless completions
-function serverless() {
-    unfunction serverless
-    # Load completions only when first using serverless
-    if [[ -f /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/serverless.zsh ]]; then
-        . /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/serverless.zsh
-        . /Users/mahadiahmed/Code/pn-repos/ncp/postnord-ncp-change-shipment/node_modules/tabtab/.completions/sls.zsh
-    fi
-    serverless "$@"
-}
-
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
