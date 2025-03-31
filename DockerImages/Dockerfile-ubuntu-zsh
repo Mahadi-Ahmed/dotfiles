@@ -44,7 +44,7 @@ ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
 # Install Node.js and tree-sitter CLI
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g neovim tree-sitter-cli
 
@@ -122,6 +122,8 @@ RUN mkdir -p ${HOME}/.local/share/fonts \
 # Set up zsh configuration
 RUN echo "export PATH=\$PATH:\$HOME/.local/bin:\$HOME/.local/share/nvim/lazy-rocks/hererocks/bin" >> ${HOME}/.zshrc && \
     echo 'ZSH_THEME="powerlevel10k/powerlevel10k"' >> ${HOME}/.zshrc
+
+RUN echo "alias vim='nvim'" >> ${HOME}/.zshrc
 
 # Create config directory for Neovim and add basic configuration
 RUN mkdir -p ${HOME}/.config/nvim && \
