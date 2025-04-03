@@ -3,3 +3,6 @@ config:
   multi-pane-icon: ""
   show-name: false        # This enables showing the name alongside the icon
   icon-position: "left"  # Shows the icon to the left of the name
+
+icons:
+  zsh: ""
