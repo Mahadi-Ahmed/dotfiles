@@ -11,3 +11,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ## Update
 `Ctrl+U`
+
+
+### catppuccin showcases:
+https://github.com/catppuccin/tmux/discussions/317
