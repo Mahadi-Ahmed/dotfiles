@@ -114,9 +114,9 @@ zinit ice as"completion"
 zinit snippet /usr/local/bin/terraform
 
 zle     -N             sesh-sessions
-bindkey -M emacs '^s' sesh-sessions
-bindkey -M vicmd '^s' sesh-sessions
-bindkey -M viins '^s' sesh-sessions
+bindkey -M emacs '^f' sesh-sessions
+bindkey -M vicmd '^f' sesh-sessions
+bindkey -M viins '^f' sesh-sessions
 
 eval "$(zoxide init zsh --cmd j)" # NOTE: Rename z prefix to j
 
