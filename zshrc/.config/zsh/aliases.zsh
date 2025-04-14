@@ -2,27 +2,8 @@
 alias -- -='cd -'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-alias 1='cd -1'
-alias 2='cd -2'
-alias 3='cd -3'
-alias 4='cd -4'
-alias 5='cd -5'
-alias 6='cd -6'
-alias 7='cd -7'
-alias 8='cd -8'
-alias 9='cd -9'
 
 # Core commands
-alias _='sudo '
-# alias ls='ls -G'
-# alias l='ls -lah'
-# alias la='ls -lAh'
-# alias ll='ls -lh'
-# alias lsa='ls -lah'
-alias md='mkdir -p'
 alias rd='rmdir'
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.venv,venv}'
 alias egrep='grep -E'
@@ -39,21 +20,14 @@ alias lsg='fd --hidden --exclude .git --max-depth 1'
 
 # Applications
 alias cat='bat'
-alias edit='nvim'
-# alias vim='nvim'
-# alias vim='nvim --startuptime "$HOME/.config/nvim/startup_logs/startup_$(date +%Y%m%d_%H%M%S).log"'
 alias vim='nvim'
 alias vimdiff='nvim -d'
 alias f='open -a Finder ./'
-alias subl='open -a /Applications/Sublime\ Text.app'
-alias warp='open -n /Applications/Warp.app'
 alias lg='lazygit'
 alias lvim='NVIM_APPNAME=lvim nvim'
 alias icat="kitten icat"
 
 # Directory shortcuts
-alias cdlv='cd /Users/mahadiahmed/.local/share/lunarvim/lvim'
-alias cdmdf='cd ~/Code/pn-repos/system-components/modtagarflex/'
 alias cdpn='cd ~/Code/pn-repos/'
 alias cdqmk='cd ~/Code/mahadia/qmk/keyboards/planck/keymaps/mahadia'
 
@@ -64,22 +38,10 @@ alias rc='vim ~/.zshrc'
 alias rsource='source ~/.zshrc'
 alias moveSc='/Users/mahadiahmed/Code/mahadia/Util-Scripts/screenshot_mover/screenshot_mover'
 
-# Serverless
-alias localsls='./node_modules/.bin/serverless'
-alias slslocal='localsls offline -s test'
-alias slslocaldev='localsls offline -s dev'
-alias slslocaltest='localsls offline -s test'
 
 # FZF integration
 alias v='fd --hidden --exclude .git | fzf-tmux -p --height 40% --layout=reverse --border --preview "bat --style=numbers --color=always --line-range :500 {}" | xargs nvim'
 alias vp='fd --hidden --exclude .git | fzf --height 40% --layout=reverse --border --preview "bat --style=numbers --color=always --line-range :500 {}" | xargs nvim'
-
-# Plugin related
-alias zi='zinit'
-alias zini='zinit'
-alias zpl='zinit'
-alias zplg='zinit'
-alias fsh-alias='fast-theme'
 
 # Git aliases
 alias g='git'
