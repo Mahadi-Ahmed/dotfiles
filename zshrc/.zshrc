@@ -12,9 +12,7 @@ path=(
   $path[@]
 )
 
-# Initialize zinit
 source ~/powerlevel10k/powerlevel10k.zsh-theme
-
 source ~/.config/zsh/aliases.zsh
 
 export MANPAGER='nvim +Man!'
@@ -83,7 +81,7 @@ bindkey -M vicmd '^f' sesh-sessions
 bindkey -M viins '^f' sesh-sessions
 
 
-eval "$(zoxide init zsh --cmd j)" # NOTE: Rename z prefix to j
+eval "$(zoxide init zsh)"
 
 function codeauth () {
     node /Users/mahadiahmed/Code/snippets/tokenCodeClipboard/index.js $1
