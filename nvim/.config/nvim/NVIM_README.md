@@ -24,25 +24,15 @@
 - [x] make the command <leader> st live grep ignore stuff in lock files
 - [x] Take a look at LazyVim keybinds for ideas [LazyVim Keymaps](https://www.lazyvim.org/keymaps)
 - [x] fix fancy startup dashboard with dashboard or alpha like lazyvim
-
 - [x] create persistent undotree
 - [x] Migrate to [Lazy](https://github.com/folke/lazy.nvim)
 - [x] Customize Lualine
-  - [] list amount of lsp servers running 
 - [x] Look into vue lsp functionality with a small example[lspZero](https://lsp-zero.netlify.app/blog/configure-volar-v2.html)
 - [] Fix the title string
 - [x] Add integration to gitsigns(https://github.com/lewis6991/gitsigns.nvim)
 
 - [x] Add colorizer to show hex colors[colorizer](https://github.com/norcalli/nvim-colorizer.lua)
   - [x] Add a command to turn on & off the colorizer in whichkey
-
-- [x] [Bufferline - buffer tab plugin](https://github.com/akinsho/bufferline.nvim)
-  Continue customizing the config for bufferline
-  - [] fix so each split has its own bufferline
-  - [x] Fix bufferline background
-  - [x] Add command to close buffer
-  - [x] Add command to select buffer to close 
-  - [x] Add keybindings & map then in whichkey
 
 #### Interesting plugins to look into later
 - [] Database client for neovim [nvim-dbee](https://github.com/kndndrj/nvim-dbee)
@@ -70,7 +60,7 @@
 * [Neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)
 * [nvim-basic-ide](https://github.com/LunarVim/nvim-basic-ide)
 * [Josean Martinez Youtube Video](https://www.youtube.com/watch?v=vdn_pKJUda8&list=LL&index=1)
-* Look at min 18 in ThePrimeagen video [ThePrimeagen Youtube Video](https://www.youtube.com/watch?v=w7i4amO_zaE&list=LL)
+* [ThePrimeagen Youtube Video](https://www.youtube.com/watch?v=w7i4amO_zaE&list=LL)
 * [lspzero](https://github.com/VonHeikemen/lsp-zero.nvim)
 * [ftplugin](https://neovim.io/doc/user/filetype.html) & [usage of ftplugin](https://www.reddit.com/r/neovim/comments/x3zp6t/usage_of_afterftplugin_directory_for/)
 * [LazyVim](https://www.lazyvim.org/)
