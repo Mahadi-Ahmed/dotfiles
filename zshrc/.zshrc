@@ -22,13 +22,12 @@ export FZF_TMUX_OPTS="-p 55%,60%"
 export ATAC_KEY_BINDINGS="/Users/mahadiahmed/.config/atac/vim_key_bindings.toml"
 
 # zsh history settings
-HISTSIZE=50000    # Number of commands in memory
+HISTSIZE=10000    # Number of commands in memory
 SAVEHIST=50000    # Number of commands saved to HISTFILE
 HISTFILE=~/.zsh_history  # Where history is saved
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
-setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
 setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
 setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
@@ -36,7 +35,6 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks
 setopt HIST_FCNTL_LOCK           # Faster file locking
 setopt HIST_FIND_NO_DUPS         # Don't display duplicates in search
-setopt EXTENDED_HISTORY          # Save timestamp and duration
 unsetopt HIST_SAVE_BY_COPY       # Don't create temporary files
 
 # Ignore specific commands in history

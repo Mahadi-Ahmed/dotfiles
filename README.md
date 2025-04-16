@@ -2,9 +2,6 @@
 
 [nvim config](https://github.com/Mahadi-Ahmed/nvim)
 
-## 
-* Install [zinit](https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#install)
-
 ### Manage dotfiles with [gnu stow](https://www.gnu.org/software/stow/)
 
 Greate article on stow:
