@@ -135,5 +135,7 @@ RUN mkdir -p ${HOME}/.config/nvim && \
 ENV LUA_PATH="${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/share/lua/5.1/?.lua;${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/share/lua/5.1/?/init.lua;;"
 ENV LUA_CPATH="${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/lib/lua/5.1/?.so;;"
 
+COPY setupScripts $HOME/setupScripts
+
 # Set default command to zsh
 CMD ["zsh"]
