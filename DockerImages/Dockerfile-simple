@@ -45,6 +45,6 @@ COPY setup.sh $HOME/dotfiles
 COPY Brewfile $HOME/dotfiles
 COPY .stowrc $HOME/dotfiles
 
-
+WORKDIR $HOME/dotfiles
 # Set default command to zsh
 CMD ["zsh"]
