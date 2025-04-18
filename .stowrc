@@ -1,0 +1,4 @@
+--ignore=DockerImages
+--ignore=setupScripts
+--ignore=.DS_Store
+--ignore=.stowrc

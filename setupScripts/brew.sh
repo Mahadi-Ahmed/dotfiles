@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 install_brew() {
   if command -v brew &>/dev/null; then
     echo "Homebrew already installed."
