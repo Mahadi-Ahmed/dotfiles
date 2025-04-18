@@ -2,6 +2,9 @@
 
 printf "Welcome lab Member 003 Suupar Hacker\nSetting up environment IBN5100...\nEl Psy Congroo\n"
 
+echo "Installing p10k"
+source ./setupScripts/p10kSetup.sh
+
 echo "Brewing..."
 source ./setupScripts/brew.sh
 
@@ -11,7 +14,6 @@ stow --dotfiles -vt ~ */
 
 cp ~/zshrc.backup ~/.zshrc #NOTE: Only used during testing / in container
 
-#TODO Install p10k
 
 #TODO Install tpm
 #TODO: Install volta - (https://docs.volta.sh/advanced/installers#skipping-volta-setup)
