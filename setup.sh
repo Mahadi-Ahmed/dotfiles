@@ -8,12 +8,8 @@ source ./setupScripts/p10kSetup.sh
 echo "Brewing..."
 source ./setupScripts/brew.sh
 
-echo "Stow..."
-mv ~/.zshrc ~/.zshrc.backup
-stow --dotfiles -vt ~ */
-
-cp ~/zshrc.backup ~/.zshrc #NOTE: Only used during testing / in container
-
+echo "Stowing..."
+source ./setupScripts/stow.sh
 
 #TODO Install tpm
 #TODO: Install volta - (https://docs.volta.sh/advanced/installers#skipping-volta-setup)
@@ -26,6 +22,10 @@ if [ "$(uname)" == "Darwin" ]; then
 		xcode-select --install
 		sudo xcodebuild -license accept
 	fi
+fi
+
+if [ "$(uname)" == "Linux" ]; then
+  echo "its a linux machine"
 fi
 
 exit 0
