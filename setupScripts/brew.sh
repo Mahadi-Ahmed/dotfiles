@@ -7,8 +7,6 @@ install_brew() {
     echo "Homebrew not found - installing..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-    # NOTE: Needed for in the container, remove when using rc from dotfiles
-    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
     # Apply to current shell
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   fi

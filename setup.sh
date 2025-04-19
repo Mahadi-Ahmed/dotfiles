@@ -14,7 +14,10 @@ source ./setupScripts/stow.sh
 echo "Installing tpm - tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 
-#TODO: Install volta - (https://docs.volta.sh/advanced/installers#skipping-volta-setup)
+echo "Installing volta"
+curl https://get.volta.sh | bash -s -- --skip-setup
+
+#TODO: Setup osx settings (https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
 
 if [ "$(uname)" == "Darwin" ]; then
 	if command -v xcode-select &>/dev/null; then
@@ -26,9 +29,11 @@ if [ "$(uname)" == "Darwin" ]; then
 	fi
 fi
 
-#TODO: Remove later
-#NOTE: Just for the container
+#NOTE: Just for container
 if [ "$(uname)" == "Linux" ]; then
+
+  echo "adding path to linuxbrew in zshrc"
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
   echo "It's a Linux machine, installing eza manually..."
   
   wget -c https://github.com/eza-community/eza/releases/latest/download/eza_aarch64-unknown-linux-gnu.tar.gz -O - | tar xz
