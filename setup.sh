@@ -11,7 +11,9 @@ source ./setupScripts/brew.sh
 echo "Stowing..."
 source ./setupScripts/stow.sh
 
-#TODO Install tpm
+echo "Installing tpm - tmux plugin manager"
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+
 #TODO: Install volta - (https://docs.volta.sh/advanced/installers#skipping-volta-setup)
 
 if [ "$(uname)" == "Darwin" ]; then
