@@ -40,9 +40,6 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${HOME}/.l
 RUN echo "alias vim='nvim'" >> ${HOME}/.zshrc
 
 RUN git clone https://github.com/Mahadi-Ahmed/dotfiles.git ${HOME}/dotfiles
-COPY setupScripts $HOME/dotfiles/setupScripts
-COPY setup.sh $HOME/dotfiles
-COPY Brewfile $HOME/dotfiles
 
 WORKDIR $HOME/dotfiles
 # Set default command to zsh
