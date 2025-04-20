@@ -1,4 +1,5 @@
 tap "noahgorstein/tap"
+tap "nikitabobko/tap"
 
 brew "stow"
 brew "bat"
@@ -27,7 +28,7 @@ brew "noahgorstein/tap/jqp"
 
 cask "qmk-toolbox"
 cask "1password"
-cask "aerospace"
+cask "nikitabobko/tap/aerospace"
 cask "raycast"
 cask "postman"
 cask "slack"
