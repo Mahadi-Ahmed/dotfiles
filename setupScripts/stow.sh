@@ -10,6 +10,5 @@ stow -vt ~ bat
 stow -vt ~ kitty
 stow -vt ~ alacritty
 stow -vt ~ p10k
-stow -vt ~ ssh
 stow -vt ~ tmux
 stow -vt ~ zshrc
