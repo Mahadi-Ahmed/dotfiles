@@ -1,20 +1,17 @@
 #!/bin/bash
 
-install_brew() {
-  if command -v brew &>/dev/null; then
-    echo "Homebrew already installed."
-  else
-    echo "Homebrew not found - installing..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if command -v brew &>/dev/null; then
+  echo "Homebrew already installed."
+else
+  echo "Homebrew not found - installing..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-    # Apply to current shell
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  fi
-}
+  # Apply to current shell
+fi
 
-main() {
-  install_brew
-  brew bundle
-}
+#NOTE: Just for container
+if [ "$(uname)" == "Linux" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
-main
+brew bundle

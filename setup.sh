@@ -32,8 +32,6 @@ fi
 #NOTE: Just for container
 if [ "$(uname)" == "Linux" ]; then
 
-  echo "adding path to linuxbrew in zshrc"
-  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
   echo "It's a Linux machine, installing eza manually..."
   
   wget -c https://github.com/eza-community/eza/releases/latest/download/eza_aarch64-unknown-linux-gnu.tar.gz -O - | tar xz
