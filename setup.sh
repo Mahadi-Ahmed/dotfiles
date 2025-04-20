@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e 
-
 printf "Welcome lab Member 003 Suupar Hacker\nSetting up environment IBN5100...\nEl Psy Congroo\n"
 
 echo "Brewing..."
