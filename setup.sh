@@ -1,15 +1,17 @@
 #!/bin/bash
 
-printf "Welcome lab Member 003 Suupar Hacker\nSetting up environment IBN5100...\nEl Psy Congroo\n"
+set -e 
 
-echo "Installing p10k"
-source ./setupScripts/p10kSetup.sh
+printf "Welcome lab Member 003 Suupar Hacker\nSetting up environment IBN5100...\nEl Psy Congroo\n"
 
 echo "Brewing..."
 source ./setupScripts/brew.sh
 
 echo "Stowing..."
 source ./setupScripts/stow.sh
+
+echo "Installing p10k"
+source ./setupScripts/p10kSetup.sh
 
 echo "Installing tpm - tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
@@ -29,7 +31,7 @@ if [ "$(uname)" == "Darwin" ]; then
 	fi
 fi
 
-#NOTE: Just for container
+#NOTE: Just for pi
 if [ "$(uname)" == "Linux" ]; then
 
   echo "It's a Linux machine, installing eza manually..."

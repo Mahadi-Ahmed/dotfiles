@@ -1,8 +1,10 @@
 #!/bin/bash
 
+set -e
+
 if [ -f ~/.zshrc ]; then
   echo "Found a zshrc, backing it up"
-  mv ~/.zshrc ~/.zshrc.backup
+  mv ~/.zshrc ~/.zshrc.bootstrap.backup
 fi
 
 stow -vt ~ aerospace
