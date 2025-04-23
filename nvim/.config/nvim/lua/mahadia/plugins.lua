@@ -331,6 +331,11 @@ local plugins = {
     "folke/lazydev.nvim",
     ft = "lua",
   },
+  {
+    "shrynx/line-numbers.nvim",
+    opts = {},
+    cmd = { "LineNumberToggle", "LineNumberBoth"}
+  }
 }
 
 -- require("lazy").setup(plugins, { defaults = { lazy = true } })
