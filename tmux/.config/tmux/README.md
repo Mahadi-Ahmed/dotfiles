@@ -1,5 +1,11 @@
 # ~/.config/tmux/tmux.conf
 
+## To change catppuccin flavor:
+1. change flavor in tmux config
+2. run prefix + I to update & install
+3. tmux kill-servers
+4. tmux source-file tmux.conf
+
 ## Install
 Once everything has been installed it's time to run TPM, install first:
 ```bash
