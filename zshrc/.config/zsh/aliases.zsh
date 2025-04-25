@@ -9,12 +9,12 @@ alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox,.
 alias egrep='grep -E'
 alias fgrep='grep -F'
 ## use eza instead of ls
-alias ls='eza --icons --group-directories-first -w 120'
-alias ll='eza --icons --group-directories-first -l'
-alias lsa='eza --icons --group-directories-first -a -w 80'
-alias lt='eza --icons --group-directories-first --tree'
-alias l.='eza --icons --group-directories-first -d .*'
-alias lta='eza --icons --group-directories-first --tree --level=4 --git-ignore'
+alias ls='eza --icons --group-directories-first -w 120 --color=auto'
+alias ll='eza --icons --group-directories-first -l --color=auto'
+alias lsa='eza --icons --group-directories-first -a -w 80 --color=auto'
+alias lt='eza --icons --group-directories-first --tree --color=auto'
+alias l.='eza --icons --group-directories-first -d .* --color=auto'
+alias lta='eza --icons --group-directories-first --tree --level=4 --git-ignore --color=auto'
 
 alias lsg='fd --hidden --exclude .git --max-depth 1'
 
