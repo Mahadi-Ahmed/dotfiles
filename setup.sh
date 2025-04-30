@@ -19,7 +19,7 @@ curl https://get.volta.sh | bash -s -- --skip-setup
 
 #TODO: Setup osx settings (https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
 
-if [ "$(uname)" == "Darwin" ]; then
+if [ "$(uname)" = "Darwin" ]; then
 	if command -v xcode-select &>/dev/null; then
 		echo "Xcode Command Line Tools already installed."
 	else
@@ -30,7 +30,10 @@ if [ "$(uname)" == "Darwin" ]; then
 fi
 
 #NOTE: Just for pi
-if [ "$(uname)" == "Linux" ]; then
+if [ "$(uname)" = "Linux" ]; then
+
+  echo "Installing Zoxide manually"
+  curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
   echo "It's a Linux machine, installing eza manually..."
   
@@ -48,5 +51,3 @@ if [ "$(uname)" == "Linux" ]; then
     echo "eza installation failed."
   fi
 fi
-
-exit 0

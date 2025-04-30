@@ -7,7 +7,7 @@ else
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-if [ "$(uname)" == "Darwin" ]; then
+if [ "$(uname)" = "Darwin" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
   #NOTE: Just for pi/container
