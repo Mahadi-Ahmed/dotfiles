@@ -1,0 +1,18 @@
+[user]
+	name = mahadia
+	email = mahadia.dev@gmail.com
+[includeIf "gitdir:~/Code/mahadia/"]
+  path = ~/Code/mahadia/.gitconfig-personal
+[includeIf "gitdir:~/dotfiles/"]
+  path = ~/Code/mahadia/.gitconfig-personal
+[includeIf "gitdir:~/Code/pn-repos/"]
+  path = ~/Code/pn-repos/.gitconfig-work
+
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+
+[core]
+	editor = vim
