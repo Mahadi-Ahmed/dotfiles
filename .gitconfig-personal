@@ -1,0 +1,5 @@
+[user]
+	name = Mahadi-Ahmed
+	email = mahadia.dev@gmail.com
+[core]
+  sshCommand = ssh -i ~/.ssh/id_mahadia_dev_github
