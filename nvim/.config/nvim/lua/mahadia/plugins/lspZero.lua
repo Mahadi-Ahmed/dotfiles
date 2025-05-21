@@ -2,13 +2,6 @@ local lsp = require('lsp-zero')
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({
-  'ts_ls',
-  'eslint',
-  'lua_ls',
-  'volar',
-})
-
 -- Fix Undefined global 'vim'
 lsp.configure('lua_ls', {
   settings = {
