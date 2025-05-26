@@ -25,7 +25,7 @@ mason_lspconfig.setup({
 
 local on_attach = function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
-  vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+  vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<leader>lW", function() vim.lsp.buf.workspace_symbol() end, opts)
   vim.keymap.set("n", "<leader>li", "<cmd>Telescope lsp_definitions<cr>", opts)
