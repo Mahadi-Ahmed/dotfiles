@@ -63,3 +63,4 @@
 * [lspzero](https://github.com/VonHeikemen/lsp-zero.nvim)
 * [ftplugin](https://neovim.io/doc/user/filetype.html) & [usage of ftplugin](https://www.reddit.com/r/neovim/comments/x3zp6t/usage_of_afterftplugin_directory_for/)
 * [LazyVim](https://www.lazyvim.org/)
+* [Kickstart](https://github.com/nvim-lua/kickstart.nvim)
