@@ -1,4 +1,4 @@
-- [] Refactor: lspZero will stop getting updates , move to [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+- [x] Refactor: lspZero will stop getting updates , move to [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [] Look into quickfix list & how to use them
 - [] Look into nvim-dap to add debuggers
     - [] Try out all the different dap's with small examples
@@ -28,21 +28,20 @@
 - [x] Migrate to [Lazy](https://github.com/folke/lazy.nvim)
 - [x] Customize Lualine
 - [x] Look into vue lsp functionality with a small example[lspZero](https://lsp-zero.netlify.app/blog/configure-volar-v2.html)
-- [] Fix the title string
 - [x] Add integration to gitsigns(https://github.com/lewis6991/gitsigns.nvim)
 
 - [x] Add colorizer to show hex colors[colorizer](https://github.com/norcalli/nvim-colorizer.lua)
   - [x] Add a command to turn on & off the colorizer in whichkey
 
 #### Interesting plugins to look into later
+- [] Kitty scrollback [kitty-scrollback](https://github.com/mikesmithgh/kitty-scrollback.nvim)
 - [] Database client for neovim [nvim-dbee](https://github.com/kndndrj/nvim-dbee)
 - Look into interesting packages in mini to add features / replace existing ones:
     - [x] mini.ai, Extend the a/i textobjects[mini.ai](https://github.com/echasnovski/mini.ai)
     - [x] [mini.surround](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md)
-- [] lsp saga, preview defenition before jumping into it - https://github.com/glepnir/lspsaga.nvim
 - [x] autoSession - auto-session will try to restore an existing session for the current cwd if one exists.(https://github.com/rmagatti/auto-session)
 - [x] wtf.nvim - A Neovim plugin to help you work out what the fudge that diagnostic means and how to fix it!(https://github.com/piersolenski/wtf.nvim)
-- [] A minimal [REST-Client Interface for Neovim](https://github.com/mistweaverco/kulala.nvim)
+- [] Kuala A minimal [REST-Client Interface for Neovim](https://github.com/mistweaverco/kulala.nvim)
 - [] look into setting up [go.nvim](https://github.com/ray-x/go.nvim)
 - [x] Establish good command workflow and quit bad habit[hardtime](https://github.com/m4xshen/hardtime.nvim)
 
@@ -64,3 +63,4 @@
 * [lspzero](https://github.com/VonHeikemen/lsp-zero.nvim)
 * [ftplugin](https://neovim.io/doc/user/filetype.html) & [usage of ftplugin](https://www.reddit.com/r/neovim/comments/x3zp6t/usage_of_afterftplugin_directory_for/)
 * [LazyVim](https://www.lazyvim.org/)
+* [Kickstart](https://github.com/nvim-lua/kickstart.nvim)
