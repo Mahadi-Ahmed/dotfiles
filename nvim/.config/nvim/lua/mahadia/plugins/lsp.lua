@@ -138,3 +138,7 @@ cmp.setup({
     { name = 'path' },
   }),
 })
+
+vim.diagnostic.config({
+  virtual_text = true,
+})
