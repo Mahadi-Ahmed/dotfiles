@@ -1,6 +1,29 @@
 local mason = require('mason')
 local lspconfig = require('lspconfig')
 local mason_lspconfig = require('mason-lspconfig')
+print('hejhej')
+print("LSP config file loaded at:", os.date())
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('mahadia-lsp-attach', { clear = true }),
+  callback = function(event)
+    print('LSP attached:', vim.lsp.get_client_by_id(event.data.client_id).name, 'to buffer:', event.buf)
+
+    local opts = { buffer = event.buf }
+    vim.keymap.set({ "n", "v" }, "<leader>lf", function() vim.lsp.buf.format({}) end, opts)
+    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+    vim.keymap.set("n", "<leader>lW", function() vim.lsp.buf.workspace_symbol() end, opts)
+    vim.keymap.set("n", "<leader>li", "<cmd>Telescope lsp_definitions<cr>", opts)
+    vim.keymap.set("n", "<leader>lo", function() vim.diagnostic.open_float() end, opts)
+    vim.keymap.set("n", "<leader>lj", function() vim.diagnostic.goto_next() end, opts)
+    vim.keymap.set("n", "<leader>lk", function() vim.diagnostic.goto_prev() end, opts)
+    vim.keymap.set("n", "<leader>la", function() vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references <cr>", opts)
+    vim.keymap.set("n", "<leader>lr", function() vim.lsp.buf.rename() end, opts)
+    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+  end,
+})
 
 mason.setup({
   ui = {
@@ -12,6 +35,8 @@ mason.setup({
   }
 })
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 mason_lspconfig.setup({
   ensure_installed = {
     'ts_ls',
@@ -19,71 +44,68 @@ mason_lspconfig.setup({
     'lua_ls',
     'gopls',
   },
-  automatic_installation = true,
-  automatic_setup = false,
-})
+  automatic_installation = false,
+  handlers = {
+    -- Default handler for mason-configured servers
+    function(server_name)
+      print("Handler called for server:", server_name)
+      print("About to call lspconfig setup for:", server_name)
+      lspconfig[server_name].setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+      print("Finished setup for:", server_name)
+    end,
 
-local on_attach = function(client, bufnr)
-  local opts = { buffer = bufnr, remap = false }
-  vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
-  vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-  vim.keymap.set("n", "<leader>lW", function() vim.lsp.buf.workspace_symbol() end, opts)
-  vim.keymap.set("n", "<leader>li", "<cmd>Telescope lsp_definitions<cr>", opts)
-  vim.keymap.set("n", "<leader>lo", function() vim.diagnostic.open_float() end, opts)
-  vim.keymap.set("n", "<leader>lj", function() vim.diagnostic.goto_next() end, opts)
-  vim.keymap.set("n", "<leader>lk", function() vim.diagnostic.goto_prev() end, opts)
-  vim.keymap.set("n", "<leader>la", function() vim.lsp.buf.code_action() end, opts)
-  vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references <cr>", opts)
-  vim.keymap.set("n", "<leader>lr", function() vim.lsp.buf.rename() end, opts)
-  vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-  vim.keymap.set("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, opts)
-end
+    ["lua_ls"] = function()
+      lspconfig.lua_ls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+    end,
+
+    ["ts_ls"] = function()
+      lspconfig.ts_ls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+    end,
+
+    ["gopls"] = function()
+      lspconfig.gopls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+    end,
 
 
--- Set up LSP capabilities for nvim-cmp
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    ["eslint"] = function()
+      lspconfig.eslint.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        -- settings = {
+        --   workingDirectory = { mode = 'auto' },
+        --   validate = {
+        --     "javascript",
+        --     "javascriptreact",
+        --     "typescript",
+        --     "typescriptreact",
+        --     "vue"
+        --   },
+        --   experimental = {
+        --     useFlatConfig = false
+        --   },
+        --   codeAction = {
+        --     showDocumentation = {
+        --       enable = true
+        --     }
+        --   }
+        -- },
+        filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' }
+      })
+    end
 
--- Configure Lua
-lspconfig.lua_ls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
--- Configure TypeScript/JavaScript
-lspconfig.ts_ls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
--- Configure Go
-lspconfig.gopls.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
-
--- Configure ESLint
-lspconfig.eslint.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    workingDirectory = { mode = 'auto' },
-    validate = {
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-      "vue"
-    },
-    experimental = {
-      useFlatConfig = false
-    },
-    codeAction = {
-      showDocumentation = {
-        enable = true
-      }
-    }
-  },
-  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' }
+  }
 })
 
 -- Set up nvim-cmp
