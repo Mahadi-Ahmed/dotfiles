@@ -54,6 +54,13 @@ local plugins = {
     end
   },
   {
+    'stevearc/conform.nvim',
+    event = 'LazyFile',
+    config = function ()
+      require('mahadia.plugins.conform')
+    end
+  },
+  {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
     dependencies = {
@@ -224,33 +231,41 @@ local plugins = {
     end
   },
   -- Cmp / Autocompletion
-{
-  'neovim/nvim-lspconfig',
-  dependencies = {
-    -- LSP Support
-    { 'williamboman/mason.nvim' },
-    { 'williamboman/mason-lspconfig.nvim' },
-    -- Autocompletion
-    { 'hrsh7th/nvim-cmp' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/cmp-buffer' },
-    { 'hrsh7th/cmp-path' },
-    { 'hrsh7th/cmp-nvim-lua' },
-    -- Snippets
-    { 'L3MON4D3/LuaSnip' },
-    { 'saadparwaiz1/cmp_luasnip' },
-    { 'rafamadriz/friendly-snippets' },
-    {
-      "folke/lazydev.nvim",
-      ft = "lua",
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      -- LSP Support
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
+      -- Autocompletion
+      {
+        'saghen/blink.cmp',
+        dependencies = {
+          'rafamadriz/friendly-snippets',
+          'L3MON4D3/LuaSnip',
+        },
+        version = '*',
+        config = function ()
+          require('mahadia.plugins.blinkCmp')
+        end
+      },
+      {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+          library = {
+            -- Load luvit types when the `vim.uv` word is found
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          },
+        },
+      },
     },
+    lazy = true,
+    event = 'LazyFile',
+    config = function()
+      require('mahadia.plugins.lsp')
+    end
   },
-  lazy = true,
-  event = 'LazyFile',
-  config = function()
-    require('mahadia.plugins.lsp')
-  end
-},
   --vim-tmux-navigator
   {
     'christoomey/vim-tmux-navigator',
@@ -330,6 +345,18 @@ local plugins = {
     "shrynx/line-numbers.nvim",
     opts = {},
     cmd = { "LineNumberToggle", "LineNumberBoth"}
+  },
+  {
+    'mikesmithgh/kitty-scrollback.nvim',
+    enabled = true,
+    lazy = true,
+    cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth', 'KittyScrollbackGenerateCommandLineEditing' },
+    event = { 'User KittyScrollbackLaunch' },
+    -- version = '*', -- latest stable version, may have breaking changes if major version changed
+    -- version = '^6.0.0', -- pin major version, include fixes and features that do not have breaking changes
+    config = function()
+      require('kitty-scrollback').setup()
+    end,
   }
 }
 

@@ -1,27 +1,35 @@
 local mason = require('mason')
-local lspconfig = require('lspconfig')
 local mason_lspconfig = require('mason-lspconfig')
-print('hejhej')
-print("LSP config file loaded at:", os.date())
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('mahadia-lsp-attach', { clear = true }),
   callback = function(event)
-    print('LSP attached:', vim.lsp.get_client_by_id(event.data.client_id).name, 'to buffer:', event.buf)
-
     local opts = { buffer = event.buf }
-    vim.keymap.set({ "n", "v" }, "<leader>lf", function() vim.lsp.buf.format({}) end, opts)
-    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+    vim.keymap.set({ "n", "v" }, "<leader>lf", function()
+        require("conform").format({ async = false, lsp_format = "fallback" })
+    end, opts)
+    vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "<leader>lW", function() vim.lsp.buf.workspace_symbol() end, opts)
-    vim.keymap.set("n", "<leader>li", "<cmd>Telescope lsp_definitions<cr>", opts)
+    vim.keymap.set("n", "<leader>li", function() Snacks.picker.lsp_declarations() end, opts)
     vim.keymap.set("n", "<leader>lo", function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set("n", "<leader>lj", function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set("n", "<leader>lk", function() vim.diagnostic.goto_prev() end, opts)
+    vim.keymap.set("n", "<leader>lj", function() vim.diagnostic.jump({ count = 1 }) end, opts)
+    vim.keymap.set("n", "<leader>lk", function() vim.diagnostic.jump({ count = -1 }) end, opts)
     vim.keymap.set("n", "<leader>la", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references <cr>", opts)
+    vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end, opts)
     vim.keymap.set("n", "<leader>lr", function() vim.lsp.buf.rename() end, opts)
+
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+    -- Enable inlay hints if the server supports them
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client and client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(false, { bufnr = event.buf })
+
+      vim.keymap.set("n", "<leader>th", function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }), { bufnr = event.buf })
+      end, { buffer = event.buf, desc = "Toggle inlay hints" })
+    end
   end,
 })
 
@@ -35,132 +43,164 @@ mason.setup({
   }
 })
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 mason_lspconfig.setup({
   ensure_installed = {
-    'ts_ls',
     'eslint',
     'lua_ls',
     'gopls',
+    'vtsls',
+    'vue_ls',
   },
   automatic_installation = false,
-  handlers = {
-    -- Default handler for mason-configured servers
-    function(server_name)
-      print("Handler called for server:", server_name)
-      print("About to call lspconfig setup for:", server_name)
-      lspconfig[server_name].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
-      print("Finished setup for:", server_name)
-    end,
-
-    ["lua_ls"] = function()
-      lspconfig.lua_ls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
-    end,
-
-    ["ts_ls"] = function()
-      lspconfig.ts_ls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
-    end,
-
-    ["gopls"] = function()
-      lspconfig.gopls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
-    end,
-
-
-    ["eslint"] = function()
-      lspconfig.eslint.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        -- settings = {
-        --   workingDirectory = { mode = 'auto' },
-        --   validate = {
-        --     "javascript",
-        --     "javascriptreact",
-        --     "typescript",
-        --     "typescriptreact",
-        --     "vue"
-        --   },
-        --   experimental = {
-        --     useFlatConfig = false
-        --   },
-        --   codeAction = {
-        --     showDocumentation = {
-        --       enable = true
-        --     }
-        --   }
-        -- },
-        filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' }
-      })
-    end
-
-  }
+  automatic_enable = true,
 })
 
--- Set up nvim-cmp
-local cmp = require('cmp')
-local luasnip = require('luasnip')
-
--- Load snippets
-require('luasnip.loaders.from_vscode').lazy_load()
-
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
+vim.lsp.config('vtsls', {
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  capabilities = capabilities,
+  settings = {
+    vtsls = {
+      tsserver = {
+        globalPlugins = {}
+      },
+      autoUseWorkspaceTsdk = true,
+      experimental = {
+        completion = {
+          enableServerSideFuzzyMatch = true,
+        },
+      },
+    },
+    typescript = {
+      updateImportsOnFileMove = { enabled = 'always' },
+      suggest = {
+        completeFunctionCalls = true,
+      },
+      preferences = {
+        importModuleSpecifier = 'non-relative',
+      },
+      inlayHints = {
+        parameterNames = { enabled = 'literals' },
+        parameterTypes = { enabled = true },
+        variableTypes = { enabled = false },
+        propertyDeclarationTypes = { enabled = true },
+        functionLikeReturnTypes = { enabled = true },
+        enumMemberValues = { enabled = true },
+      },
+    },
+    javascript = {
+      updateImportsOnFileMove = { enabled = 'always' },
+      suggest = {
+        completeFunctionCalls = true,
+      },
+    }
   },
-
-
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-
-    -- Tab completion
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  }),
-
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  }, {
-    { name = 'buffer' },
-    { name = 'path' },
-  }),
+  before_init = function(_, config)
+    table.insert(config.settings.vtsls.tsserver.globalPlugins, {
+      name = '@vue/typescript-plugin',
+      location = vim.fn.expand('$MASON/packages/vue-language-server/node_modules/@vue/language-server'),
+      languages = { 'vue' },
+      configNamespace = 'typescript',
+      enableForWorkspaceTypeScriptVersions = true,
+    })
+  end,
+  on_attach = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  end,
 })
+
+vim.lsp.config('lua_ls', {
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      workspace = {
+        checkThirdParty = false,
+      },
+      completion = {
+        callSnippet = 'Replace',
+      },
+      telemetry = {
+        enable = false,
+      },
+      diagnostics = {
+        globals = { 'vim' },
+      },
+    },
+  },
+  on_attach = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  end,
+})
+
+vim.lsp.config('gopls', {
+  capabilities = capabilities,
+})
+
+vim.lsp.config('eslint', {
+  capabilities = capabilities,
+  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' }
+})
+
+vim.lsp.config('yamlls', {
+  capabilities = capabilities,
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        ["https://json.schemastore.org/github-action.json"] = "/action.{yml,yaml}",
+      },
+      validate = true,
+      completion = true,
+      hover = true,
+      format = {
+        enable = true,
+      },
+    },
+    redhat = {
+      telemetry = {
+        enabled = false,
+      },
+    },
+  },
+  on_attach = function(client)
+    client.server_capabilities.documentFormattingProvider = true
+  end,
+})
+
+-- Enable the LSP servers
+vim.lsp.enable('vtsls')
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('gopls')
+vim.lsp.enable('eslint')
+vim.lsp.enable('yamlls')
+
+Icons = require('mahadia.plugins.icons')
 
 vim.diagnostic.config({
-  virtual_text = true,
+  severity_sort = true,
+  float = { border = 'rounded', source = 'if_many' },
+  underline = { severity = vim.diagnostic.severity.ERROR },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = Icons.diagnostics.Error,
+      [vim.diagnostic.severity.WARN] = Icons.diagnostics.Warning,
+      [vim.diagnostic.severity.INFO] = Icons.diagnostics.Information,
+      [vim.diagnostic.severity.HINT] = Icons.diagnostics.Hint,
+    },
+  },
+  virtual_text = {
+    source = 'if_many',
+    spacing = 2,
+    format = function(diagnostic)
+      return diagnostic.message
+    end,
+  },
 })
+
+vim.keymap.set('n', '<leader>tdt', function()
+  local new_config = not vim.diagnostic.config().virtual_text
+  vim.diagnostic.config({ virtual_text = new_config })
+end, { desc = 'Toggle diagnostic virtual_text' })
