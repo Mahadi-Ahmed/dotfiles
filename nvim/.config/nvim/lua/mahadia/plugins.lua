@@ -260,8 +260,7 @@ local plugins = {
         },
       },
     },
-    lazy = true,
-    event = 'LazyFile',
+    event = 'BufReadPre', --NOTE: need to use native event instead of custom LazyFile
     config = function()
       require('mahadia.plugins.lsp')
     end

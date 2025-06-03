@@ -170,13 +170,6 @@ vim.lsp.config('yamlls', {
   end,
 })
 
--- Enable the LSP servers
-vim.lsp.enable('vtsls')
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('gopls')
-vim.lsp.enable('eslint')
-vim.lsp.enable('yamlls')
-
 Icons = require('mahadia.plugins.icons')
 
 vim.diagnostic.config({
