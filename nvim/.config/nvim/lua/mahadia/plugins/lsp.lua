@@ -52,6 +52,8 @@ mason_lspconfig.setup({
     'gopls',
     'vtsls',
     'vue_ls',
+    'jsonls',
+    'emmet_language_server'
   },
   automatic_installation = false,
   automatic_enable = true,
