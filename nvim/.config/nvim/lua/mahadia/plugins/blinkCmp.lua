@@ -4,7 +4,13 @@ if not setup then
 end
 
 blink.setup({
-	keymap = { preset = "enter" },
+	keymap = {
+		["<Up>"] = { "select_prev", "fallback" },
+		["<Down>"] = { "select_next", "fallback" },
+		["<Tab>"] = { "select_next", "fallback" },
+		["<S-Tab>"] = { "select_prev", "fallback" },
+		["<CR>"] = { "accept", "fallback" },
+	},
 
 	appearance = {
 		use_nvim_cmp_as_default = true,
@@ -13,14 +19,12 @@ blink.setup({
 
 	sources = {
 		default = { "lsp", "path", "snippets", "buffer" },
-		-- optionally disable cmdline completions
-		-- cmdline = {},
 	},
 
 	signature = {
 		enabled = true,
 		window = {
-			border = "rounded",
+			border = "single",
 			scrollbar = false,
 		},
 	},
@@ -32,7 +36,7 @@ blink.setup({
 			},
 		},
 		menu = {
-			border = "rounded",
+			border = "single",
 			draw = {
 				treesitter = { "lsp" },
 				columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
@@ -64,12 +68,6 @@ blink.setup({
 		jump = function(direction)
 			require("luasnip").jump(direction)
 		end,
-		-- NEW: Set the preset to luasnip
 		preset = "luasnip",
 	},
-
-	-- experimental auto-completion support
-	-- completion = {
-	--   trigger = { show_on_insert_on_trigger_character = false }
-	-- },
 })
