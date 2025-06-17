@@ -27,6 +27,9 @@ alias lg='lazygit'
 alias lvim='NVIM_APPNAME=lvim nvim'
 alias icat="kitten icat"
 
+# AWS LocalStack
+laws() { aws --endpoint-url=http://localhost:4566 "$@"; }
+
 # Directory shortcuts
 alias cdpn='cd ~/Code/pn-repos/'
 alias cdqmk='cd ~/Code/mahadia/qmk/keyboards/planck/keymaps/mahadia'
