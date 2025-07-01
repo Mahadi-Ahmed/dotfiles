@@ -19,9 +19,9 @@ source ~/.config/zsh/aliases.zsh
 autoload -Uz compinit
 # Only regenerate once a day for faster startup
 if [[ -n ~/.zcompdump(#qNmh+24) ]]; then
-  compinit
+  compinit -u
 else
-  compinit -C
+  compinit -C -u
 fi
 
 zstyle ':completion:*' menu select
@@ -90,6 +90,8 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git' # Opti
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+source /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 zle     -N             sesh-sessions
 bindkey -M emacs '^f' sesh-sessions
