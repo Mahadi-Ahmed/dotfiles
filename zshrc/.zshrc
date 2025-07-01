@@ -15,6 +15,19 @@ path=(
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.config/zsh/aliases.zsh
 
+# Completion system
+autoload -Uz compinit
+# Only regenerate once a day for faster startup
+if [[ -n ~/.zcompdump(#qNmh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' list-colors ''
+
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
