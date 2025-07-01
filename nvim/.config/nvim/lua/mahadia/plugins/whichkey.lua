@@ -100,7 +100,6 @@ wk.add({
   -- { "<leader>jr", "<cmd>lua _G.harpoon_telescope(require('harpoon'):list())<cr>", desc = "Telescope Harpoon" },
 
   { "<leader>l", group = "lsp zero" },
-  { "<leader>lR", desc = "references" },
   { "<leader>lW", desc = "workspace symbols" },
   { "<leader>la", desc = "code action" },
   { "<leader>lf", desc = "format" },
