@@ -53,7 +53,8 @@ mason_lspconfig.setup({
     'vtsls',
     'vue_ls',
     'jsonls',
-    'emmet_language_server'
+    'emmet_language_server',
+    'cssls'
   },
   automatic_installation = false,
   automatic_enable = true,
