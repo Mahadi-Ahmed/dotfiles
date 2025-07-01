@@ -86,6 +86,11 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git' # Opti
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Autosuggestions
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
 zle     -N             sesh-sessions
 bindkey -M emacs '^f' sesh-sessions
 bindkey -M vicmd '^f' sesh-sessions
