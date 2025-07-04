@@ -73,8 +73,8 @@ wk.add({
   },
 
   { "<leader>g", group = "Git" },
-  { "<leader>gc", "<cmd>Telescope git_bcommits<cr>", desc = "Checkout commit(for current file)" },
-  { "<leader>gC", "<cmd>Telescope git_commits<cr>", desc = "Checkout commit in repo" },
+  { "<leader>gc", "<cmd>lua Snacks.picker.git_log_file()<cr>", desc = "Checkout commit(for current file)" },
+  { "<leader>gC", "<cmd>lua Snacks.picker.git_log()<cr>", desc = "Checkout commit in repo" },
   { "<leader>gR", "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = "Reset Buffer" },
   { "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", desc = "Lazygit" },
   { "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", desc = "Next Hunk" },

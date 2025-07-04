@@ -14,7 +14,7 @@ snacks.setup({
     timeout = 3000,
   },
   picker = {
-    enabled = false,
+    enabled = true,
   },
   quickfile = { enabled = true },
   scope = { enabled = true },
