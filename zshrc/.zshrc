@@ -28,6 +28,9 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' list-colors ''
 
+# Disable autocomplete for man command for performance
+zstyle ':completion:*:man:*' completer
+
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
