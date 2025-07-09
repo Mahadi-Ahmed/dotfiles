@@ -12,7 +12,7 @@ alias fgrep='grep -F'
 alias ls='eza --icons --group-directories-first -w 120 --color=auto'
 alias ll='eza --icons --group-directories-first -l --color=auto'
 alias lsa='eza --icons --group-directories-first -a -w 80 --color=auto'
-alias lt='eza --icons --group-directories-first --tree --color=auto'
+alias lt='eza --icons --group-directories-first --tree --git-ignore --color=auto'
 alias l.='eza --icons --group-directories-first -d .* --color=auto'
 alias lta='eza --icons --group-directories-first --tree --level=4 --git-ignore --color=auto'
 
