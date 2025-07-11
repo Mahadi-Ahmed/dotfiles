@@ -17,6 +17,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 echo "Installing volta"
 curl https://get.volta.sh | bash -s -- --skip-setup
 
+#TODO: Install kitty terminal
+
 #TODO: Setup osx settings (https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
 
 if [ "$(uname)" = "Darwin" ]; then

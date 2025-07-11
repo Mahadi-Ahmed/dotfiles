@@ -4,8 +4,6 @@ The setup script will install homebrew, dependencies & setup:
 * nvim
 * aerospace
 * bat
-* kitty
-* alacritty
 * p10k
 * tmux
 * zshrc
