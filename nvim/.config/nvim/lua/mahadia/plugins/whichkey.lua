@@ -59,6 +59,11 @@ wk.add({
   { "<leader>bm", "<cmd>MaximizerToggle<cr>", desc = "Maximize split toggle" },
   { "<leader>bd", "<cmd>bd<cr>", desc = "Delete buffer" },
 
+  -- {
+  --   "<leader>f",
+  --   "<cmd>lua Snacks.picker.files()<cr>",
+  --   desc = "Find File"
+  -- },
   {
     "<leader>f",
     function()

@@ -15,9 +15,7 @@ local Event = require("lazy.core.handler.event")
 Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFile", "BufWritePre" } }
 Event.mappings["User LazyFile"] = Event.mappings.LazyFile
 
--- Install your plugins here
 local plugins = {
-  -- My plugins here
   { "folke/lazy.nvim",       tag = "stable" },
   { "nvim-lua/plenary.nvim", lazy = true }, -- Useful lua functions used ny lots of plugins
   -- Colorschemes
