@@ -1,6 +1,7 @@
 # Mahadi's dotfiles
 
-![screenshot](./screenshot.png)
+![Screenshot](./Screenshot.png)
+
 
 The setup script will install homebrew, dependencies & setup:
 * nvim
