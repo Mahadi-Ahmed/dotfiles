@@ -1,5 +1,7 @@
 # Mahadi's dotfiles
 
+![screenshot](./screenshot.png)
+
 The setup script will install homebrew, dependencies & setup:
 * nvim
 * aerospace
