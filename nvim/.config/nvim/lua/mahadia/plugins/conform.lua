@@ -9,6 +9,7 @@ conform.setup({
 		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 		vue = { "prettierd", "prettier", stop_after_first = true },
 		lua = { "stylua", lsp_format = "fallback" },
+		html = { "prettierd", "prettier", stop_after_first = true },
 		yaml = function(bufnr)
 			local filename = vim.api.nvim_buf_get_name(bufnr)
 			if filename:match("%.github/workflows/") then
