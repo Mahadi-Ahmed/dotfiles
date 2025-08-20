@@ -17,6 +17,9 @@ source setup.sh
 ```
 
 To try out the dotfiles in a container:
+- Clone the repository
+- Run the commands in the root of the repository:
+
 ```
 docker build -f DockerImages/Dockerfile-simple -t 'dotfiles:test' . && \
 docker run -d --name dotfilesTest -it dotfiles:test && \
