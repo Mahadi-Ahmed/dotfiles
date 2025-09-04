@@ -104,6 +104,10 @@ bindkey -M viins '^f' sesh-sessions
 
 eval "$(zoxide init zsh)"
 
+# Ruby
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+
 function codeauth () {
     node /Users/mahadiahmed/Code/snippets/tokenCodeClipboard/index.js $1
 }
