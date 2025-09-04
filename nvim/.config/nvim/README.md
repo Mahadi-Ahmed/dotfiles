@@ -36,7 +36,7 @@
 #### Interesting plugins to look into later
 - [x] Kitty scrollback [kitty-scrollback](https://github.com/mikesmithgh/kitty-scrollback.nvim)
 - [] Database client for neovim [nvim-dbee](https://github.com/kndndrj/nvim-dbee)
-- Look into interesting packages in mini to add features / replace existing ones:
+- [] Look into interesting packages in mini to add features / replace existing ones:
     - [x] mini.ai, Extend the a/i textobjects[mini.ai](https://github.com/echasnovski/mini.ai)
     - [x] [mini.surround](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md)
 - [x] autoSession - auto-session will try to restore an existing session for the current cwd if one exists.(https://github.com/rmagatti/auto-session)
