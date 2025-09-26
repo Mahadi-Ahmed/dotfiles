@@ -28,6 +28,8 @@ brew "neovim"
 brew "sesh"
 brew "yq"
 brew "noahgorstein/tap/jqp"
+brew "chruby"
+brew "ruby-install"
 
 cask "qmk-toolbox"
 cask "1password"
