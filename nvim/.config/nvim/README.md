@@ -1,3 +1,4 @@
+- [] Look into better markdown preview
 - [x] Refactor: lspZero will stop getting updates , move to [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [] Look into quickfix list & how to use them
 - [] Look into nvim-dap to add debuggers
@@ -60,7 +61,6 @@
 * [nvim-basic-ide](https://github.com/LunarVim/nvim-basic-ide)
 * [Josean Martinez Youtube Video](https://www.youtube.com/watch?v=vdn_pKJUda8&list=LL&index=1)
 * [ThePrimeagen Youtube Video](https://www.youtube.com/watch?v=w7i4amO_zaE&list=LL)
-* [lspzero](https://github.com/VonHeikemen/lsp-zero.nvim)
 * [ftplugin](https://neovim.io/doc/user/filetype.html) & [usage of ftplugin](https://www.reddit.com/r/neovim/comments/x3zp6t/usage_of_afterftplugin_directory_for/)
 * [LazyVim](https://www.lazyvim.org/)
 * [Kickstart](https://github.com/nvim-lua/kickstart.nvim)
