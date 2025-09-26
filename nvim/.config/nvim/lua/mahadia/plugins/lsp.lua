@@ -54,7 +54,8 @@ mason_lspconfig.setup({
     'vue_ls',
     'jsonls',
     'emmet_language_server',
-    'cssls'
+    'cssls',
+    'ruby_lsp',
   },
   automatic_installation = false,
   automatic_enable = true,
