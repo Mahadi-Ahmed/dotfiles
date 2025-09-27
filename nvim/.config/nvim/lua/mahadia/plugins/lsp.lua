@@ -139,6 +139,11 @@ vim.lsp.config('lua_ls', {
   end,
 })
 
+vim.lsp.config('ruby_lsp', {
+  capabilities = capabilities,
+  filetypes = { "ruby", "eruby"}
+})
+
 vim.lsp.config('gopls', {
   capabilities = capabilities,
 })

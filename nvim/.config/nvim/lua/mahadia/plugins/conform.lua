@@ -2,7 +2,6 @@ local conform = require("conform")
 
 conform.setup({
 	formatters_by_ft = {
-		-- JavaScript/TypeScript family - Prettier only
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
 		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
@@ -10,6 +9,7 @@ conform.setup({
 		vue = { "prettierd", "prettier", stop_after_first = true },
 		lua = { "stylua", lsp_format = "fallback" },
 		html = { "prettierd", "prettier", stop_after_first = true },
+		ruby = { "rubyfmt", stop_after_first = true },
 		yaml = function(bufnr)
 			local filename = vim.api.nvim_buf_get_name(bufnr)
 			if filename:match("%.github/workflows/") then
@@ -19,7 +19,6 @@ conform.setup({
 			end
 		end,
 
-		-- Other languages with LSP fallback
 		go = { lsp_format = "fallback" },
 	},
 
