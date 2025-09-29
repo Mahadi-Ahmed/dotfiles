@@ -30,6 +30,7 @@ brew "yq"
 brew "noahgorstein/tap/jqp"
 brew "chruby"
 brew "ruby-install"
+brew "carapace"
 
 cask "qmk-toolbox"
 cask "1password"

@@ -31,6 +31,15 @@ zstyle ':completion:*' list-colors ''
 # Disable autocomplete for man command for performance
 zstyle ':completion:*:man:*' completer
 
+# ${UserConfigDir}/zsh/.zshrc
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+
+#Order of groups can be configured with the zstyle group-order.
+
+zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
+
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
