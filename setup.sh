@@ -21,6 +21,9 @@ curl https://get.volta.sh | bash -s -- --skip-setup
 
 #TODO: Setup osx settings (https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
 
+echo "Installing atuin"
+curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+
 if [ "$(uname)" = "Darwin" ]; then
 	if command -v xcode-select &>/dev/null; then
 		echo "Xcode Command Line Tools already installed."

@@ -131,3 +131,7 @@ function sesh-sessions() {
     sesh connect $session
   }
 }
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
