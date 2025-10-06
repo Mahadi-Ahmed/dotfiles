@@ -146,6 +146,7 @@ vim.lsp.config('ruby_lsp', {
 
 vim.lsp.config('gopls', {
   capabilities = capabilities,
+  filetypes = { 'go' }
 })
 
 vim.lsp.config('eslint', {
