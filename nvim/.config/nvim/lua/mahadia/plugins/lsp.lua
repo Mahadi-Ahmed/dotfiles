@@ -56,6 +56,7 @@ mason_lspconfig.setup({
     'emmet_language_server',
     'cssls',
     'ruby_lsp',
+    'taplo'
   },
   automatic_installation = false,
   automatic_enable = true,
@@ -178,6 +179,21 @@ vim.lsp.config('yamlls', {
   on_attach = function(client)
     client.server_capabilities.documentFormattingProvider = true
   end,
+})
+
+vim.lsp.config('taplo', {
+  capabilities = capabilities,
+  filetypes = { 'toml' },
+  -- settings = {
+  --   evenBetterToml = {
+  --     schema = {
+  --       enabled = true,
+  --       associations = {
+  --         ["starship\\.toml$"] = "https://starship.rs/config-schema.json",
+  --       },
+  --     },
+  --   },
+  -- },
 })
 
 Icons = require('mahadia.plugins.icons')
