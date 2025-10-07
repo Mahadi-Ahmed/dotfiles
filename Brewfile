@@ -1,5 +1,6 @@
 tap "noahgorstein/tap"
 tap "nikitabobko/tap"
+tap "homebrew/cask-fonts"
 
 brew "stow"
 brew "bat"
@@ -33,6 +34,7 @@ brew "ruby-install"
 brew "carapace"
 
 cask "qmk-toolbox"
+cask "font-fira-code-nerd-font"
 cask "1password"
 cask "nikitabobko/tap/aerospace"
 cask "raycast"
