@@ -101,6 +101,11 @@ run = 'layout floating'
     alt-ctrl-k = 'focus up'
     alt-ctrl-l = 'focus right'
 
+    alt-ctrl-left = 'focus left'
+    alt-ctrl-down = 'focus down'
+    alt-ctrl-up = 'focus up'
+    alt-ctrl-right = 'focus right'
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-ctrl-shift-h = 'move left'
     alt-ctrl-shift-j = 'move down'
@@ -113,7 +118,7 @@ run = 'layout floating'
 
     # NOTE: Maybe setup mnemonic workspaces, ie , s for slack , w for work , t for terminal
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-    alt-ctrl-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
+    alt-ctrl-a = 'workspace A'
     alt-ctrl-s = 'workspace S'
     alt-ctrl-d = 'workspace D'
     alt-ctrl-f = 'workspace F'
