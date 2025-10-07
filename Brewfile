@@ -32,6 +32,7 @@ brew "noahgorstein/tap/jqp"
 brew "chruby"
 brew "ruby-install"
 brew "carapace"
+brew "starship"
 
 cask "qmk-toolbox"
 cask "font-fira-code-nerd-font"

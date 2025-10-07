@@ -9,7 +9,6 @@ stow -vt ~ nvim
 stow -vt ~ aerospace
 stow -vt ~ bat
 stow -vt ~ kitty
-stow -vt ~ alacritty
-stow -vt ~ p10k
+stow -vt ~ starship
 stow -vt ~ tmux
 stow -vt ~ zshrc

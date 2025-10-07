@@ -8,9 +8,6 @@ source ./setupScripts/brew.sh
 echo "Stowing..."
 source ./setupScripts/stow.sh
 
-echo "Installing p10k"
-source ./setupScripts/p10kSetup.sh
-
 echo "Installing tpm - tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 
