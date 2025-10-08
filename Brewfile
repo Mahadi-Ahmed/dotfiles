@@ -1,6 +1,5 @@
 tap "noahgorstein/tap"
 tap "nikitabobko/tap"
-tap "homebrew/cask-fonts"
 
 brew "stow"
 brew "bat"
