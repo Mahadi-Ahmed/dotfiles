@@ -7,7 +7,8 @@ The setup script will install homebrew, dependencies & setup:
 * nvim
 * aerospace
 * bat
-* p10k
+* starship
+* kitty
 * tmux
 * zshrc
 
