@@ -14,12 +14,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 echo "Installing volta"
 curl https://get.volta.sh | bash -s -- --skip-setup
 
-#TODO: Install kitty terminal
-
 #TODO: Setup osx settings (https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
 
-echo "Installing atuin"
-curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
 if [ "$(uname)" = "Darwin" ]; then
 	if command -v xcode-select &>/dev/null; then
@@ -53,3 +49,9 @@ if [ "$(uname)" = "Linux" ]; then
     echo "eza installation failed."
   fi
 fi
+
+echo "Installing atuin"
+curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+
+echo "install node via volta"
+volta install node@lts
