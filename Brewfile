@@ -32,7 +32,7 @@ brew "carapace"
 brew "starship"
 brew "asdf"
 brew "libyaml"
-brew "lua"
+brew "lua@5.1"
 brew "luarocks"
 
 cask "qmk-toolbox"
