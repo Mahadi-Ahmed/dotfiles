@@ -8,6 +8,10 @@ source ./setupScripts/brew.sh
 echo "Stowing..."
 source ./setupScripts/stow.sh
 
+# "Creating Neovim undo directory"
+mkdir -p ~/.undodir
+chmod 700 ~/.undodir
+
 echo "Installing tpm - tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 
