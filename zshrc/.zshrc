@@ -1,13 +1,10 @@
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-
 # Path configurations
 typeset -U path
 path=(
   /opt/homebrew/bin(N)
-  ${HOME}/.volta/bin(N)
+  ${ASDF_DATA_DIR:-$HOME/.asdf}/shims(N)
   ${HOME}/.local/bin(N)
+  ${HOME}/.cargo/bin(N)
   /usr/local/opt/avr-gcc@8/bin(N)
   $path[@]
 )
@@ -31,7 +28,6 @@ zstyle ':completion:*' list-colors ''
 # Disable autocomplete for man command for performance
 zstyle ':completion:*:man:*' completer
 
-# ${UserConfigDir}/zsh/.zshrc
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
@@ -112,10 +108,6 @@ bindkey -M viins '^f' sesh-sessions
 
 
 eval "$(zoxide init zsh)"
-
-# Ruby
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
 
 function codeauth () {
     node /Users/mahadiahmed/Code/snippets/tokenCodeClipboard/index.js $1

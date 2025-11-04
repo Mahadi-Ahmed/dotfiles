@@ -8,11 +8,12 @@ source ./setupScripts/brew.sh
 echo "Stowing..."
 source ./setupScripts/stow.sh
 
+# "Creating Neovim undo directory"
+mkdir -p ~/.undodir
+chmod 700 ~/.undodir
+
 echo "Installing tpm - tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-
-echo "Installing volta"
-curl https://get.volta.sh | bash -s -- --skip-setup
 
 #TODO: Setup osx settings (https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
 
@@ -52,5 +53,28 @@ fi
 echo "Installing atuin"
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
-echo "Install node lts"
-volta install node@lts
+echo "Installing rustup (Rust toolchain)"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+echo "Setting up asdf plugins and languages"
+# Add Node.js plugin
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git 2>/dev/null || echo "nodejs plugin already added"
+
+# Add Ruby plugin
+asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git 2>/dev/null || echo "ruby plugin already added"
+
+# Install Node.js LTS
+echo "Installing Node.js LTS..."
+asdf install nodejs lts
+
+# Install Ruby latest
+echo "Installing Ruby latest..."
+asdf install ruby latest
+
+# Set global versions in $HOME/.tool-versions
+asdf set -u nodejs lts
+asdf set -u ruby latest
+
+echo "asdf setup complete!"
+echo "Node.js version: $(asdf current nodejs)"
+echo "Ruby version: $(asdf current ruby)"

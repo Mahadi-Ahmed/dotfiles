@@ -58,6 +58,12 @@ vim.g.skip_ts_context_commentstring_module = true
 -- autoSessions
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
+-- Disable unused providers
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
 -- The shada file (SHAred DAta) in Neovim stores persistent data between sessions, 
 -- vim.opt.shadafile = "NONE"
 -- vim.schedule(function()
