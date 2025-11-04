@@ -11,6 +11,7 @@ The setup script will install homebrew, dependencies & setup:
 * kitty
 * tmux
 * zshrc
+* atuin
 
 Run the setup script:
 ```

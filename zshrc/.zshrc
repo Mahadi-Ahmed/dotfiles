@@ -6,7 +6,7 @@
 typeset -U path
 path=(
   /opt/homebrew/bin(N)
-  ${HOME}/.volta/bin(N)
+  ${ASDF_DATA_DIR:-$HOME/.asdf}/shims(N)
   ${HOME}/.local/bin(N)
   /usr/local/opt/avr-gcc@8/bin(N)
   $path[@]
@@ -112,10 +112,6 @@ bindkey -M viins '^f' sesh-sessions
 
 
 eval "$(zoxide init zsh)"
-
-# Ruby
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
 
 function codeauth () {
     node /Users/mahadiahmed/Code/snippets/tokenCodeClipboard/index.js $1
