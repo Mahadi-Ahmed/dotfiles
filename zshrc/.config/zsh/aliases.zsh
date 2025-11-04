@@ -26,7 +26,7 @@ alias f='open -a Finder ./'
 alias lg='lazygit'
 alias lvim='NVIM_APPNAME=lvim nvim'
 alias icat="kitten icat"
-alias claude="/Users/mahadiahmed/.claude/local/claude"
+alias claude="~/.local/bin/claude"
 
 # AWS LocalStack
 laws() { aws --endpoint-url=http://localhost:4566 "$@"; }
