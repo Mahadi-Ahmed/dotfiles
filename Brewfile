@@ -34,6 +34,7 @@ brew "asdf"
 brew "libyaml"
 brew "lua@5.1"
 brew "luarocks"
+brew "imagemagick"
 
 cask "qmk-toolbox"
 cask "font-fira-code-nerd-font"
