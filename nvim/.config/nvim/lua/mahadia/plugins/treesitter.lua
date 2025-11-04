@@ -31,9 +31,8 @@ treesitter.setup({
     "vim",
     "dockerfile",
     "gitignore",
-    "java",
-    "vue"
-    -- "python"
+    "vue",
+    "python"
   },
   -- context_commentstring = {
   --   enable = true,
