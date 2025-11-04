@@ -1,7 +1,3 @@
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-
 # Path configurations
 typeset -U path
 path=(
@@ -32,7 +28,6 @@ zstyle ':completion:*' list-colors ''
 # Disable autocomplete for man command for performance
 zstyle ':completion:*:man:*' completer
 
-# ${UserConfigDir}/zsh/.zshrc
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
