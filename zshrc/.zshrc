@@ -12,6 +12,10 @@ path=(
 # source ~/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.config/zsh/aliases.zsh
 
+# asdf setup (Homebrew installation)
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+fpath=(/opt/homebrew/opt/asdf/share/zsh/site-functions $fpath)
+
 # Completion system
 autoload -Uz compinit
 # Only regenerate once a day for faster startup
