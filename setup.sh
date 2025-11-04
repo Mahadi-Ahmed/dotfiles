@@ -51,3 +51,6 @@ fi
 
 echo "Installing atuin"
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+
+echo "Install node lts"
+volta install node@lts
