@@ -8,6 +8,7 @@ path=(
   /opt/homebrew/bin(N)
   ${ASDF_DATA_DIR:-$HOME/.asdf}/shims(N)
   ${HOME}/.local/bin(N)
+  ${HOME}/.cargo/bin(N)
   /usr/local/opt/avr-gcc@8/bin(N)
   $path[@]
 )

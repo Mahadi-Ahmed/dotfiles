@@ -49,6 +49,9 @@ fi
 echo "Installing atuin"
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
+echo "Installing rustup (Rust toolchain)"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
 echo "Setting up asdf plugins and languages"
 # Add Node.js plugin
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git 2>/dev/null || echo "nodejs plugin already added"
