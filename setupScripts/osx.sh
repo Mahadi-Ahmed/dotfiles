@@ -101,7 +101,7 @@ echo "Show Sound in menu bar"
 defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
 
 echo "Show Input/Language menu in menu bar"
-defaults write com.apple.TextInputMenu visible -bool true
+defaults write com.apple.HIToolbox AppleShowInputMenu -bool true
 
 echo "Hide Spotlight from menu bar"
 defaults -currentHost write com.apple.Spotlight MenuItemHidden -int 1
@@ -113,6 +113,14 @@ echo "Disable Spotlight keyboard shortcuts (Cmd+Space and Option+Cmd+Space)"
 # Disable Option+Cmd+Space for Finder search
 /usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:65:enabled false" ~/Library/Preferences/com.apple.symbolichotkeys.plist 2>/dev/null || \
   /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:65:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+
+echo "Disable keyboard shortcuts for switching input sources"
+# Disable Control+Space (Select the previous input source)
+/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:60:enabled false" ~/Library/Preferences/com.apple.symbolichotkeys.plist 2>/dev/null || \
+  /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:60:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
+# Disable Control+Option+Space (Select next source in Input menu)
+/usr/libexec/PlistBuddy -c "Set :AppleSymbolicHotKeys:61:enabled false" ~/Library/Preferences/com.apple.symbolichotkeys.plist 2>/dev/null || \
+  /usr/libexec/PlistBuddy -c "Add :AppleSymbolicHotKeys:61:enabled bool false" ~/Library/Preferences/com.apple.symbolichotkeys.plist
 
 ### Power Management
 
