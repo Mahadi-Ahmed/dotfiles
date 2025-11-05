@@ -78,3 +78,6 @@ asdf set -u ruby latest
 echo "asdf setup complete!"
 echo "Node.js version: $(asdf current nodejs)"
 echo "Ruby version: $(asdf current ruby)"
+
+echo "Setting up osx settings"
+source ./setupScripts/osx.sh
