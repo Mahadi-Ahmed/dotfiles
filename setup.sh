@@ -50,11 +50,19 @@ if [ "$(uname)" = "Linux" ]; then
   fi
 fi
 
-echo "Installing atuin"
-curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+if ! command -v atuin &>/dev/null; then
+  echo "Installing atuin"
+  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh --no-modify-path
+else
+  echo "atuin already installed, skipping..."
+fi
 
-echo "Installing rustup (Rust toolchain)"
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+if ! command -v rustup &>/dev/null; then
+  echo "Installing rustup (Rust toolchain)"
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+else
+  echo "rustup already installed, skipping..."
+fi
 
 echo "Setting up asdf plugins and languages"
 # Add Node.js plugin
