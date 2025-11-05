@@ -52,7 +52,7 @@ fi
 
 if ! command -v atuin &>/dev/null; then
   echo "Installing atuin"
-  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh --no-modify-path
+  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 else
   echo "atuin already installed, skipping..."
 fi
