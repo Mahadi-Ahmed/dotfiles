@@ -1,3 +1,4 @@
 tmux/.config/tmux/plugins/
 
 .DS_Store
+kitty/.config/kitty/current-theme.conf
