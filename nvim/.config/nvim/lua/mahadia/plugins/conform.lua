@@ -4,8 +4,9 @@ conform.setup({
 	formatters_by_ft = {
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", "eslint_d", "eslint", stop_after_first = true },
+		astro = { "prettierd", "eslint_d", "eslint", stop_after_first = true },
 		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+		typescriptreact = { "biome", "prettierd", "prettier", stop_after_first = true },
 		vue = { "prettierd", "prettier", stop_after_first = true },
 		lua = { "stylua", lsp_format = "fallback" },
 		html = { "prettierd", "prettier", stop_after_first = true },
@@ -22,6 +23,9 @@ conform.setup({
 	},
 
 	formatters = {
+		biome = {
+			require_cwd = true,
+		},
 		prettierd = {
 			require_cwd = true,
 		},
