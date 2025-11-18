@@ -35,6 +35,7 @@
   - [x] Add a command to turn on & off the colorizer in whichkey
 
 #### Interesting plugins to look into later
+- [ ] Look into vim dispatch
 - [x] Kitty scrollback [kitty-scrollback](https://github.com/mikesmithgh/kitty-scrollback.nvim)
 - [] Database client for neovim [nvim-dbee](https://github.com/kndndrj/nvim-dbee)
 - [] Look into interesting packages in mini to add features / replace existing ones:
