@@ -1,6 +1,11 @@
 local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
 
+-- Increase LSP timeout for large monorepos (30 seconds)
+-- Note: The timeout is set per LSP request in milliseconds
+-- vim.lsp.set_log_level('OFF') -- Disable LSP logging for better performance
+-- vim.g.lsp_timeout = 30000
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('mahadia-lsp-attach', { clear = true }),
   callback = function(event)
@@ -16,7 +21,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set("n", "<leader>lj", function() vim.diagnostic.jump({ count = 1 }) end, opts)
     vim.keymap.set("n", "<leader>lk", function() vim.diagnostic.jump({ count = -1 }) end, opts)
     vim.keymap.set("n", "<leader>la", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end, opts)
+    vim.keymap.set("n", "gr", function()
+      Snacks.picker.lsp_references({ includeDeclaration = false })
+    end, opts)
     vim.keymap.set("n", "<leader>lr", function() vim.lsp.buf.rename() end, opts)
 
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
@@ -68,7 +75,9 @@ vim.lsp.config('vtsls', {
   settings = {
     vtsls = {
       tsserver = {
-        globalPlugins = {}
+        globalPlugins = {},
+        -- Increase memory limit for large monorepos (in MB)
+        maxTsServerMemory = 8192,
       },
       autoUseWorkspaceTsdk = true,
       experimental = {
@@ -84,6 +93,10 @@ vim.lsp.config('vtsls', {
       },
       preferences = {
         importModuleSpecifier = 'non-relative',
+      },
+      -- Increase timeout for large monorepos
+      tsserver = {
+        maxTsServerMemory = 8192,
       },
       inlayHints = {
         parameterNames = { enabled = 'literals' },

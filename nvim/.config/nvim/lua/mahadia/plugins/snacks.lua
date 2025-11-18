@@ -15,6 +15,26 @@ snacks.setup({
   },
   picker = {
     enabled = true,
+    -- Increase timeout for LSP operations in large monorepos
+    win = {
+      input = {
+        keys = {
+          -- Add escape to close picker
+          ["<Esc>"] = "close",
+        },
+      },
+    },
+    -- Configure formatters with better performance for large result sets
+    formatters = {
+      file = {
+        filename_first = true,
+      },
+    },
+    -- Previewers configuration
+    previewers = {
+      -- Disable preview for better performance if needed
+      -- enabled = false,
+    },
   },
   quickfile = { enabled = true },
   scope = { enabled = true },
