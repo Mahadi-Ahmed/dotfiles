@@ -1,3 +1,4 @@
+- [x] Add a breadcrumbs plugin/functionality
 - [] Look into better markdown preview
 - [x] Refactor: lspZero will stop getting updates , move to [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [] Look into quickfix list & how to use them

@@ -117,8 +117,8 @@ wk.add({
   { "<leader>lm", "<cmd>%!jq . <cr>", desc = "Format json" },
 
   { "<leader>m", group = "Session" },
-  { "<leader>mr", "<cmd>SessionRestore<CR>",group = "Restore session for cwd" },
-  { "<leader>ms", "<cmd>SessionSave<CR>",group = "Save session for auto session root dir" },
+  { "<leader>mr", "<cmd>AutoSession restore<CR>",group = "Restore session for cwd" },
+  { "<leader>ms", "<cmd>AutoSession save<CR>",group = "Save session for auto session root dir" },
 
   { "<leader>s", group = "Search" },
   { "<leader>s:", "<cmd>Telescope commands<cr>", desc = "Commands" },

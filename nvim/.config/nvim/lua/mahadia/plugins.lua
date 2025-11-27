@@ -211,7 +211,7 @@ local plugins = {
     config = function()
       require('mahadia.plugins.autoSession')
     end,
-    cmd = { 'SessionRestore', 'SessionSave' }
+    cmd = 'AutoSession'
   },
   {
     "folke/todo-comments.nvim",
@@ -354,6 +354,9 @@ local plugins = {
     config = function()
       require('kitty-scrollback').setup()
     end,
+  },
+  {
+    'Bekaboo/dropbar.nvim',
   }
 }
 
