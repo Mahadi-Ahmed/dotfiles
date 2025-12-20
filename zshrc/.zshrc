@@ -135,3 +135,5 @@ function sesh-sessions() {
 
 eval "$(atuin init zsh)"
 eval "$(starship init zsh)"
+
+source <(menti activate)
