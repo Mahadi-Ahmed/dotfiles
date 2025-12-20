@@ -71,6 +71,12 @@ mason_lspconfig.setup({
 
 vim.lsp.config('vtsls', {
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  root_markers = {
+    "tsconfig.json",
+    "tsconfig.base.json",
+    "package.json",
+    ".git"
+  },
   capabilities = capabilities,
   settings = {
     vtsls = {
