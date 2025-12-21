@@ -19,5 +19,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 `Ctrl+U`
 
 
+### Interesting plugins
+- https://github.com/fabioluciano/tmux-powerkit
+
 ### catppuccin showcases:
 https://github.com/catppuccin/tmux/discussions/317
