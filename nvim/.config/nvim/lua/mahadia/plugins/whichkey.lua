@@ -59,23 +59,28 @@ wk.add({
   { "<leader>bm", "<cmd>MaximizerToggle<cr>", desc = "Maximize split toggle" },
   { "<leader>bd", "<cmd>bd<cr>", desc = "Delete buffer" },
 
-  -- {
-  --   "<leader>f",
-  --   "<cmd>lua Snacks.picker.files()<cr>",
-  --   desc = "Find File"
-  -- },
   {
     "<leader>f",
     function()
-      local _, builtin = pcall(require, "telescope.builtin")
-      local _, themes = pcall(require, "telescope.themes")
-      local ok = pcall(builtin.git_files, themes.get_dropdown({ previewer = false }))
-      if not ok then
-        builtin.find_files(themes.get_dropdown())
-      end
+	Snacks.picker.files({
+		hidden = true,
+		follow = true,
+	})
     end,
     desc = "Find File"
   },
+  -- {
+  --   "<leader>f",
+  --   function()
+  --     local _, builtin = pcall(require, "telescope.builtin")
+  --     local _, themes = pcall(require, "telescope.themes")
+  --     local ok = pcall(builtin.git_files, themes.get_dropdown({ previewer = false }))
+  --     if not ok then
+  --       builtin.find_files(themes.get_dropdown())
+  --     end
+  --   end,
+  --   desc = "Find File"
+  -- },
 
   { "<leader>g", group = "Git" },
   { "<leader>gc", "<cmd>lua Snacks.picker.git_log_file()<cr>", desc = "Checkout commit(for current file)" },
