@@ -1,7 +1,9 @@
 tap "noahgorstein/tap"
 tap "nikitabobko/tap"
+tap "felixkratz/formulae"
 
 brew "stow"
+brew "borders"
 brew "bat"
 brew "fd"
 brew "fzf"
