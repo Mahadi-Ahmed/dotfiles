@@ -47,8 +47,9 @@ keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
 
 keymap("x", "<leader>p", [["_dP"]])
-keymap({"n", "v"}, "<leader>y", [["+y]])
-keymap("n", "<leader>Y", [["+Y]])
+-- Use <Space> directly to avoid timeout conflict with <leader>yf
+keymap({"n", "v"}, "<Space>y", [["+y]])
+keymap("n", "<Space>Y", [["+Y]])
 keymap({"n", "v"}, "<leader>p", [["+p"]])
 keymap({"n", "v"}, "<leader>P", [["+P"]])
 keymap("n", "<leader>ya", "gg\"*yG<C-o>", { desc = "Yank entire file", silent = false })
