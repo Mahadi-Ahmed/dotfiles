@@ -16,7 +16,7 @@ alias lt='eza --icons --group-directories-first --tree --git-ignore --color=auto
 alias l.='eza --icons --group-directories-first -d .* --color=auto'
 alias lta='eza --icons --group-directories-first --tree --level=4 --git-ignore --color=auto'
 
-alias lsg='fd --hidden --exclude .git --max-depth 1'
+alias lsg='fd -u --max-depth 1'
 
 # Applications
 alias cat='bat'
