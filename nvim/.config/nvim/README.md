@@ -1,3 +1,4 @@
+- [ ] Look into tsgo lsp
 - [x] Add a breadcrumbs plugin/functionality
 - [] Look into better markdown preview
 - [x] Refactor: lspZero will stop getting updates , move to [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
@@ -47,6 +48,10 @@
 - [] Kuala A minimal [REST-Client Interface for Neovim](https://github.com/mistweaverco/kulala.nvim)
 - [] look into setting up [go.nvim](https://github.com/ray-x/go.nvim)
 - [x] Establish good command workflow and quit bad habit[hardtime](https://github.com/m4xshen/hardtime.nvim)
+
+##### AI Plugins:
+- https://github.com/olimorris/codecompanion.nvim
+##### DB & API Plugins:
 
 ### Nvim Tree Settings & Configuration
 - [x] Make it so if you toggle the explorer when a file is open it opens up nvim-tree navigates to that folder
