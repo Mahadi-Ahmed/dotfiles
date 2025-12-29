@@ -45,6 +45,10 @@ zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'exter
 
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
+
+# Default editor
+export EDITOR="nvim"
+export VISUAL="nvim"
 export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
 export FZF_TMUX_OPTS="-p 55%,60%"
 export ATAC_KEY_BINDINGS="/Users/mahadiahmed/.config/atac/vim_key_bindings.toml"
