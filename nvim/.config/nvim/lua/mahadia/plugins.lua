@@ -315,48 +315,20 @@ local plugins = {
     end
   },
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
-  -- {
-  --   "mfussenegger/nvim-dap",
-  --   dependencies = {
-  --     'rcarriga/nvim-dap-ui',
-  --     'nvim-neotest/nvim-nio',
-  --     { 'leoluz/nvim-dap-go', ft = { 'go' } },
-  --     { 'mxsdev/nvim-dap-vscode-js', ft = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'astro', 'vue' } }
-  --   },
-  --   -- config = function()
-  --   --   require('mahadia.plugins.dap')
-  --   -- end,
-  --   event = 'LazyFile'
-  -- },
-  -- {
-  --   'microsoft/vscode-js-debug',
-  --   version = '1.x',
-  --   build = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out',
-  --   init = function()
-  --     vim.fn.system { "git", "config", "--global", "--add", "safe.directory", vim.fn.stdpath "data" .. "/lazy/vscode-js-debug" }
-  --     vim.fn.system { "git", "config", "-f", vim.fn.stdpath "data" .. "/lazy/vscode-js-debug/.git/config", "--add", "core.fileMode", "false" }
-  --     vim.fn.system { "git", "-C", vim.fn.stdpath "data" .. "/lazy/vscode-js-debug", "update-index", "--assume-unchanged", "package-lock.json" }
-  --   end,
-  -- },
   {
     "shrynx/line-numbers.nvim",
     opts = {},
     cmd = { "LineNumberToggle", "LineNumberBoth"}
   },
   {
-    'mikesmithgh/kitty-scrollback.nvim',
-    enabled = true,
-    lazy = true,
-    cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth', 'KittyScrollbackGenerateCommandLineEditing' },
-    event = { 'User KittyScrollbackLaunch' },
-    -- version = '*', -- latest stable version, may have breaking changes if major version changed
-    -- version = '^6.0.0', -- pin major version, include fixes and features that do not have breaking changes
-    config = function()
-      require('kitty-scrollback').setup()
-    end,
+    'Bekaboo/dropbar.nvim',
   },
   {
-    'Bekaboo/dropbar.nvim',
+    "esmuellert/vscode-diff.nvim",
+    branch = "next",  -- For v2.0 features (optional: use "main" for stable)
+    dependencies = { "MunifTanjim/nui.nvim" },
+    cmd = { "CodeDiff" },
+    opts = {},
   }
 }
 
