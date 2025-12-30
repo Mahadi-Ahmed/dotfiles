@@ -58,7 +58,6 @@ vim.api.nvim_create_autocmd("User", {
     snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>tw")
     snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>tL")
     snacks.toggle.diagnostics():map("<leader>tdd")
-    snacks.toggle.line_number():map("<leader>tl")
     snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>tc")
     snacks.toggle.treesitter():map("<leader>tT")
     snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>tb")

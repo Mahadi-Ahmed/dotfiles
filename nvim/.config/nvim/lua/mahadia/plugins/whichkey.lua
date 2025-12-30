@@ -141,4 +141,5 @@ wk.add({
 
   { "<leader>t", group = "Toggle\'s" },
   { "<leader>tt", "<cmd>ColorizerToggle<CR>", desc = "Colorizer toggle" },
+  { "<leader>tl", "<cmd>LineNumberToggle<CR>", desc = "Line number toggle" },
 })
