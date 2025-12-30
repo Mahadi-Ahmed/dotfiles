@@ -91,10 +91,62 @@ wk.add({
   { "<leader>gk", "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", desc = "Prev Hunk" },
   { "<leader>gl", "<cmd>lua require 'gitsigns'.blame_line()<cr>", desc = "Blame" },
   { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open changed file" },
-  { "<leader>gp", "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", desc = "Preview Hunk" },
+  { "<leader>gp", "<cmd>lua require 'gitsigns'.preview_hunk_inline()<cr>", desc = "Preview Hunk" },
   { "<leader>gr", "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = "Reset Hunk" },
   { "<leader>gs", "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", desc = "Stage Hunk" },
   { "<leader>gu", "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", desc = "Undo Stage Hunk" },
+
+  { "<leader>gd", group = "Diff" },
+  { "<leader>gdd", "<cmd>CodeDiff file HEAD<cr>", desc = "Diff file vs HEAD" },
+  { "<leader>gdD", "<cmd>CodeDiff<cr>", desc = "Diff explorer (all changes)" },
+  {
+    "<leader>gdb",
+    function()
+      local branch = vim.fn.input("Compare with branch/commit: ", "main")
+      if branch ~= "" then
+        vim.cmd("CodeDiff file " .. branch)
+      end
+    end,
+    desc = "Diff file vs branch/commit"
+  },
+  {
+    "<leader>gdm",
+    "<cmd>CodeDiff file main<cr>",
+    desc = "Diff file vs main branch"
+  },
+  {
+    "<leader>gds",
+    "<cmd>CodeDiff file HEAD~1<cr>",
+    desc = "Diff file vs previous commit"
+  },
+  {
+    "<leader>gdc",
+    function()
+      local commit = vim.fn.input("Compare with commit: ")
+      if commit ~= "" then
+        vim.cmd("CodeDiff file " .. commit)
+      end
+    end,
+    desc = "Diff file vs specific commit"
+  },
+  {
+    "<leader>gdr",
+    function()
+      local rev1 = vim.fn.input("First revision (e.g., main): ")
+      if rev1 == "" then return end
+      local rev2 = vim.fn.input("Second revision (e.g., HEAD): ")
+      if rev2 == "" then return end
+      vim.cmd("CodeDiff " .. rev1 .. " " .. rev2)
+    end,
+    desc = "Diff explorer (two branches/commits)"
+  },
+
+  { "<leader>gh", group = "GitHub" },
+  { "<leader>ghp", "<cmd>lua Snacks.picker.gh_pr()<cr>", desc = "List open PRs" },
+  { "<leader>ghm", "<cmd>lua Snacks.picker.gh_pr({ author = '@me' })<cr>", desc = "My PRs" },
+  { "<leader>ghr", "<cmd>lua Snacks.picker.gh_pr({ review = 'requested' })<cr>", desc = "Review requests" },
+  { "<leader>ghA", "<cmd>lua Snacks.picker.gh_pr({ assignee = '@me' })<cr>", desc = "Assigned to me" },
+  { "<leader>ghl", "<cmd>lua Snacks.picker.gh_pr({ label = 'Team: Payments Team' })<cr>", desc = "Payments Team PRs" },
 
   { "<leader>j", group = "Harpoon" },
   { "<leader>ja", "<cmd>lua require('harpoon'):list():select(4)<cr>", desc = "Index 4" },

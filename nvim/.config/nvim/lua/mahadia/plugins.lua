@@ -322,13 +322,17 @@ local plugins = {
   },
   {
     'Bekaboo/dropbar.nvim',
+    event = "LazyFile",
+
   },
   {
     "esmuellert/vscode-diff.nvim",
     branch = "next",  -- For v2.0 features (optional: use "main" for stable)
     dependencies = { "MunifTanjim/nui.nvim" },
     cmd = { "CodeDiff" },
-    opts = {},
+    config = function()
+      require('mahadia.plugins.vscode-diff')
+    end
   }
 }
 
