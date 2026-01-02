@@ -183,7 +183,7 @@ wk.add({
   { "<leader>sl", "<cmd>Telescope current_buffer_fuzzy_find theme=ivy<cr>", desc = "Current buffer fuzzy find" },
   { "<leader>sc", "<cmd>Telescope grep_string<cr>", desc = "Find Text under cursor" },
   { "<leader>sf", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Find files" },
-  { "<leader>sh", "<cmd>Telescope<cr>", desc = "Find pickers" },
+  { "<leader>sh", "<cmd>lua Snacks.picker.pickers()<cr>", desc = "Find pickers" },
   { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
   { "<leader>st", "<cmd>Telescope live_grep<cr>", desc = "Find Text" },
   { "<leader>sT", "<cmd>TodoTelescope<cr>", desc = "Find ToDo" },
