@@ -69,18 +69,6 @@ wk.add({
     end,
     desc = "Find File"
   },
-  -- {
-  --   "<leader>f",
-  --   function()
-  --     local _, builtin = pcall(require, "telescope.builtin")
-  --     local _, themes = pcall(require, "telescope.themes")
-  --     local ok = pcall(builtin.git_files, themes.get_dropdown({ previewer = false }))
-  --     if not ok then
-  --       builtin.find_files(themes.get_dropdown())
-  --     end
-  --   end,
-  --   desc = "Find File"
-  -- },
 
   { "<leader>g", group = "Git" },
   { "<leader>gc", "<cmd>lua Snacks.picker.git_log_file()<cr>", desc = "Checkout commit(for current file)" },
@@ -139,6 +127,31 @@ wk.add({
       vim.cmd("CodeDiff " .. rev1 .. " " .. rev2)
     end,
     desc = "Diff explorer (two branches/commits)"
+  },
+  {
+    "<leader>gdf",
+    function()
+      local current_file = vim.api.nvim_buf_get_name(0)
+      if current_file == "" then
+        vim.notify("No file in current buffer", vim.log.levels.WARN)
+        return
+      end
+
+      -- Use Snacks picker to select a file to compare against
+      Snacks.picker.files({
+        hidden = true,
+        follow = true,
+        confirm = function(picker, item)
+          picker:close()
+          if item then
+            local compare_file = item.file or item.path or item[1]
+            vim.cmd("CodeDiff file " .. vim.fn.fnameescape(current_file) .. " " .. vim.fn.fnameescape(compare_file))
+            vim.notify("Diffing: " .. vim.fn.fnamemodify(current_file, ":t") .. " ↔ " .. vim.fn.fnamemodify(compare_file, ":t"))
+          end
+        end,
+      })
+    end,
+    desc = "Diff current file vs another file"
   },
 
   { "<leader>gh", group = "GitHub" },
