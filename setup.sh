@@ -15,8 +15,6 @@ chmod 700 ~/.undodir
 echo "Installing tpm - tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 
-#TODO: Setup osx settings (https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
-
 if [ "$(uname)" = "Darwin" ]; then
 	if command -v xcode-select &>/dev/null; then
 		echo "Xcode Command Line Tools already installed."
@@ -71,6 +69,9 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git 2>/dev/null ||
 # Add Ruby plugin
 asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git 2>/dev/null || echo "ruby plugin already added"
 
+# Add Python plugin
+asdf plugin add python https://github.com/asdf-community/asdf-python.git 2>/dev/null || echo "python plugin already added"
+
 # Install Node.js LTS
 echo "Installing Node.js LTS..."
 asdf install nodejs lts
@@ -79,13 +80,26 @@ asdf install nodejs lts
 echo "Installing Ruby latest..."
 asdf install ruby latest
 
+# Install Python latest
+echo "Installing Python latest..."
+asdf install python latest
+
 # Set global versions in $HOME/.tool-versions
 asdf set -u nodejs lts
 asdf set -u ruby latest
+asdf set -u python latest
 
 echo "asdf setup complete!"
 echo "Node.js version: $(asdf current nodejs)"
 echo "Ruby version: $(asdf current ruby)"
+echo "Python version: $(asdf current python)"
 
-echo "Setting up osx settings"
-source ./setupScripts/osx.sh
+# Install pipx for Python CLI tools
+echo "Installing pipx..."
+pip install pipx
+pipx ensurepath
+
+if [ "$(uname)" = "Darwin" ]; then
+  echo "Setting up osx settings"
+  source ./setupScripts/osx.sh
+fi
