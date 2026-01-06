@@ -1,0 +1,48 @@
+FROM ubuntu:22.04
+
+# Prevent tzdata from requesting user input during installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Set environment variables early
+ENV HOME=/root
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${HOME}/.local/bin
+
+# Install basic dependencies including zsh
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    wget \
+    build-essential \
+    unzip \
+    software-properties-common \
+    locales \
+    zsh \
+    xclip \
+    xsel \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up locale
+RUN locale-gen en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+# Create a non-root user
+RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/* && \
+    useradd -m -s /usr/bin/zsh developer && \
+    usermod -aG sudo developer && \
+    echo "developer:password" | chpasswd
+
+# Update environment variables for the new user
+ENV HOME=/home/developer
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${HOME}/.local/bin
+
+RUN echo "alias vim='nvim'" >> ${HOME}/.zshrc
+
+# Copy local dotfiles instead of cloning from GitHub
+# Note: Build context should be the dotfiles root directory
+COPY --chown=developer:developer . ${HOME}/dotfiles
+
+WORKDIR $HOME/dotfiles
+# Set default command to zsh
+CMD ["zsh"]

@@ -1,0 +1,28 @@
+# Git files
+.git
+.gitignore
+
+# Docker files
+DockerImages/
+
+# Documentation
+*.md
+!README.md
+
+# macOS
+.DS_Store
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+
+# Node modules if any
+node_modules/
+
+# Build artifacts
+*.log
