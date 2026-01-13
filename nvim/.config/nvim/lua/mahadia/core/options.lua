@@ -5,8 +5,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.title = true
 vim.opt.titlestring = "%<%F%=%l/%L" -- what the title of the window will be set to
 vim.opt.fillchars = { vert = ' ', eob = ' '}
--- vim.o.background = "light" -- or "light" for light mode
--- vim.cmd([[colorscheme gruvbox]])
 
 -- line numbers
 vim.opt.relativenumber = true
@@ -33,19 +31,15 @@ vim.opt.guifont = "FiraCode Nerd Font:h16"
 vim.opt.wrap = false -- line wrapping
 vim.opt.splitright = true --force all vertical splits to go to the right of current window
 
--- vim.opt.completeopt = { "menuone", "noselect" } -- set behaviour for popup completion 
-
 vim.opt.timeoutlen = 300 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.updatetime = 100 -- faster completion (4000ms default)
 vim.opt.undofile = true  -- enable persistent undo
 
--- vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
 vim.g["sneak#label"] = true
 
--- vim.opt.foldlevel = 20
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- tmux-navigator
+vim.g.tmux_navigator_disable_when_zoomed = 1 -- disable tmux navigation when pane is zoomed
 
 -- UFO folding
 vim.o.foldcolumn = "0" -- '0' is not bad
@@ -63,10 +57,3 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
-
--- The shada file (SHAred DAta) in Neovim stores persistent data between sessions, 
--- vim.opt.shadafile = "NONE"
--- vim.schedule(function()
---   vim.opt.shadafile = ""
---   vim.cmd([[ silent! rsh ]])
--- end)
