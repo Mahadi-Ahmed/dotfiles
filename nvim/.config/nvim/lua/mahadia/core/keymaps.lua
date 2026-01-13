@@ -18,11 +18,6 @@ vim.g.mapleader = " "
 --   command_mode = "c",
 
 -- Normal --
--- Better window navigation - NOTE: not needed anymore since i use tmux-navigator
--- keymap("n", "<C-h>", "<C-w>h", opts)
--- keymap("n", "<C-j>", "<C-w>j", opts)
--- keymap("n", "<C-k>", "<C-w>k", opts)
--- keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Dont save x in registeter
 --keymap("n", "x", '"_x')
@@ -90,14 +85,3 @@ keymap("n", "<leader>yf", yank_file_reference, { desc = "Yank file:line referenc
 keymap("v", "<leader>yf", yank_file_reference_range, { desc = "Yank file:line-line reference", silent = true })
 
 keymap('n', 's', '<Nop>', { noremap = true, silent = true })
-
--- vnoremap  <leader>y  "+y
--- nnoremap  <leader>Y  "+yg_
--- nnoremap  <leader>y  "+y
--- nnoremap  <leader>yy  "+yy
---
--- " " Paste from clipboard
--- nnoremap <leader>p "+p
--- nnoremap <leader>P "+P
--- vnoremap <leader>p "+p
--- vnoremap <leader>P "+P
