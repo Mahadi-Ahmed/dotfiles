@@ -1,4 +1,4 @@
-local setup, vscode_diff = pcall(require, "vscode-diff")
+local setup, vscode_diff = pcall(require, "codediff")
 if not setup then
   return
 end

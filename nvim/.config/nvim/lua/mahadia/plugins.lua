@@ -326,12 +326,11 @@ local plugins = {
 
   },
   {
-    "esmuellert/vscode-diff.nvim",
-    branch = "next",  -- For v2.0 features (optional: use "main" for stable)
+    "esmuellert/codediff.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
-    cmd = { "CodeDiff" },
+    cmd = "CodeDiff",
     config = function()
-      require('mahadia.plugins.vscode-diff')
+      require("mahadia.plugins.codediff")
     end
   }
 }
