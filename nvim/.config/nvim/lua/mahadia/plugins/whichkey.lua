@@ -72,7 +72,60 @@ wk.add({
 
   { "<leader>g", group = "Git" },
   { "<leader>gc", "<cmd>lua Snacks.picker.git_log_file()<cr>", desc = "Checkout commit(for current file)" },
-  { "<leader>gC", "<cmd>lua Snacks.picker.git_log()<cr>", desc = "Checkout commit in repo" },
+  {
+    "<leader>gC",
+    function()
+	Snacks.picker.git_log({
+		confirm = function(picker, item)
+			picker:close()
+			if item then
+				-- Extract commit hash from the selected item
+				local commit = item.commit or item.hash or item[1]
+				if not commit then
+					vim.notify("Could not determine commit hash", vim.log.levels.ERROR)
+					return
+				end
+
+				-- Get list of files changed in this commit
+				local cmd = string.format("git diff-tree --no-commit-id --name-only -r %s", commit)
+				local handle = io.popen(cmd)
+				if not handle then
+					vim.notify("Failed to get changed files", vim.log.levels.ERROR)
+					return
+				end
+
+				local files = {}
+				for file in handle:lines() do
+					if file ~= "" then
+						table.insert(files, file)
+					end
+				end
+				handle:close()
+
+				if #files == 0 then
+					vim.notify("No files changed in commit " .. commit:sub(1, 7), vim.log.levels.WARN)
+					return
+				end
+
+				-- Open each file in a buffer (only if it exists in working tree)
+				local opened = 0
+				for _, file in ipairs(files) do
+					if vim.fn.filereadable(file) == 1 then
+						vim.cmd("edit " .. vim.fn.fnameescape(file))
+						opened = opened + 1
+					end
+				end
+
+				vim.notify(
+					string.format("Opened %d/%d files from commit %s", opened, #files, commit:sub(1, 7)),
+					vim.log.levels.INFO
+				)
+			end
+		end,
+	})
+    end,
+    desc = "Open files from commit"
+  },
   { "<leader>gR", "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = "Reset Buffer" },
   { "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", desc = "Lazygit" },
   { "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", desc = "Next Hunk" },
