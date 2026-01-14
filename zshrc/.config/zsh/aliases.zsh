@@ -27,6 +27,7 @@ alias lg='lazygit'
 alias lvim='NVIM_APPNAME=lvim nvim'
 alias icat="kitten icat"
 alias claude="~/.local/bin/claude"
+alias c='claude'
 
 # AWS LocalStack
 laws() { aws --endpoint-url=http://localhost:4566 "$@"; }

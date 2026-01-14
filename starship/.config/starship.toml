@@ -16,15 +16,14 @@ $ruby\
 $lua\
 $python\
 $kotlin\
-$line_break\
-$character"""
-
-right_format = """
+$fill\
 $jobs\
 $direnv\
 $aws\
 $cmd_duration\
-$time"""
+$time\
+$line_break\
+$character"""
 
 palette = "catppuccin_mocha"
 
@@ -55,6 +54,9 @@ surface0 = "#313244"
 base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
+
+[fill]
+symbol = " "
 
 [cmd_duration]
 min_time = 500
