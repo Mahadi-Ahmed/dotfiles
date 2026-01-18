@@ -36,3 +36,4 @@ source setup.sh
 * [Your unofficial guide to dotfiles on GitHub](https://dotfiles.github.io)
 * [Sync your .dotfiles with git and GNU #Stow like a pro!](https://www.youtube.com/watch?v=CFzEuBGPPPg)
 * [osx setup script](https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
+* [dreams of code](https://gist.github.com/elliottminns)

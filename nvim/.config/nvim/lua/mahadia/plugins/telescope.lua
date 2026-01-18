@@ -76,7 +76,6 @@ telescope.setup({
     },
     buffers = {
       sort_lastused = true,
-      initial_mode = "normal",
       mappings = {
         i = {
           ["<C-d>"] = actions.delete_buffer,

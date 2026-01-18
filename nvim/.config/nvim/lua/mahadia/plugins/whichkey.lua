@@ -46,7 +46,7 @@ wk.setup(setup)
 
 -- Mappings
 wk.add({
-  { "<leader><space>", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>" , desc = "find buffers" },
+  { "<leader><space>", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>" , desc = "find buffers" }, -- NOTE: Prefer telescope, snacks does not handle last_used well
   { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
 
   { "<leader>h", "<cmd>nohlsearch<CR>", desc = "No Highlight" },
