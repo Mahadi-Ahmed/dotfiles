@@ -9,7 +9,6 @@ path=(
   $path[@]
 )
 
-# source ~/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.config/zsh/aliases.zsh
 
 # asdf setup (Homebrew installation)
@@ -79,31 +78,12 @@ zshaddhistory() {
     [[ ${cmd} != (ls|cd|pwd|exit|clear|export) ]]
 }
 
-function zsh_directory_name() {
-  emulate -L zsh
-  [[ $1 == d ]] || return
-  while [[ $2 != / ]]; do
-    if [[ -e $2/.git ]]; then
-      typeset -ga reply=(${2:t} $#2)
-      # echo ${2:t} $#2
-      # echo ${2:t} 
-      # echo ${2:h} 
-      return
-    fi
-    2=${2:h}
-  done
-  return 1
-}
-
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git' # Optimize FZF
 # export FZF_DEFAULT_OPTS='--height 40% --border'
 # export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Autosuggestions
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -117,6 +97,28 @@ bindkey -M emacs '^f' sesh-sessions
 bindkey -M vicmd '^f' sesh-sessions
 bindkey -M viins '^f' sesh-sessions
 
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+
+# Copy current command buffer to clipboard (macOS)
+function copy-buffer-to-clipboard() {
+  echo -n "$BUFFER" | pbcopy
+  zle -M "Copied to clipboard"
+}
+
+zle -N copy-buffer-to-clipboard
+bindkey '^Xc' copy-buffer-to-clipboard
+
+# Clear screen but keep current command buffer
+function clear-screen-and-scrollback() {
+  echoti civis >"$TTY"
+  printf '%b' '\e[H\e[2J\e[3J' >"$TTY"
+  echoti cnorm >"$TTY"
+  zle redisplay
+}
+zle -N clear-screen-and-scrollback
+bindkey '^Xn' clear-screen-and-scrollback
 
 eval "$(zoxide init zsh)"
 
