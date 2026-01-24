@@ -25,18 +25,11 @@ else
 fi
 
 zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
 zstyle ':completion:*' list-colors ''
 
 # Disable autocomplete for man command for performance
 zstyle ':completion:*:man:*' completer
-
-export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
-zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-source <(carapace _carapace)
-
-# Override carapace completions for file editors to enable case-insensitive file matching
-compdef _files nvim bat
 
 #Order of groups can be configured with the zstyle group-order.
 
