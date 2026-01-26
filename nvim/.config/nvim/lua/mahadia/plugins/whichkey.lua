@@ -213,6 +213,7 @@ wk.add({
   { "<leader>ghr", "<cmd>lua Snacks.picker.gh_pr({ review = 'requested' })<cr>", desc = "Review requests" },
   { "<leader>ghA", "<cmd>lua Snacks.picker.gh_pr({ assignee = '@me' })<cr>", desc = "Assigned to me" },
   { "<leader>ghl", "<cmd>lua Snacks.picker.gh_pr({ label = 'Team: Payments Team' })<cr>", desc = "Payments Team PRs" },
+  { "<leader>gho", "<cmd>lua Snacks.gitbrowse.open()<cr>", desc = "open github web" },
 
   { "<leader>j", group = "Harpoon" },
   { "<leader>ja", "<cmd>lua require('harpoon'):list():select(4)<cr>", desc = "Index 4" },

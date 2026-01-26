@@ -2,8 +2,8 @@
 - [x] Add a breadcrumbs plugin/functionality
 - [] Look into better markdown preview
 - [x] Refactor: lspZero will stop getting updates , move to [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-- [] Look into quickfix list & how to use them
-- [] Look into nvim-dap to add debuggers
+- [ ] Look into quickfix list & how to use them
+- [ ] Look into nvim-dap to add debuggers
     - [] Try out all the different dap's with small examples
 - [] Extract theme colors & remove all hardcoded colors to handle theme switching better  
 - [x] create a keymap for :%!jq . to format json
@@ -39,8 +39,8 @@
 #### Interesting plugins to look into later
 - [ ] Look into vim dispatch
 - [x] Kitty scrollback [kitty-scrollback](https://github.com/mikesmithgh/kitty-scrollback.nvim)
-- [] Database client for neovim [nvim-dbee](https://github.com/kndndrj/nvim-dbee)
-- [] Look into interesting packages in mini to add features / replace existing ones:
+- [ ] Database client for neovim [nvim-dbee](https://github.com/kndndrj/nvim-dbee)
+- [ ] Look into interesting packages in mini to add features / replace existing ones:
     - [x] mini.ai, Extend the a/i textobjects[mini.ai](https://github.com/echasnovski/mini.ai)
     - [x] [mini.surround](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md)
 - [x] autoSession - auto-session will try to restore an existing session for the current cwd if one exists.(https://github.com/rmagatti/auto-session)

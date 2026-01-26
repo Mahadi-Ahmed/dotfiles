@@ -7,7 +7,7 @@ set.breakindent = true       -- Wrapped lines visually align with the start of t
 set.showbreak = "↪ "         -- Show indicator for wrapped lines
 
 -- Set soft wrap column (visual guide at 120 chars)
-set.colorcolumn = "120"      -- Visual guide line at column 120
+set.colorcolumn = "100"      -- Visual guide line at column 100
 
 -- Disable hard wrapping (we want visual wrapping only)
 set.textwidth = 0            -- Don't auto-insert newlines

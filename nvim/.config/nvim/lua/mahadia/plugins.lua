@@ -100,8 +100,7 @@ local plugins = {
     'stevearc/oil.nvim',
     opts = {},
     -- Optional dependencies
-    dependencies = { { "echasnovski/mini.icons", opts = {} } },
-    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+    dependencies = { { "nvim-mini/mini.icons", opts = {} } },
     -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
     cmd = 'Oil'
   },
@@ -124,7 +123,7 @@ local plugins = {
     "folke/which-key.nvim",
     event = "VeryLazy",
     dependencies = {
-      'echasnovski/mini.icons', version = false
+      'nvim-mini/mini.icons', version = false
     },
     config = function()
       require('mahadia.plugins.whichkey')
@@ -314,7 +313,16 @@ local plugins = {
       require('mahadia.plugins.noice')
     end
   },
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+  {
+    "OXY2DEV/markview.nvim",
+    -- NOTE: Markview to toggle md preview
+    event = "LazyFile",
+    opts = {
+      preview = {
+        enable = false,  -- disable rendering by default, toggle with :Markview
+      },
+    },
+  },
   {
     "shrynx/line-numbers.nvim",
     opts = {},
