@@ -1,0 +1,49 @@
+# Ghostty Configuration
+# Converted from Kitty config
+
+# ===== Font Settings =====
+font-family = FiraCode Nerd Font
+font-size = 16
+font-thicken = true
+
+# ===== Window Settings =====
+background-opacity = 0.97
+window-padding-x = 10
+window-padding-y = 10
+
+# macOS specific
+macos-titlebar-style = hidden
+macos-window-shadow = true
+
+# ===== Cursor Settings =====
+# Ghostty doesn't have cursor trail like Kitty, but we can style the cursor
+cursor-style = block
+cursor-style-blink = true
+
+# ===== Shell Integration =====
+shell-integration = zsh
+
+# ===== Scrollback =====
+scrollback-limit = 4000
+
+# ===== Window Behavior =====
+window-decoration = false
+confirm-close-surface = false
+quit-after-last-window-closed = true
+
+# ===== Tab Bar =====
+# Note: Ghostty handles tabs differently than Kitty
+# The tab bar is more minimal by default
+
+# ===== Keybindings =====
+
+# Font size adjustments
+keybind = cmd+equal=increase_font_size:2
+keybind = cmd+minus=decrease_font_size:2
+keybind = cmd+zero=reset_font_size
+
+# Clipboard
+keybind = cmd+c=copy_to_clipboard
+keybind = cmd+v=paste_from_clipboard
+
+theme = Rose Pine
