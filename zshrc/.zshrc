@@ -115,10 +115,6 @@ bindkey '^Xn' clear-screen-and-scrollback
 
 eval "$(zoxide init zsh)"
 
-function codeauth () {
-    node /Users/mahadiahmed/Code/snippets/tokenCodeClipboard/index.js $1
-}
-
 function sesh-sessions() {
   {
     exec </dev/tty
@@ -132,6 +128,7 @@ function sesh-sessions() {
 
 . "$HOME/.atuin/bin/env"
 
+eval "$(mise activate zsh)"
 eval "$(atuin init zsh)"
 eval "$(starship init zsh)"
 
