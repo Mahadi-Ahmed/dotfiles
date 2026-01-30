@@ -257,7 +257,18 @@ wk.add({
   { "<leader>ss", "<cmd>Telescope spell_suggest theme=cursor<cr>", desc = "Spelling" },
   { "<leader>sn", "<cmd>NoiceAll<cr>", desc = "open Notification in window" },
   { "<leader>su", "<cmd>Telescope undo<cr>", desc = "Undo History" },
-
+  {
+    "<leader>sj",
+    function()
+      Snacks.picker.jumps({
+        -- transform = "unique_file",
+        -- Only show jumps in current working directory
+        -- NOTE: doesnt work
+        -- filter = { cwd = true }
+      })
+    end,
+    desc = "Jumps"
+  },
   { "<leader>t", group = "Toggle\'s" },
   { "<leader>tt", "<cmd>ColorizerToggle<CR>", desc = "Colorizer toggle" },
   { "<leader>tl", "<cmd>LineNumberToggle<CR>", desc = "Line number toggle" },
