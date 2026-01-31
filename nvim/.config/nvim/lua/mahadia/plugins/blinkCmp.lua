@@ -18,7 +18,19 @@ blink.setup({
 	},
 
 	sources = {
-		default = { "lsp", "path", "snippets", "buffer" },
+		default = { "lazydev", "lsp", "path", "snippets", "buffer", "dadbod" },
+		providers = {
+			lazydev = {
+				name = "LazyDev",
+				module = "lazydev.integrations.blink",
+				score_offset = 100, -- show at a higher priority than LSP
+			},
+			dadbod = {
+				name = "Dadbod",
+				module = "vim_dadbod_completion.blink",
+				-- score_offset = 85,
+			},
+		},
 	},
 
 	signature = {

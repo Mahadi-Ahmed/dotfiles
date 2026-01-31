@@ -340,6 +340,21 @@ local plugins = {
     config = function()
       require("mahadia.plugins.codediff")
     end
+  },
+  {
+    "tpope/vim-dadbod",
+    dependencies = {
+      { "kristijanhusak/vim-dadbod-ui"},
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }},
+    },
+    cmd = {
+      "DBUI",
+      "DBUIToggle",
+      "DBUIAddConnection",
+      "DBUIFindBuffer"
+    },
+    config = function()
+    end,
   }
 }
 
