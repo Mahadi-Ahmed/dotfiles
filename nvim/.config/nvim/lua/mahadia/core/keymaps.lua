@@ -47,7 +47,7 @@ keymap({"n", "v"}, "<Space>y", [["+y]])
 keymap("n", "<Space>Y", [["+Y]])
 keymap({"n", "v"}, "<leader>p", [["+p"]])
 keymap({"n", "v"}, "<leader>P", [["+P"]])
-keymap("n", "<leader>ya", "gg\"*yG<C-o>", { desc = "Yank entire file", silent = false })
+keymap("n", "<leader>ya", "<cmd>%y+<CR>", { desc = "Yank entire file" })
 
 -- Yank file path with line number reference
 local function get_relative_path()
