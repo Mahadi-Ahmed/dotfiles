@@ -33,7 +33,8 @@ treesitter.setup({
     "gitignore",
     "vue",
     "python",
-    "regex"
+    "regex",
+    "ruby"
   },
   -- context_commentstring = {
   --   enable = true,
