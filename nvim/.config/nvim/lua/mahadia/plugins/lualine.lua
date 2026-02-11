@@ -113,12 +113,6 @@ ins_left({
 -- Add components to right sections
 
 ins_right({
-	require("noice").api.statusline.mode.get,
-	cond = require("noice").api.statusline.mode.has,
-	color = { fg = colors.magenta },
-})
-
-ins_right({
 	-- Lsp server name .
 	function()
 		local msg = "No Active Lsp"
