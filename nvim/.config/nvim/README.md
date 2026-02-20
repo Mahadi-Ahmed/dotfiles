@@ -45,16 +45,17 @@
     - [x] [mini.surround](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-surround.md)
 - [x] autoSession - auto-session will try to restore an existing session for the current cwd if one exists.(https://github.com/rmagatti/auto-session)
 - [x] wtf.nvim - A Neovim plugin to help you work out what the fudge that diagnostic means and how to fix it!(https://github.com/piersolenski/wtf.nvim)
-- [] Kuala A minimal [REST-Client Interface for Neovim](https://github.com/mistweaverco/kulala.nvim)
-- [] look into setting up [go.nvim](https://github.com/ray-x/go.nvim)
+- [ ] Kuala A minimal [REST-Client Interface for Neovim](https://github.com/mistweaverco/kulala.nvim)
+- [ ] look into setting up [go.nvim](https://github.com/ray-x/go.nvim)
 - [x] Establish good command workflow and quit bad habit[hardtime](https://github.com/m4xshen/hardtime.nvim)
+- [ ] [TakaTime](https://github.com/Rtarun3606k/TakaTime?tab=readme-ov-file)
 
 ##### AI Plugins:
 - https://github.com/olimorris/codecompanion.nvim
 ##### DB & API Plugins:
 
 ### Nvim Tree Settings & Configuration
-- [x] Make it so if you toggle the explorer when a file is open it opens up nvim-tree navigates to that folder
+- [ixi] Make it so if you toggle the explorer when a file is open it opens up nvim-tree navigates to that folder
 - [x] Remove .git folder from explorer view (Propbably no need to implement this)
 - [x] Fix so if you open a file directly nvimtree does not open first
 - [x] Change so the tree doesnt use symbols instead it highlights the color of the name of of file if its dirty/new in git

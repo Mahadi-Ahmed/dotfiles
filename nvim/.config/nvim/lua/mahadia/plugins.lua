@@ -355,6 +355,12 @@ local plugins = {
     },
     config = function()
     end,
+  },
+  {
+    "aikhe/wrapped.nvim",
+    dependencies = { "nvzone/volt" },
+    cmd = { "NvimWrapped" },
+    opts = {},
   }
 }
 
