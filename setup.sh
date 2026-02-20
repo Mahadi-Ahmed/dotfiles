@@ -62,37 +62,32 @@ else
   echo "rustup already installed, skipping..."
 fi
 
-echo "Setting up asdf plugins and languages"
-# Add Node.js plugin
-asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git 2>/dev/null || echo "nodejs plugin already added"
+echo "Setting up mise languages"
 
-# Add Ruby plugin
-asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git 2>/dev/null || echo "ruby plugin already added"
-
-# Add Python plugin
-asdf plugin add python https://github.com/asdf-community/asdf-python.git 2>/dev/null || echo "python plugin already added"
-
-# Install Node.js LTS
+# Install runtimes (mise auto-discovers from its built-in registry, no plugin step needed)
 echo "Installing Node.js LTS..."
-asdf install nodejs lts
+mise install node@lts
 
-# Install Ruby latest
 echo "Installing Ruby latest..."
-asdf install ruby latest
+mise install ruby@latest
 
-# Install Python latest
 echo "Installing Python latest..."
-asdf install python latest
+mise install python@latest
 
-# Set global versions in $HOME/.tool-versions
-asdf set -u nodejs lts
-asdf set -u ruby latest
-asdf set -u python latest
+echo "Installing Go latest..."
+mise install go@latest
 
-echo "asdf setup complete!"
-echo "Node.js version: $(asdf current nodejs)"
-echo "Ruby version: $(asdf current ruby)"
-echo "Python version: $(asdf current python)"
+# Set global versions in ~/.config/mise/config.toml
+mise use -g node@lts
+mise use -g ruby@latest
+mise use -g python@latest
+mise use -g go@latest
+
+echo "mise setup complete!"
+echo "Node.js version: $(mise current node)"
+echo "Ruby version: $(mise current ruby)"
+echo "Python version: $(mise current python)"
+echo "Go version: $(mise current go)"
 
 # Install pipx for Python CLI tools
 echo "Installing pipx..."

@@ -2,7 +2,6 @@
 typeset -U path
 path=(
   /opt/homebrew/bin(N)
-  ${ASDF_DATA_DIR:-$HOME/.asdf}/shims(N)
   ${HOME}/.local/bin(N)
   ${HOME}/.cargo/bin(N)
   /usr/local/opt/avr-gcc@8/bin(N)
@@ -10,10 +9,6 @@ path=(
 )
 
 source ~/.config/zsh/aliases.zsh
-
-# asdf setup (Homebrew installation)
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-fpath=(/opt/homebrew/opt/asdf/share/zsh/site-functions $fpath)
 
 # Completion system
 autoload -Uz compinit
