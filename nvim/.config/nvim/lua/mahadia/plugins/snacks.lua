@@ -38,7 +38,7 @@ snacks.setup({
   },
   quickfile = { enabled = true },
   scope = { enabled = true },
-  -- scroll = { enabled = true },
+  scroll = { enabled = false },
   statuscolumn = { enabled = true },
   styles = {
     notification = {}
