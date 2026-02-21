@@ -14,6 +14,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         require("conform").format({ async = false, lsp_format = "fallback" })
     end, opts)
     vim.keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, opts)
+    vim.keymap.set("n", "gi", function() Snacks.picker.lsp_implementations() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "<leader>lW", function() vim.lsp.buf.workspace_symbol() end, opts)
     vim.keymap.set("n", "<leader>li", function() Snacks.picker.lsp_declarations() end, opts)
