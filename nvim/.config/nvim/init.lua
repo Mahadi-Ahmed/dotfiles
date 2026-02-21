@@ -1,14 +1,4 @@
 -- Disable netrw at the very start, before vim.loader.enable
-
-local orig_notify = vim.notify
-vim.notify = function(msg, level, opts)
-	local f = io.open("/tmp/nvim-notify.log", "a")
-	if f then
-		f:write(msg .. "\n")
-		f:close()
-	end
-	orig_notify(msg, level, opts)
-end
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
