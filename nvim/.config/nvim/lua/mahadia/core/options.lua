@@ -9,6 +9,7 @@ vim.opt.fillchars = { vert = ' ', eob = ' '}
 -- line numbers
 vim.opt.relativenumber = true
 vim.opt.number = true
+vim.opt.showtabline = 0 -- hide bufferline by default; pair mode enables it
 vim.opt.scrolloff = 8
 
 vim.opt.hlsearch = true -- highlight all matches on previous search pattern

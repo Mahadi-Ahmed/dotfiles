@@ -135,6 +135,15 @@ ins_right({
 })
 
 ins_right({
+  function()
+    local ok, pair = pcall(require, 'mahadia.plugins.pair')
+    if ok and pair.is_active() then return '󰐊 PAIR' end
+    return ''
+  end,
+  color = { fg = '#00FF00', gui = 'bold' },
+})
+
+ins_right({
 	function()
 		return "▊"
 	end,

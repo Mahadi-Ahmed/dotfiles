@@ -325,8 +325,20 @@ local plugins = {
   },
   {
     "shrynx/line-numbers.nvim",
-    opts = {},
+    opts = { mode = "relative" },
     cmd = { "LineNumberToggle", "LineNumberBoth"}
+  },
+  {
+    dir = vim.fn.stdpath("config"),
+    name = "pair-mode",
+    config = function()
+      require('mahadia.plugins.pair').setup()
+    end,
+    cmd = 'Pair',
+    dependencies = {
+      'shrynx/line-numbers.nvim',
+      'folke/snacks.nvim',
+    },
   },
   {
     'Bekaboo/dropbar.nvim',
@@ -361,6 +373,15 @@ local plugins = {
     dependencies = { "nvzone/volt" },
     cmd = { "NvimWrapped" },
     opts = {},
+  },
+  {
+    'akinsho/bufferline.nvim',
+    version = "*",
+    config = function()
+      require('mahadia.plugins.bufferline')
+    end,
+    lazy = true,
+    dependencies = 'nvim-tree/nvim-web-devicons'
   }
 }
 
