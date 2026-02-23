@@ -52,6 +52,11 @@ local plugins = {
     end
   },
   {
+    'andymass/vim-matchup',
+    event = "LazyFile",
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  },
+  {
     'stevearc/conform.nvim',
     event = 'LazyFile',
     config = function ()

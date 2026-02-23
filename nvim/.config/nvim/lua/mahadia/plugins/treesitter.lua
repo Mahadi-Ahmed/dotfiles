@@ -39,6 +39,10 @@ treesitter.setup({
   -- context_commentstring = {
   --   enable = true,
   -- },
+  -- vim-matchup treesitter integration for % on keywords (def/end, do/end, etc.)
+  matchup = {
+    enable = true,
+  },
   -- auto install above language parsers
   auto_install = true,
   -- Setting this to true will run `:h syntax` and tree-sitter at the same time.

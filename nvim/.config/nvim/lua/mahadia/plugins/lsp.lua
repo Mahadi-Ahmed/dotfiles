@@ -160,6 +160,11 @@ vim.lsp.config('lua_ls', {
   end,
 })
 
+vim.lsp.config('rubocop', {
+  root_markers = { ".rubocop.yml" },
+  workspace_required = true,
+})
+
 vim.lsp.config('ruby_lsp', {
   capabilities = capabilities,
   filetypes = { "ruby", "eruby"}
