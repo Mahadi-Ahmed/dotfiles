@@ -26,7 +26,7 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 -- vim.opt.showtabline = 2
--- vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = "80"
 vim.opt.guifont = "FiraCode Nerd Font:h16"
 
 vim.opt.wrap = false -- line wrapping

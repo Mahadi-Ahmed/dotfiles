@@ -14,6 +14,9 @@ local PairState = {
     laststatus = nil,
     showtabline = nil,
     guicursor = nil,
+    statuscolumn = nil,
+    number = nil,
+    relativenumber = nil,
     highlights = {
       CursorLine = nil,
       CursorLineNr = nil,
@@ -48,7 +51,10 @@ local function save_state()
   PairState.original.showmode    = vim.opt.showmode:get()
   PairState.original.laststatus  = vim.opt.laststatus:get()
   PairState.original.showtabline = vim.opt.showtabline:get()
-  PairState.original.guicursor   = vim.opt.guicursor:get()
+  PairState.original.guicursor      = vim.opt.guicursor:get()
+  PairState.original.statuscolumn   = vim.opt.statuscolumn:get()
+  PairState.original.number         = vim.opt.number:get()
+  PairState.original.relativenumber = vim.opt.relativenumber:get()
 
   for group_name in pairs(PairState.original.highlights) do
     save_highlight(group_name)
@@ -65,12 +71,10 @@ local function restore_state()
   vim.opt.showmode     = PairState.original.showmode
   vim.opt.laststatus   = PairState.original.laststatus
   vim.opt.showtabline  = PairState.original.showtabline
-  vim.opt.guicursor    = PairState.original.guicursor
-
-  local ln_ok, ln = pcall(require, "line-numbers")
-  if ln_ok then
-    ln.set_mode("relative")
-  end
+  vim.opt.guicursor      = PairState.original.guicursor
+  vim.opt.statuscolumn   = PairState.original.statuscolumn
+  vim.opt.number         = PairState.original.number
+  vim.opt.relativenumber = PairState.original.relativenumber
 end
 
 -- ─── Apply pair highlights (also called on theme change while active) ─────────
@@ -99,10 +103,9 @@ local function enable_pair_mode()
   require('lazy').load({ plugins = { 'bufferline.nvim' } })
   vim.opt.showtabline  = 2
 
-  local ln_ok, ln = pcall(require, "line-numbers")
-  if ln_ok then
-    ln.set_mode("absolute")
-  end
+  vim.opt.statuscolumn   = ""
+  vim.opt.number         = true
+  vim.opt.relativenumber = false
 
   apply_pair_highlights()
 

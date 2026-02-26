@@ -330,7 +330,7 @@ local plugins = {
   },
   {
     "shrynx/line-numbers.nvim",
-    opts = { mode = "relative" },
+    opts = {},
     cmd = { "LineNumberToggle", "LineNumberBoth"}
   },
   {
@@ -341,7 +341,6 @@ local plugins = {
     end,
     cmd = 'Pair',
     dependencies = {
-      'shrynx/line-numbers.nvim',
       'folke/snacks.nvim',
     },
   },
