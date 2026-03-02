@@ -125,6 +125,10 @@ function sesh-sessions() {
 
 eval "$(mise activate zsh)"
 eval "$(atuin init zsh)"
-eval "$(starship init zsh)"
+# Guard against double-init which causes infinite recursion in zle-keymap-select
+# (starship wraps the existing widget, re-init creates a circular call chain)
+if ! typeset -f starship_precmd > /dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
 
 source <(menti activate)
