@@ -167,7 +167,8 @@ vim.lsp.config('rubocop', {
 
 vim.lsp.config('ruby_lsp', {
   capabilities = capabilities,
-  filetypes = { "ruby", "eruby"}
+  filetypes = { "ruby", "eruby" },
+  cmd = { vim.fn.expand("~/.local/share/mise/shims/ruby-lsp") },
 })
 
 vim.lsp.config('gopls', {
