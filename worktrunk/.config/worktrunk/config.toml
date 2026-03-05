@@ -1,0 +1,31 @@
+# Worktrunk user config
+# Stowed from dotfiles repo → ~/.config/worktrunk/config.toml
+
+# Subfolder pattern: worktrees live inside <repo>-worktrees/<branch>
+worktree-path = "{{ repo_path }}/../{{ repo }}-worktrees/{{ branch | sanitize }}"
+
+[list]
+full = true
+
+[merge]
+# Only applies to local merges (wt merge), NOT GitHub PRs
+squash = true
+rebase = true
+remove = true
+
+# --- Per-project hooks ---
+
+[projects."github.com/mentimeter/mm-js"]
+# Archive mahadia-notes/ to ai-notes/<branch>/ before worktree is deleted
+pre-remove.archive-notes = "if [ -d mahadia-notes ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
+# Copy untracked .env files from main worktree (preserving nested app structure)
+post-create.env = "cd {{ primary_worktree_path }} && find . -name '.env' -o -name '.env.*.local' | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
+# Create mahadia-notes/ folder for Claude session notes
+post-create.notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
+
+[projects."github.com/mentimeter/core-api"]
+pre-remove.archive-notes = "if [ -d mahadia-notes ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
+# Copy all .env.*.local files (region-specific local config)
+post-create.env = "cd {{ primary_worktree_path }} && find . -name '.env.*.local' | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
+# Create mahadia-notes/ folder for Claude session notes
+post-create.notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
