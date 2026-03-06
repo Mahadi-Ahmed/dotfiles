@@ -17,15 +17,17 @@ remove = true
 
 [projects."github.com/mentimeter/mm-js"]
 # Archive mahadia-notes/ to ai-notes/<branch>/ before worktree is deleted
-pre-remove.archive-notes = "if [ -d mahadia-notes ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
+pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-notes)\" ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
 # Copy untracked .env files from main worktree (preserving nested app structure)
 post-create.env = "cd {{ primary_worktree_path }} && find . -name '.env' -o -name '.env.*.local' | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
+post-create.deps = "cd {{ worktree_path }} && yarn install && echo '📦 Installed dependencies'"
 # Create mahadia-notes/ folder for Claude session notes
 post-create.notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
 
 [projects."github.com/mentimeter/core-api"]
-pre-remove.archive-notes = "if [ -d mahadia-notes ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
+pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-notes)\" ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
 # Copy all .env.*.local files (region-specific local config)
 post-create.env = "cd {{ primary_worktree_path }} && find . -name '.env.*.local' | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
+post-create.deps = "cd {{ worktree_path }} && bundle insttall && echo '📦 Installed dependencies'"
 # Create mahadia-notes/ folder for Claude session notes
 post-create.notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
