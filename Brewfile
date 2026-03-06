@@ -42,6 +42,7 @@ brew "sevenzip"
 brew "poppler"
 brew "resvg"
 brew "yazi"
+brew "gh"
 
 cask "qmk-toolbox"
 cask "font-fira-code-nerd-font"
