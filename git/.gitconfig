@@ -1,0 +1,43 @@
+[user]
+	name = Mahadi Ahmed
+	email = mahadia.dev@gmail.com
+
+[github]
+  user = Mahadi-Ahmed
+
+# Work projects - use work email
+[includeIf "gitdir:~/Code/menti/"]
+	path = ~/.gitconfig-work
+
+# Personal projects - use personal email
+[includeIf "gitdir:~/Code/mahadia/"]
+	path = ~/.gitconfig-personal
+
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[pull]
+  rebase = true
+
+[core]
+	editor = vim
+[init]
+	defaultBranch = main
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[push]
+	autoSetupRemote = true
+[rerere]
+	enabled = true
+	autoupdate = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+[branch]
+	sort = -committerdate
