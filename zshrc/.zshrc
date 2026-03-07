@@ -36,6 +36,7 @@ export MANWIDTH=999
 # Default editor
 export EDITOR="nvim"
 export VISUAL="nvim"
+bindkey -e  # Use emacs keybindings (prevent zsh auto-enabling vi mode from EDITOR=nvim)
 export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
 export FZF_TMUX_OPTS="-p 55%,60%"
 export ATAC_KEY_BINDINGS="/Users/mahadiahmed/.config/atac/vim_key_bindings.toml"
@@ -125,11 +126,7 @@ function sesh-sessions() {
 
 eval "$(mise activate zsh)"
 eval "$(atuin init zsh)"
-# Guard against double-init which causes infinite recursion in zle-keymap-select
-# (starship wraps the existing widget, re-init creates a circular call chain)
-if ! typeset -f starship_precmd > /dev/null 2>&1; then
-  eval "$(starship init zsh)"
-fi
+eval "$(starship init zsh)"
 
 source <(menti activate)
 
