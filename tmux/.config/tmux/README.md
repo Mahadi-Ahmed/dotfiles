@@ -23,4 +23,4 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 - https://github.com/fabioluciano/tmux-powerkit
 
 ### catppuccin showcases:
-https://github.com/catppuccin/tmux/discussions/317
+https://github.com/catppuccin/tmux/discussions/317#discussioncomment-11064512
