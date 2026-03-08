@@ -63,7 +63,6 @@ mason_lspconfig.setup({
     'jsonls',
     'emmet_language_server',
     'cssls',
-    'ruby_lsp',
     'taplo'
   },
   automatic_installation = false,
@@ -168,8 +167,9 @@ vim.lsp.config('rubocop', {
 vim.lsp.config('ruby_lsp', {
   capabilities = capabilities,
   filetypes = { "ruby", "eruby" },
-  cmd = { vim.fn.expand("~/.local/share/mise/shims/ruby-lsp") },
+  cmd = { "mise", "exec", "--", "ruby-lsp" },
 })
+vim.lsp.enable('ruby_lsp')
 
 vim.lsp.config('gopls', {
   capabilities = capabilities,
