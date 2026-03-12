@@ -52,3 +52,7 @@ alias vp='fd --hidden --exclude .git | fzf --height 40% --layout=reverse --borde
 alias glg='git log -n 40 --graph --decorate'
 alias gp='git pull'
 alias gst='git status'
+
+# Worktrunk (tmux post-switch hook handles session creation)
+alias wts='wt switch --no-cd'
+alias wtc='wt switch --no-cd --create'
