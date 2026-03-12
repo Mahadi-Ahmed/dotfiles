@@ -15,17 +15,16 @@ remove = true
 
 # --- Global hooks ---
 
-[post-switch]
-# Create tmux session for worktree and switch to it (used with wts/wtc aliases)
-tmux_session_hook = '''
+[post-create]
+# Create tmux session with layout for new worktrees (runs before per-project hooks)
+tmux_session = '''
 if [ -n "$TMUX" ]; then
-  tmux has-session -t "{{ branch | sanitize }}" 2>/dev/null || \
   tmux new-session -d -s "{{ branch | sanitize }}" -c "{{ worktree_path }}"
   tmux new-window -t "{{ branch | sanitize }}" -c "{{ worktree_path }}"
-  tmux split-window -h -t "{{ branch | sanitize }}:2"
-  tmux split-window -v -t "{{ branch | sanitize }}:2.2"
+  tmux split-window -h -t "{{ branch | sanitize }}:2" -c "{{ worktree_path }}"
+  tmux split-window -v -t "{{ branch | sanitize }}:2.2" -c "{{ worktree_path }}"
   tmux new-window -t "{{ branch | sanitize }}" -c "{{ worktree_path }}"
-  tmux select-window -t "{{ branch | sanitize }}:0"
+  tmux select-window -t "{{ branch | sanitize }}:1"
   tmux switch-client -t "{{ branch | sanitize }}"
 fi
 '''
@@ -35,16 +34,28 @@ fi
 [projects."github.com/mentimeter/mm-js"]
 # Archive mahadia-notes/ to ai-notes/<branch>/ before worktree is deleted
 pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-notes)\" ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
+post-create.deps = '''
+if [ -n "$TMUX" ]; then
+  tmux send-keys -t "{{ branch | sanitize }}:1" "cd {{ worktree_path }} && yarn install && echo '📦 Installed dependencies'" Enter
+else
+  cd {{ worktree_path }} && yarn install && echo '📦 Installed dependencies'
+fi
+'''
 # Copy untracked .env files from main worktree (preserving nested app structure)
 post-create.env = "cd {{ primary_worktree_path }} && find . -name '.env' -o -name '.env.*.local' | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
-post-create.deps = "cd {{ worktree_path }} && yarn install && echo '📦 Installed dependencies'"
 # Create mahadia-notes/ folder for Claude session notes
 post-create.notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
 
 [projects."github.com/mentimeter/core-api"]
 pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-notes)\" ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
+post-create.deps = '''
+if [ -n "$TMUX" ]; then
+  tmux send-keys -t "{{ branch | sanitize }}:1" "cd {{ worktree_path }} && bundle install && echo '📦 Installed dependencies'" Enter
+else
+  cd {{ worktree_path }} && bundle install && echo '📦 Installed dependencies'
+fi
+'''
 # Copy all .env.*.local files (region-specific local config)
 post-create.env = "cd {{ primary_worktree_path }} && find . -name '.env.*.local' | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
-post-create.deps = "cd {{ worktree_path }} && bundle install && echo '📦 Installed dependencies'"
 # Create mahadia-notes/ folder for Claude session notes
 post-create.notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
