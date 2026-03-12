@@ -20,7 +20,12 @@ remove = true
 tmux_session_hook = '''
 if [ -n "$TMUX" ]; then
   tmux has-session -t "{{ branch | sanitize }}" 2>/dev/null || \
-    tmux new-session -d -s "{{ branch | sanitize }}" -c "{{ worktree_path }}"
+  tmux new-session -d -s "{{ branch | sanitize }}" -c "{{ worktree_path }}"
+  tmux new-window -t "{{ branch | sanitize }}" -c "{{ worktree_path }}"
+  tmux split-window -h -t "{{ branch | sanitize }}:2"
+  tmux split-window -v -t "{{ branch | sanitize }}:2.2"
+  tmux new-window -t "{{ branch | sanitize }}" -c "{{ worktree_path }}"
+  tmux select-window -t "{{ branch | sanitize }}:0"
   tmux switch-client -t "{{ branch | sanitize }}"
 fi
 '''
