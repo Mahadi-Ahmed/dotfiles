@@ -167,7 +167,10 @@ vim.lsp.config('rubocop', {
 vim.lsp.config('ruby_lsp', {
   capabilities = capabilities,
   filetypes = { "ruby", "eruby" },
-  cmd = { "mise", "exec", "--", "ruby-lsp" },
+  cmd = {
+    "bash", "-c",
+    'PATH="$(mise where ruby)/bin:$PATH" exec ruby-lsp "$@"', "--"
+  },
 })
 vim.lsp.enable('ruby_lsp')
 
