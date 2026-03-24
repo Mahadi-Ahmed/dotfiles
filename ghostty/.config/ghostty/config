@@ -33,6 +33,10 @@ quit-after-last-window-closed = true
 
 # ===== Animations =====
 # custom-shader = shaders/cursor_sweep.glsl
+# Best so far - warp
+custom-shader = shaders/cursor_warp.glsl
+# Worst so far - tail
+# custom-shader = shaders/cursor_tail.glsl
 
 # ===== Tab Bar =====
 # Note: Ghostty handles tabs differently than Kitty
