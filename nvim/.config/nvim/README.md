@@ -1,3 +1,5 @@
+- [ ] Look into codelenses
+- [ ] Use native undotree instead of plugin
 - [ ] Look into tsgo lsp
 - [x] Add a breadcrumbs plugin/functionality
 - [x] Look into better markdown preview

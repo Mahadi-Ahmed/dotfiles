@@ -21,7 +21,7 @@ alias lsg='fd -u --max-depth 1'
 # Applications
 alias cat='bat'
 alias vim='nvim'
-alias vimdiff='nvim -d'
+alias vimdiff='nvim -c "packadd nvim.difftool" -d'
 alias f='open -a Finder ./'
 alias lg='lazygit'
 alias lvim='NVIM_APPNAME=lvim nvim'
