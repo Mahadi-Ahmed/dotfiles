@@ -15,7 +15,7 @@ remove = true
 
 # --- Global hooks ---
 
-[post-create]
+[pre-start]
 # Create tmux session with layout for new worktrees (runs before per-project hooks)
 tmux_session = '''
 if [ -n "$TMUX" ]; then
@@ -45,6 +45,7 @@ fi
 post-create.env = "cd {{ primary_worktree_path }} && find . -name '.env' -o -name '.env.*.local' | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
 # Create mahadia-notes/ folder for Claude session notes
 post-create.notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
+# TODO: Create a hook for copying the .claude/settings.local.json from main into each wt
 
 [projects."github.com/mentimeter/core-api"]
 pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-notes)\" ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"

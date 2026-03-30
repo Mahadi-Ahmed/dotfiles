@@ -43,6 +43,7 @@ brew "poppler"
 brew "resvg"
 brew "yazi"
 brew "gh"
+brew "worktrunk"
 
 cask "qmk-toolbox"
 cask "font-fira-code-nerd-font"
