@@ -55,10 +55,6 @@ local plugins = {
     'andymass/vim-matchup',
     event = "LazyFile",
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    init = function()
-      -- Workaround: vim-matchup treesitter engine crashes on markdown with Neovim 0.12
-      vim.g.matchup_treesitter_disabled = { "markdown", "markdown_inline" }
-    end,
   },
   {
     'stevearc/conform.nvim',
