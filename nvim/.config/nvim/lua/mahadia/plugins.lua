@@ -34,19 +34,11 @@ local plugins = {
     cmd = 'Themery'
   },
   { "catppuccin/nvim",         name = "catppuccin", cmd = 'Themery' },
-  -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
-    cmd = {
-      "TSInstall",
-      "TSUninstall",
-      "TSUpdate",
-      "TSUpdateSync",
-      "TSInstallInfo",
-      "TSInstallSync",
-      "TSInstallFromGrammar",
-    },
-    event = "LazyFile",
+    branch = 'main',
+    lazy = false,
+    build = ':TSUpdate',
     config = function()
       require('mahadia.plugins.treesitter')
     end
@@ -54,7 +46,6 @@ local plugins = {
   {
     'andymass/vim-matchup',
     event = "LazyFile",
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
   {
     'stevearc/conform.nvim',
@@ -65,7 +56,7 @@ local plugins = {
   },
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
+    version = '*',
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
