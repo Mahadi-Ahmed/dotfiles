@@ -28,3 +28,12 @@ treesitter.install({
   "regex",
   "ruby",
 })
+
+-- Enable treesitter highlighting for filetypes with installed parsers.
+-- Neovim 0.12 only auto-enables for lua, markdown, help, query.
+-- Replaces `highlight = { enable = true }` from the old master branch.
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})

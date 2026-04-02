@@ -52,8 +52,8 @@
 - [ ] [Codereview](https://github.com/afewyards/codereview.nvim)
 
 ##### AI Plugins:
-- [Codecompanion](https://github.com/olimorris/codecompanion.nvim)
-- [Minuet-ai](https://github.com/milanglacier/minuet-ai.nvim)
+- [ ] [Codecompanion](https://github.com/olimorris/codecompanion.nvim)
+- [ ] [Minuet-ai](https://github.com/milanglacier/minuet-ai.nvim)
 
 ##### DB & API Plugins:
 - [ ] Kuala A minimal [REST-Client Interface for Neovim](https://github.com/mistweaverco/kulala.nvim)
