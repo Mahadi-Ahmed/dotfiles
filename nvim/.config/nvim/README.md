@@ -1,3 +1,4 @@
+- [ ] Implement oldfiles picker like MariaSolos
 - [ ] Look into codelenses
 - [ ] Use native undotree instead of plugin
 - [ ] Look into tsgo lsp

@@ -34,7 +34,7 @@ RUN apt-get update && apt-get install -y \
     lua5.1 \
     luarocks \
     # Additional dependencies
-    fzf \
+    sudo \
     && rm -rf /var/lib/apt/lists/*
 
 # Set up locale
@@ -58,9 +58,11 @@ RUN apt-get update && apt-get install -y ninja-build gettext cmake && \
     cd .. && \
     rm -rf neovim
 
-# Install Rust (needed for some tools)
+# Install Rust
+ENV RUSTUP_HOME=/usr/local/rustup
+ENV CARGO_HOME=/usr/local/cargo
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-ENV PATH="/root/.cargo/bin:${PATH}"
+ENV PATH="/usr/local/cargo/bin:${PATH}"
 
 # Install additional tools
 RUN apt-get update && apt-get install -y \
@@ -68,9 +70,11 @@ RUN apt-get update && apt-get install -y \
     fd-find \
     && rm -rf /var/lib/apt/lists/*
 
-# Install fzf from source
+# Install fzf (latest from git, cache-busted via ADD)
+ADD https://api.github.com/repos/junegunn/fzf/git/refs/heads/master /tmp/fzf-version
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
     && ~/.fzf/install --all
+ENV PATH="${HOME}/.fzf/bin:${PATH}"
 
 # Install lazygit
 RUN LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v*([^"]+)".*/\1/') \
@@ -83,17 +87,6 @@ RUN LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygi
 RUN cpanm --notest Module::Build && \
     cpanm --notest Neovim::Ext
 
-# Create a non-root user
-RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/* && \
-    useradd -m -s /usr/bin/zsh developer && \
-    usermod -aG sudo developer && \
-    echo "developer:password" | chpasswd
-
-# Update environment variables for the new user
-ENV HOME=/home/developer
-ENV PYTHONPATH=/usr/local/lib/python3/site-packages:${HOME}/.local/lib/python3/site-packages
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${HOME}/.local/bin
-
 # Set up Python environment and dependencies
 RUN python3 -m pip install --user pynvim wheel
 
@@ -102,9 +95,11 @@ RUN mkdir -p ${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin && \
     curl -o hererocks.py https://raw.githubusercontent.com/luarocks/hererocks/latest/hererocks.py && \
     python3 hererocks.py ${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin -l 5.1 -r latest && \
     rm hererocks.py
-
-# Add LuaRocks to PATH
 ENV PATH="${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin:${PATH}"
+
+# Set Lua environment variables
+ENV LUA_PATH="${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/share/lua/5.1/?.lua;${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/share/lua/5.1/?/init.lua;;"
+ENV LUA_CPATH="${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/lib/lua/5.1/?.so;;"
 
 # Install Oh My Zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -131,11 +126,12 @@ RUN mkdir -p ${HOME}/.config/nvim && \
     echo 'vim.opt.clipboard = "unnamedplus"' > ${HOME}/.config/nvim/init.lua && \
     echo 'vim.g.loaded_perl_provider = 0' >> ${HOME}/.config/nvim/init.lua
 
-# Set Lua environment variables
-ENV LUA_PATH="${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/share/lua/5.1/?.lua;${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/share/lua/5.1/?/init.lua;;"
-ENV LUA_CPATH="${HOME}/.local/share/nvim/lazy-rocks/hererocks/bin/lua/lib/lua/5.1/?.so;;"
-
 COPY setupScripts $HOME/setupScripts
+
+# Create a non-root user (can switch with: su - developer)
+RUN useradd -m -s /usr/bin/zsh developer && \
+    usermod -aG sudo developer && \
+    echo "developer:password" | chpasswd
 
 # Set default command to zsh
 CMD ["zsh"]
