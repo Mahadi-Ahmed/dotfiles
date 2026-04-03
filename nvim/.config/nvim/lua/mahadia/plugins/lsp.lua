@@ -100,9 +100,13 @@ vim.lsp.config('vtsls', {
       preferences = {
         importModuleSpecifier = 'non-relative',
       },
-      -- Increase timeout for large monorepos
       tsserver = {
         maxTsServerMemory = 8192,
+        watchOptions = {
+          watchFile = 'useFsEventsOnParentDirectory',
+          watchDirectory = 'useFsEvents',
+          excludeDirectories = { '**/node_modules', '**/.git' },
+        },
       },
       inlayHints = {
         parameterNames = { enabled = 'literals' },
