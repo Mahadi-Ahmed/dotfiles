@@ -46,7 +46,6 @@ brew "yazi"
 brew "gh"
 brew "worktrunk"
 
-cask "qmk-toolbox"
 cask "font-fira-code-nerd-font"
 cask "1password"
 cask "1password-cli"
