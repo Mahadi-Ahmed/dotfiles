@@ -37,8 +37,8 @@ local plugins = {
   {
     'nvim-treesitter/nvim-treesitter',
     branch = 'main',
-    lazy = false,
     build = ':TSUpdate',
+    event = 'LazyFile',
     config = function()
       require('mahadia.plugins.treesitter')
     end
