@@ -15,6 +15,11 @@ snacks.setup({
   },
   picker = {
     enabled = true,
+    sources = {
+      recent = {
+        filter = { cwd = true },
+      },
+    },
     -- Increase timeout for LSP operations in large monorepos
     win = {
       input = {
@@ -66,4 +71,3 @@ vim.api.nvim_create_autocmd("User", {
     snacks.toggle.dim():map("<leader>tD")
   end,
 })
-

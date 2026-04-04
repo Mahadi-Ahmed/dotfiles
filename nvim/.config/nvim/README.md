@@ -1,4 +1,3 @@
-- [ ] Implement oldfiles picker like MariaSolos
 - [ ] Look into codelenses
 - [ ] Use native undotree instead of plugin
 - [ ] Look into tsgo lsp
@@ -35,6 +34,7 @@
 - [x] Customize Lualine
 - [x] Look into vue lsp functionality with a small example[lspZero](https://lsp-zero.netlify.app/blog/configure-volar-v2.html)
 - [x] Add integration to gitsigns(https://github.com/lewis6991/gitsigns.nvim)
+- [x] Implement oldfiles picker
 
 - [x] Add colorizer to show hex colors[colorizer](https://github.com/norcalli/nvim-colorizer.lua)
   - [x] Add a command to turn on & off the colorizer in whichkey
@@ -78,3 +78,4 @@
 * [ftplugin](https://neovim.io/doc/user/filetype.html) & [usage of ftplugin](https://www.reddit.com/r/neovim/comments/x3zp6t/usage_of_afterftplugin_directory_for/)
 * [LazyVim](https://www.lazyvim.org/)
 * [Kickstart](https://github.com/nvim-lua/kickstart.nvim)
+* [MariaSolOs](https://github.com/MariaSolOs/dotfiles)
