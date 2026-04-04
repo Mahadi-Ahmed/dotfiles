@@ -1,6 +1,6 @@
-- [ ] Look into codelenses
-- [ ] Use native undotree instead of plugin
 - [ ] Look into tsgo lsp
+- [x] Use native undotree instead of plugin
+- [x] Look into codelenses
 - [x] Add a breadcrumbs plugin/functionality
 - [x] Look into better markdown preview
 - [x] Refactor: lspZero will stop getting updates , move to [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)

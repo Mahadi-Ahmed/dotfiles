@@ -186,13 +186,6 @@ local plugins = {
       require('mahadia.plugins.toggleterm')
     end
   },
-  {
-    'mbbill/undotree',
-    event = 'LazyFile',
-    config = function()
-      require('mahadia.plugins.undotree')
-    end
-  },
   { 'farmergreg/vim-lastplace' },
   {
     'norcalli/nvim-colorizer.lua',

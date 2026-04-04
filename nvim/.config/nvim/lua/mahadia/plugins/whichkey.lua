@@ -51,7 +51,7 @@ wk.add({
 
   { "<leader>h", "<cmd>nohlsearch<CR>", desc = "No Highlight" },
   { "<leader>q", "<cmd>qa<CR>", desc = "Quit" },
-  { "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "Undotree toggle" },
+  { "<leader>u", "<cmd>Undotree<CR>", desc = "Undotree toggle" },
   { "<leader>w", "<cmd>w!<CR>", desc = "Save" },
   { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
 

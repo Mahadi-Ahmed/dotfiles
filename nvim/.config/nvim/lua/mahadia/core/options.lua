@@ -35,6 +35,13 @@ vim.opt.splitright = true --force all vertical splits to go to the right of curr
 vim.opt.timeoutlen = 300 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.updatetime = 100 -- faster completion (4000ms default)
 vim.opt.undofile = true  -- enable persistent undo
+local undodir = vim.fn.expand('~/.undodir')
+if vim.fn.isdirectory(undodir) == 0 then
+  vim.fn.mkdir(undodir, 'p', 0700)
+end
+vim.opt.undodir = undodir
+vim.opt.undolevels = 10000
+vim.opt.undoreload = 10000
 
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
 vim.g["sneak#label"] = true

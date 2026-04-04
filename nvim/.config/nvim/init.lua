@@ -4,6 +4,7 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.loader.enable()
 
+
 require("mahadia.core.options")
 require("mahadia.core.keymaps")
 
@@ -64,3 +65,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 	desc = "Highlight yanked text",
 })
+
+vim.cmd.packadd 'nvim.undotree'
