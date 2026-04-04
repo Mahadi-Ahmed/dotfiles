@@ -139,6 +139,41 @@ vim.lsp.config('vtsls', {
   end,
 })
 
+vim.lsp.config('tailwindcss', {
+  root_markers = {
+    'tailwind.config.js',
+    'tailwind.config.cjs',
+    'tailwind.config.mjs',
+    'tailwind.config.ts',
+  },
+  settings = {
+    tailwindCSS = {
+      files = {
+        exclude = {
+          "**/.git/**",
+          "**/node_modules/**",
+          "**/dist/**",
+          "**/build/**",
+          "**/.next/**",
+          "**/.turbo/**",
+          "**/coverage/**",
+          "**/api/**",
+        },
+      },
+      experimental = {
+        configFile = {
+          ["applications/storybook/tailwind.config.js"] = "applications/storybook/**",
+          ["design/ragnar-tailwind-config/tailwind.config.js"] = {
+            "applications/**",
+            "packages/**",
+            "design/**",
+          },
+        },
+      },
+    },
+  },
+})
+
 vim.lsp.config('lua_ls', {
   capabilities = capabilities,
   settings = {
