@@ -113,21 +113,16 @@ ins_left({
 -- Add components to right sections
 
 ins_right({
-	-- Lsp server name .
 	function()
-		local msg = "No Active Lsp"
-		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-		local clients = vim.lsp.get_clients()
-		if next(clients) == nil then
-			return msg
+		local clients = vim.lsp.get_clients({ bufnr = 0 })
+		if #clients == 0 then
+			return "No Active Lsp"
 		end
-		for _, client in ipairs(clients) do
-			local filetypes = client.config.filetypes
-			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-				return client.name
-			end
+		local name = clients[#clients].name
+		if #clients > 1 then
+			return name .. " [+" .. (#clients - 1) .. "]"
 		end
-		return msg
+		return name
 	end,
 	icon = " LSP:",
 	-- color = { fg = '#f6c177', gui = 'bold' },
