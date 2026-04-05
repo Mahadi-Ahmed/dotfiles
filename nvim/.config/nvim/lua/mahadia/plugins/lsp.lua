@@ -38,6 +38,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }), { bufnr = event.buf })
       end, { buffer = event.buf, desc = "Toggle inlay hints" })
     end
+
+    if client and client.server_capabilities.codeLensProvider then
+      vim.keymap.set("n", "<leader>tc", function()
+        local enabled = vim.lsp.codelens.is_enabled({ bufnr = event.buf })
+        vim.lsp.codelens.enable(not enabled, { bufnr = event.buf })
+      end, { buffer = event.buf, desc = "Toggle code lenses" })
+    end
   end,
 })
 
@@ -97,6 +104,8 @@ vim.lsp.config('vtsls', {
       suggest = {
         completeFunctionCalls = true,
       },
+      referencesCodeLens = { enabled = true },
+      implementationsCodeLens = { enabled = true },
       preferences = {
         importModuleSpecifier = 'non-relative',
       },
@@ -210,12 +219,44 @@ vim.lsp.config('ruby_lsp', {
     "bash", "-c",
     'PATH="$(mise where ruby)/bin:$PATH" exec ruby-lsp "$@"', "--"
   },
+  init_options = {
+    enabledFeatures = {
+      codeLens = true,
+    },
+  },
 })
 vim.lsp.enable('ruby_lsp')
 
+local function send_test_to_tmux(cmd)
+  local test_cmd = cmd.arguments[3]
+  if not vim.g.test_tmux_pane then
+    vim.ui.input({ prompt = "Tmux pane (e.g. {last}, :.1, test:0): " }, function(pane)
+      if pane and pane ~= "" then
+        vim.g.test_tmux_pane = pane
+        vim.fn.system({ "tmux", "send-keys", "-t", pane, test_cmd, "Enter" })
+      end
+    end)
+  else
+    vim.fn.system({ "tmux", "send-keys", "-t", vim.g.test_tmux_pane, test_cmd, "Enter" })
+  end
+end
+
+vim.lsp.commands["rubyLsp.runTest"] = send_test_to_tmux
+vim.lsp.commands["rubyLsp.runTestInTerminal"] = send_test_to_tmux
+
 vim.lsp.config('gopls', {
   capabilities = capabilities,
-  filetypes = { 'go' }
+  filetypes = { 'go' },
+  settings = {
+    gopls = {
+      codelenses = {
+        test = true,
+        generate = true,
+        tidy = true,
+        runGovulncheck = true,
+      },
+    },
+  },
 })
 
 vim.lsp.config('eslint', {
