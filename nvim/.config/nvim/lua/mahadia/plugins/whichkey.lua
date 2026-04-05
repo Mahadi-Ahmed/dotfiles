@@ -57,7 +57,7 @@ wk.add({
 
   { "<leader>b", group = "Buffers" },
   { "<leader>bm", "<cmd>MaximizerToggle<cr>", desc = "Maximize split toggle" },
-  { "<leader>bd", "<cmd>bd<cr>", desc = "Delete buffer" },
+  { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete buffer" },
 
   {
     "<leader>f",

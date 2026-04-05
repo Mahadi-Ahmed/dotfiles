@@ -18,7 +18,6 @@ vim.opt.smartcase = true
 vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 
 vim.opt.expandtab = true -- convert tabs to spaces
-vim.opt.updatetime = 300 -- faster completion (4000ms default)
 
 -- tabs & indentation
 vim.opt.tabstop = 2
