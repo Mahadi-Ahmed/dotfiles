@@ -1,4 +1,4 @@
-- [ ] Look into tsgo lsp
+- [x] Look into tsgo lsp
 - [x] Use native undotree instead of plugin
 - [x] Look into codelenses
 - [x] Add a breadcrumbs plugin/functionality
@@ -51,6 +51,7 @@
 - [x] Establish good command workflow and quit bad habit[hardtime](https://github.com/m4xshen/hardtime.nvim)
 - [ ] [TakaTime](https://github.com/Rtarun3606k/TakaTime?tab=readme-ov-file)
 - [ ] [Codereview](https://github.com/afewyards/codereview.nvim)
+- [ ] Look into mini.clue
 
 ##### AI Plugins:
 - [ ] [Codecompanion](https://github.com/olimorris/codecompanion.nvim)
