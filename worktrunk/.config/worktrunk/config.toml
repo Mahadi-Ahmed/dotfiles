@@ -34,29 +34,41 @@ fi
 [projects."github.com/mentimeter/mm-js"]
 # Archive mahadia-notes/ to ai-notes/<branch>/ before worktree is deleted
 pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-notes)\" ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
-post-create.deps = '''
+# Install JS dependencies (via tmux pane if available, else inline)
+[[projects."github.com/mentimeter/mm-js".pre-start]]
+deps = '''
 if [ -n "$TMUX" ]; then
   tmux send-keys -t "{{ branch | sanitize }}:1" "cd {{ worktree_path }} && yarn install && echo '📦 Installed dependencies'" Enter
 else
   cd {{ worktree_path }} && yarn install && echo '📦 Installed dependencies'
 fi
 '''
+
 # Copy untracked .env files from main worktree (preserving nested app structure)
-post-create.env = "cd {{ primary_worktree_path }} && find . -name '.env' -o -name '.env.*.local' | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
+[[projects."github.com/mentimeter/mm-js".pre-start]]
+env = "cd {{ primary_worktree_path }} && find . \\( -name '.env' -o -name '.env.local' -o -name '.env.*.local' \\) | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
+
 # Create mahadia-notes/ folder for Claude session notes
-post-create.notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
+[[projects."github.com/mentimeter/mm-js".pre-start]]
+notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
 # TODO: Create a hook for copying the .claude/settings.local.json from main into each wt
 
 [projects."github.com/mentimeter/core-api"]
 pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-notes)\" ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
-post-create.deps = '''
+# Install Ruby dependencies (via tmux pane if available, else inline)
+[[projects."github.com/mentimeter/core-api".pre-start]]
+deps = '''
 if [ -n "$TMUX" ]; then
   tmux send-keys -t "{{ branch | sanitize }}:1" "cd {{ worktree_path }} && bundle install && echo '📦 Installed dependencies'" Enter
 else
   cd {{ worktree_path }} && bundle install && echo '📦 Installed dependencies'
 fi
 '''
+
 # Copy all .env.*.local files (region-specific local config)
-post-create.env = "cd {{ primary_worktree_path }} && find . -name '.env.*.local' | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
+[[projects."github.com/mentimeter/core-api".pre-start]]
+env = "cd {{ primary_worktree_path }} && find . -name '.env.*.local' | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
+
 # Create mahadia-notes/ folder for Claude session notes
-post-create.notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
+[[projects."github.com/mentimeter/core-api".pre-start]]
+notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
