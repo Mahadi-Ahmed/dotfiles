@@ -2,7 +2,7 @@ local wk = require("which-key")
 
 -- Setup options
 local setup = {
-  preset= "modern",
+  preset= "helix",
   plugins = {
     marks = true,
     registers = true,
@@ -11,7 +11,7 @@ local setup = {
       suggestions = 20,
     },
     presets = {
-      operators = false,
+      operators = true,
       motions = true,
       text_objects = true,
       windows = true,
@@ -34,10 +34,10 @@ local setup = {
   --   winblend = 0,
   -- },
   layout = {
-    height = { min = 4, max = 25 },
-    width = { min = 20, max = 50 },
-    spacing = 4,
-    align = "center",
+    -- height = { min = 4, max = 25 },
+    -- width = { min = 20, max = 50 },
+    -- spacing = 4,
+    -- align = "center",
   },
   show_help = true,
 }
