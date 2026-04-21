@@ -53,5 +53,5 @@ keybind = cmd+zero=reset_font_size
 keybind = cmd+c=copy_to_clipboard
 keybind = cmd+v=paste_from_clipboard
 
-theme = Rose Pine
-# theme = Gruvbox Light
+# theme = Rose Pine
+theme = Gruvbox Light

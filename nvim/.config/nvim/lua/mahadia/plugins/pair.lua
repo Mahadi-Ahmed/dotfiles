@@ -79,6 +79,7 @@ end
 
 -- ─── Apply pair highlights (also called on theme change while active) ─────────
 
+-- TODO: Add a section for light / dark mode variants
 local function apply_pair_highlights()
   vim.api.nvim_set_hl(0, "PairModeCursor", { fg = "#1e1e2e", bg = "#4C7860" })
   vim.api.nvim_set_hl(0, "CursorLine",     { bg = "#2a2a2a" })
