@@ -26,7 +26,32 @@ alias f='open -a Finder ./'
 alias lg='lazygit'
 alias lvim='NVIM_APPNAME=lvim nvim'
 alias icat="kitten icat"
-alias claude="~/.local/bin/claude"
+# Route `claude` to the correct profile based on the current directory.
+# Work: anything under ~/Code/menti → ~/.claude-work
+# Personal: everything else → default ~/.claude
+# Implemented as a function (not an alias) so we can branch on $PWD at launch.
+claude() {
+  local claude_bin="$HOME/.local/bin/claude"
+  if _claude_is_work_dir; then
+    print -P "%F{yellow}🏢 work profile%f"
+    CLAUDE_CONFIG_DIR="$HOME/.claude-work" "$claude_bin" "$@"
+  else
+    "$claude_bin" "$@"
+  fi
+}
+
+# ${PWD:A} resolves symlinks so a shortcut like `~/menti -> ~/Code/menti` still routes to work.
+_claude_is_work_dir() {
+  [[ "${PWD:A}" == "$HOME/Code/menti"/* ]]
+}
+
+# Escape-hatch aliases for explicit overrides (e.g. personal session from a work tmux pane).
+# `claude-personal` must UNSET CLAUDE_CONFIG_DIR (not set it to ~/.claude): Claude branches
+# on whether the var is set, and in "set" mode it reads $CLAUDE_CONFIG_DIR/.claude.json,
+# but personal state lives at the legacy $HOME/.claude.json (one level up).
+alias claude-personal='env -u CLAUDE_CONFIG_DIR         $HOME/.local/bin/claude'
+alias claude-work='CLAUDE_CONFIG_DIR=$HOME/.claude-work $HOME/.local/bin/claude'
+
 alias c='claude'
 
 # AWS LocalStack
