@@ -54,11 +54,7 @@ alias claude-work='CLAUDE_CONFIG_DIR=$HOME/.claude-work $HOME/.local/bin/claude'
 
 alias c='claude'
 
-# AWS LocalStack
-laws() { aws --endpoint-url=http://localhost:4566 "$@"; }
-
 # Directory shortcuts
-alias cdpn='cd ~/Code/pn-repos/'
 alias cdqmk='cd ~/Code/mahadia/qmk/keyboards/planck/keymaps/mahadia'
 
 # Utility
