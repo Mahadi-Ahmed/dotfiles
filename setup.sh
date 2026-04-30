@@ -25,27 +25,14 @@ if [ "$(uname)" = "Darwin" ]; then
 	fi
 fi
 
-#NOTE: Just for pi
-if [ "$(uname)" = "Linux" ]; then
-
-  echo "Installing Zoxide manually"
-  curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-
-  echo "It's a Linux machine, installing eza manually..."
-  
+if ! command -v eza &>/dev/null; then
+  echo "Installing eza manually..."
   wget -c https://github.com/eza-community/eza/releases/latest/download/eza_aarch64-unknown-linux-gnu.tar.gz -O - | tar xz
-
   sudo chmod +x eza
   sudo chown root:root eza
   sudo mv eza /usr/local/bin/eza
-  
-  # Check installation
-  if command -v eza &>/dev/null; then
-    echo "eza installed successfully!"
-    eza --version
-  else
-    echo "eza installation failed."
-  fi
+else
+  echo "eza already installed, skipping..."
 fi
 
 if ! command -v atuin &>/dev/null; then
