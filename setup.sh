@@ -25,16 +25,6 @@ if [ "$(uname)" = "Darwin" ]; then
 	fi
 fi
 
-if ! command -v eza &>/dev/null; then
-  echo "Installing eza manually..."
-  wget -c https://github.com/eza-community/eza/releases/latest/download/eza_aarch64-unknown-linux-gnu.tar.gz -O - | tar xz
-  sudo chmod +x eza
-  sudo chown root:root eza
-  sudo mv eza /usr/local/bin/eza
-else
-  echo "eza already installed, skipping..."
-fi
-
 if ! command -v atuin &>/dev/null; then
   echo "Installing atuin"
   curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
