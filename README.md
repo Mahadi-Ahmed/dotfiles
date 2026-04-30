@@ -28,6 +28,19 @@ source setup.sh
 <!-- docker exec -it dotfilesTest /bin/zsh -->
 <!-- ``` -->
 
+## Pi Setup
+
+SSH into the Pi, clone the repo, and run:
+```
+git clone https://github.com/Mahadi-Ahmed/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+source setup-pi.sh
+```
+
+After setup, log out and back in (for zsh), then:
+- Open `nvim` and run `:Lazy sync`
+- Open `tmux` and press `prefix + I` to install plugins
+
 ---
 # Resources & Inspo
 * [Bootstrap repositories](https://dotfiles.github.io/bootstrap/)
