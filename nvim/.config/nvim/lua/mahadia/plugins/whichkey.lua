@@ -259,6 +259,7 @@ wk.add({
   { "<leader>su", "<cmd>Telescope undo<cr>", desc = "Undo History" },
   { "<leader>sj", "<cmd>lua Snacks.picker.jumps()<cr>", desc = "Jumps" },
   { "<leader>sr", "<cmd>lua Snacks.picker.recent()<cr>", desc = "Recent files" },
+  { "<leader>sg", "<cmd>lua require('grug-far').open({ transient = true })<cr>", desc = "Grug far" },
 
   { "<leader>t", group = "Toggle\'s" },
   { "<leader>tt", "<cmd>ColorizerToggle<CR>", desc = "Colorizer toggle" },

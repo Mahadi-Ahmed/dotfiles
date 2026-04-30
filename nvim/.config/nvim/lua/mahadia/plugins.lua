@@ -231,6 +231,7 @@ local plugins = {
           'L3MON4D3/LuaSnip',
         },
         version = '*',
+        event = 'InsertEnter',
         config = function ()
           require('mahadia.plugins.blinkCmp')
         end
@@ -370,6 +371,16 @@ local plugins = {
     end,
     lazy = true,
     dependencies = 'nvim-tree/nvim-web-devicons'
+  },
+  {
+    "MagicDuck/grug-far.nvim",
+      opts = {
+        -- Disable folding.
+        folding = { enabled = false },
+        -- Don't numerate the result list.
+        resultLocation = { showNumberLabel = false },
+      },
+    event = "LazyFile"
   }
 }
 
