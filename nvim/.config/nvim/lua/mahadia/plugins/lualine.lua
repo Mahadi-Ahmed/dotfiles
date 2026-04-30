@@ -17,8 +17,8 @@ local colors = {
   green    = '#98be65',
   orange   = '#FF8800',
   violet   = '#a9a1e1',
-  magenta  = '#ebbcba', --rose pine
-  -- magenta  = '#8ec07c', -- for gruvbox
+  -- magenta  = '#ebbcba', --rose pine
+  magenta  = '#af3a03', -- for gruvbox
   blue     = '#51afef',
   red      = '#ec5f67',
 }

@@ -52,6 +52,9 @@
 - [ ] [TakaTime](https://github.com/Rtarun3606k/TakaTime?tab=readme-ov-file)
 - [ ] [Codereview](https://github.com/afewyards/codereview.nvim)
 - [ ] Look into mini.clue
+- [x] Look into better general search tool (filter out files/paths etc)
+    - [x] grug-far
+    - [ ] grep with visually selected
 
 ##### AI Plugins:
 - [ ] [Codecompanion](https://github.com/olimorris/codecompanion.nvim)
