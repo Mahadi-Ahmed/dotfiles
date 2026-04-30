@@ -33,6 +33,7 @@ export MANWIDTH=999
 export EDITOR="nvim"
 export VISUAL="nvim"
 bindkey -e  # Use emacs keybindings (prevent zsh auto-enabling vi mode from EDITOR=nvim)
+export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
 
 # zsh history settings
 HISTSIZE=10000    # Number of commands in memory

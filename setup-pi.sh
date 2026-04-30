@@ -11,7 +11,7 @@ sudo apt update && sudo apt install -y \
 # --- starship ---
 if ! command -v starship &>/dev/null; then
   echo "Installing starship..."
-  curl -sS https://starship.rs/install.sh | sh
+  curl -sS https://starship.rs/install.sh | sh -s -- -y
 else
   echo "starship already installed, skipping..."
 fi
@@ -41,6 +41,12 @@ if ! command -v eza &>/dev/null; then
   sudo mv eza /usr/local/bin/eza
 else
   echo "eza already installed, skipping..."
+fi
+
+# --- fd symlink (Debian installs fd as fdfind) ---
+if command -v fdfind &>/dev/null && ! command -v fd &>/dev/null; then
+  echo "Creating fd symlink for fdfind..."
+  sudo ln -sf "$(which fdfind)" /usr/local/bin/fd
 fi
 
 # --- zsh plugins ---

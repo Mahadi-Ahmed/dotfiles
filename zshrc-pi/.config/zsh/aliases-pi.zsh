@@ -22,8 +22,7 @@ alias lsg='fd -u --max-depth 1'
 alias bat='batcat'
 alias cat='batcat'
 alias vim='nvim'
-alias vimdiff='nvim -c "packadd nvim.difftool" -d'
-alias lg='lazygit'
+alias vimdiff='nvim -d'
 
 # Utility
 alias cpdir='cp -rf'
