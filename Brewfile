@@ -1,6 +1,6 @@
 tap "noahgorstein/tap"
 tap "nikitabobko/tap"
-tap "felixkratz/formulae"
+tap "FelixKratz/formulae"
 
 brew "stow"
 brew "borders"
