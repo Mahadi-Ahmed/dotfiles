@@ -91,6 +91,11 @@ flash.setup({
   },
 })
 
+vim.api.nvim_set_hl(0, "FlashBackdrop", { fg = "#928374" })        -- gruvbox gray, dims without vanishing
+vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#ffffff", bg = "#d65d0e", bold = true }) -- white on orange
+vim.api.nvim_set_hl(0, "FlashMatch", { fg = "#427b58", bg = "#d5c4a1" })            -- green on tan
+vim.api.nvim_set_hl(0, "FlashCurrent", { fg = "#282828", bg = "#fabd2f" })          -- dark on yellow
+
 -- Set up keymaps
 local keymap = vim.keymap.set
 
