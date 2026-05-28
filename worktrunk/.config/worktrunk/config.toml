@@ -44,9 +44,9 @@ else
 fi
 '''
 
-# Copy untracked .env files from main worktree (preserving nested app structure)
+# Copy untracked .env files from main worktree (preserving symlinks and nested app structure)
 [[projects."github.com/mentimeter/mm-js".pre-start]]
-env = "cd {{ primary_worktree_path }} && find . \\( -name '.env' -o -name '.env.local' -o -name '.env.*.local' \\) | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
+env = "cd {{ primary_worktree_path }} && find . \\( -name '.env' -o -name '.env.local' -o -name '.env.*.local' -o -name '.env.*.local.*' \\) | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp -P $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
 
 # Create mahadia-notes/ folder for Claude session notes
 [[projects."github.com/mentimeter/mm-js".pre-start]]
@@ -65,9 +65,9 @@ else
 fi
 '''
 
-# Copy all .env.*.local files (region-specific local config)
+# Copy .env.*.local files AND profile snapshots (.env.*.local.*), preserving symlinks
 [[projects."github.com/mentimeter/core-api".pre-start]]
-env = "cd {{ primary_worktree_path }} && find . -name '.env.*.local' | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
+env = "cd {{ primary_worktree_path }} && find . \\( -name '.env.*.local' -o -name '.env.*.local.*' \\) | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp -P $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
 
 # Create mahadia-notes/ folder for Claude session notes
 [[projects."github.com/mentimeter/core-api".pre-start]]
