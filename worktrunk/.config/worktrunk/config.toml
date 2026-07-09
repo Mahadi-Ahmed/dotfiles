@@ -38,9 +38,9 @@ pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-no
 [[projects."github.com/mentimeter/mm-js".pre-start]]
 deps = '''
 if [ -n "$TMUX" ]; then
-  tmux send-keys -t "{{ branch | sanitize }}:1" "cd {{ worktree_path }} && yarn install && echo '📦 Installed dependencies'" Enter
+  tmux send-keys -t "{{ branch | sanitize }}:1" "cd {{ worktree_path }} && pnpm install && echo '📦 Installed dependencies'" Enter
 else
-  cd {{ worktree_path }} && yarn install && echo '📦 Installed dependencies'
+  cd {{ worktree_path }} && pnpm install && echo '📦 Installed dependencies'
 fi
 '''
 
