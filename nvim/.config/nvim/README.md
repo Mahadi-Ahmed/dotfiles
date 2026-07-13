@@ -1,3 +1,5 @@
+- [ ] Find a better markdown viewer plugin
+- [ ] Look into how to work with tabs & keymaps for tabs in neovim
 - [x] Look into tsgo lsp
 - [x] Use native undotree instead of plugin
 - [x] Look into codelenses
