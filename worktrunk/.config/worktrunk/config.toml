@@ -19,13 +19,16 @@ remove = true
 # Create tmux session with layout for new worktrees (runs before per-project hooks)
 tmux_session = '''
 if [ -n "$TMUX" ]; then
-  tmux new-session -d -s "{{ branch | sanitize }}" -c "{{ worktree_path }}"
-  tmux new-window -t "{{ branch | sanitize }}" -c "{{ worktree_path }}"
-  tmux split-window -h -t "{{ branch | sanitize }}:2" -c "{{ worktree_path }}"
-  tmux split-window -v -t "{{ branch | sanitize }}:2.2" -c "{{ worktree_path }}"
-  tmux new-window -t "{{ branch | sanitize }}" -c "{{ worktree_path }}"
-  tmux select-window -t "{{ branch | sanitize }}:1"
-  tmux switch-client -t "{{ branch | sanitize }}"
+  # tmux treats "." and ":" in session names as window.pane / session:window
+  # separators, so strip them to "-" (sanitize only makes the branch path-safe).
+  session=$(printf '%s' "{{ branch | sanitize }}" | tr '.:' '-')
+  tmux new-session -d -s "$session" -c "{{ worktree_path }}"
+  tmux new-window -t "$session" -c "{{ worktree_path }}"
+  tmux split-window -h -t "$session:2" -c "{{ worktree_path }}"
+  tmux split-window -v -t "$session:2.2" -c "{{ worktree_path }}"
+  tmux new-window -t "$session" -c "{{ worktree_path }}"
+  tmux select-window -t "$session:1"
+  tmux switch-client -t "$session"
 fi
 '''
 
@@ -38,7 +41,8 @@ pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-no
 [[projects."github.com/mentimeter/mm-js".pre-start]]
 deps = '''
 if [ -n "$TMUX" ]; then
-  tmux send-keys -t "{{ branch | sanitize }}:1" "cd {{ worktree_path }} && pnpm install && echo '📦 Installed dependencies'" Enter
+  session=$(printf '%s' "{{ branch | sanitize }}" | tr '.:' '-')
+  tmux send-keys -t "$session:1" "cd {{ worktree_path }} && pnpm install && echo '📦 Installed dependencies'" Enter
 else
   cd {{ worktree_path }} && pnpm install && echo '📦 Installed dependencies'
 fi
@@ -59,7 +63,8 @@ pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-no
 [[projects."github.com/mentimeter/core-api".pre-start]]
 deps = '''
 if [ -n "$TMUX" ]; then
-  tmux send-keys -t "{{ branch | sanitize }}:1" "cd {{ worktree_path }} && bundle install && echo '📦 Installed dependencies'" Enter
+  session=$(printf '%s' "{{ branch | sanitize }}" | tr '.:' '-')
+  tmux send-keys -t "$session:1" "cd {{ worktree_path }} && bundle install && echo '📦 Installed dependencies'" Enter
 else
   cd {{ worktree_path }} && bundle install && echo '📦 Installed dependencies'
 fi
