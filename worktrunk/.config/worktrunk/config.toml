@@ -1,5 +1,10 @@
 # Worktrunk user config
 # Stowed from dotfiles repo → ~/.config/worktrunk/config.toml
+#
+# Per-project hooks live in a separate private layer, loaded via
+# WORKTRUNK_SYSTEM_CONFIG_PATH (see zshrc). Worktrunk deep-merges the two, and
+# silently skips the private one when it is missing — so this file alone is a
+# complete, working config.
 
 # Subfolder pattern: worktrees live inside <repo>-worktrees/<branch>
 worktree-path = "{{ repo_path }}/../{{ repo }}-worktrees/{{ branch | sanitize }}"
@@ -31,49 +36,3 @@ if [ -n "$TMUX" ]; then
   tmux switch-client -t "$session"
 fi
 '''
-
-# --- Per-project hooks ---
-
-[projects."github.com/mentimeter/mm-js"]
-# Archive mahadia-notes/ to ai-notes/<branch>/ before worktree is deleted
-pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-notes)\" ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
-# Install JS dependencies (via tmux pane if available, else inline)
-[[projects."github.com/mentimeter/mm-js".pre-start]]
-deps = '''
-if [ -n "$TMUX" ]; then
-  session=$(printf '%s' "{{ branch | sanitize }}" | tr '.:' '-')
-  tmux send-keys -t "$session:1" "cd {{ worktree_path }} && pnpm install && echo '📦 Installed dependencies'" Enter
-else
-  cd {{ worktree_path }} && pnpm install && echo '📦 Installed dependencies'
-fi
-'''
-
-# Copy untracked .env files from main worktree (preserving symlinks and nested app structure)
-[[projects."github.com/mentimeter/mm-js".pre-start]]
-env = "cd {{ primary_worktree_path }} && find . \\( -name '.env' -o -name '.env.local' -o -name '.env.*.local' -o -name '.env.*.local.*' \\) | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp -P $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
-
-# Create mahadia-notes/ folder for Claude session notes
-[[projects."github.com/mentimeter/mm-js".pre-start]]
-notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
-# TODO: Create a hook for copying the .claude/settings.local.json from main into each wt
-
-[projects."github.com/mentimeter/core-api"]
-pre-remove.archive-notes = "if [ -d mahadia-notes ] && [ -n \"$(ls -A mahadia-notes)\" ]; then mkdir -p {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }} && cp -r mahadia-notes/* {{ repo_path }}/../{{ repo }}-worktrees/ai-notes/{{ branch | sanitize }}/ && echo '📝 Archived notes to ai-notes/{{ branch | sanitize }}'; fi"
-# Install Ruby dependencies (via tmux pane if available, else inline)
-[[projects."github.com/mentimeter/core-api".pre-start]]
-deps = '''
-if [ -n "$TMUX" ]; then
-  session=$(printf '%s' "{{ branch | sanitize }}" | tr '.:' '-')
-  tmux send-keys -t "$session:1" "cd {{ worktree_path }} && bundle install && echo '📦 Installed dependencies'" Enter
-else
-  cd {{ worktree_path }} && bundle install && echo '📦 Installed dependencies'
-fi
-'''
-
-# Copy .env.*.local files AND profile snapshots (.env.*.local.*), preserving symlinks
-[[projects."github.com/mentimeter/core-api".pre-start]]
-env = "cd {{ primary_worktree_path }} && find . \\( -name '.env.*.local' -o -name '.env.*.local.*' \\) | grep -v node_modules | while read f; do mkdir -p {{ worktree_path }}/$(dirname $f) && cp -P $f {{ worktree_path }}/$f; done 2>/dev/null; echo '✅ Copied .env files from main worktree'"
-
-# Create mahadia-notes/ folder for Claude session notes
-[[projects."github.com/mentimeter/core-api".pre-start]]
-notes = "mkdir -p {{ worktree_path }}/mahadia-notes && echo '📁 Created mahadia-notes/'"
