@@ -41,6 +41,11 @@ export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
 export FZF_TMUX_OPTS="-p 55%,60%"
 export ATAC_KEY_BINDINGS="/Users/mahadiahmed/.config/atac/vim_key_bindings.toml"
 
+# Worktrunk's private config layer (work-repo hooks, stowed from dotfiles-private).
+# Deep-merges under ~/.config/worktrunk/config.toml. Harmless when absent —
+# worktrunk skips a missing system config silently.
+export WORKTRUNK_SYSTEM_CONFIG_PATH="$HOME/.config/worktrunk-private/config.toml"
+
 # zsh history settings
 HISTSIZE=10000    # Number of commands in memory
 SAVEHIST=50000    # Number of commands saved to HISTFILE
