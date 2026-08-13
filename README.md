@@ -1,5 +1,8 @@
 # Mahadi's dotfiles
 
+# TODO:
+[ ] Tmux topbar should have repo name as a prefix
+
 ![Screenshot](./Screenshot.png)
 
 
