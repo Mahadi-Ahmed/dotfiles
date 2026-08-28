@@ -135,4 +135,22 @@ eval "$(starship init zsh)"
 
 source <(menti activate)
 
-if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+if command -v wt >/dev/null 2>&1; then
+  eval "$(command wt config shell init zsh)"
+
+  # `wt list` pads rows to the exact terminal width and repaints them with
+  # relative cursor moves as remote data streams in. Emoji-presentation
+  # sequences in commit messages (⚠️ = U+26A0 U+FE0F) are drawn as 2 cells but
+  # measured as 1, so such a row overflows by one column, wraps, and throws the
+  # repaint's cursor-up count off — leaving duplicated rows behind in wide
+  # windows. Buffered rendering has no repaint, so it stays correct.
+  # Remove once worktrunk fixes the width accounting (seen in v0.75.0).
+  functions -c wt _wt_worktrunk
+  wt () {
+    if [[ -z "${COMPLETE:-}" && "$1" == list && "$2" != statusline && "$*" != *--progressive* ]]; then
+      _wt_worktrunk "$@" --no-progressive
+    else
+      _wt_worktrunk "$@"
+    fi
+  }
+fi
