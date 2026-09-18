@@ -55,18 +55,6 @@ local plugins = {
     end
   },
   {
-    'nvim-telescope/telescope.nvim',
-    version = '*',
-    dependencies = {
-      { 'nvim-lua/plenary.nvim' },
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    },
-    cmd = 'Telescope',
-    config = function ()
-      require('mahadia.plugins.telescope')
-    end
-  },
-  {
     'folke/snacks.nvim',
     priority = 1000,
     config = function()
