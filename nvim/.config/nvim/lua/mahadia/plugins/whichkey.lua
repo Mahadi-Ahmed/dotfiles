@@ -251,7 +251,7 @@ wk.add({
   { "<leader>sf", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Find files" },
   { "<leader>sh", "<cmd>lua Snacks.picker.pickers()<cr>", desc = "Find pickers" },
   { "<leader>st", "<cmd>Telescope live_grep<cr>", desc = "Find Text" },
-  { "<leader>ss", "<cmd>Telescope spell_suggest theme=cursor<cr>", desc = "Spelling" },
+  { "<leader>ss", "<cmd>lua Snacks.picker.spelling()<cr>", desc = "Spelling" },
   { "<leader>sn", "<cmd>NoiceAll<cr>", desc = "open Notification in window" },
   { "<leader>su", "<cmd>lua Snacks.picker.undo()<cr>", desc = "Undo History" },
   { "<leader>sj", "<cmd>lua Snacks.picker.jumps()<cr>", desc = "Jumps" },

@@ -15,9 +15,37 @@ snacks.setup({
   },
   picker = {
     enabled = true,
+    -- Telescope-like chrome: bordered "Results" list on top, prompt at the
+    -- bottom, preview on the right. `reverse = true` (part of the preset) keeps
+    -- the best match next to the prompt, like telescope's default horizontal
+    -- layout with prompt_position = "bottom".
+    layout = { preset = "telescope" },
     sources = {
       recent = {
         filter = { cwd = true },
+      },
+      -- telescope's `find_files = { hidden = true }`
+      files = {
+        hidden = true,
+        follow = true,
+      },
+      -- telescope's `theme=cursor`: a small window anchored below the cursor.
+      -- NOTE: only override scalar fields here — adding a positional box entry
+      -- would stop snacks from merging the "select" preset in at all.
+      spelling = {
+        layout = {
+          preset = "select",
+          layout = {
+            relative = "cursor",
+            row = 1,
+            col = 0,
+            width = 40,
+            min_width = 40,
+            max_width = 40,
+            height = 0.25,
+            min_height = 3,
+          },
+        },
       },
     },
     -- Increase timeout for LSP operations in large monorepos
