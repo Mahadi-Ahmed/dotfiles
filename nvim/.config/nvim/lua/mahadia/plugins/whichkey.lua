@@ -46,7 +46,7 @@ wk.setup(setup)
 
 -- Mappings
 wk.add({
-  { "<leader><space>", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>" , desc = "find buffers" }, -- NOTE: Prefer telescope, snacks does not handle last_used well
+  { "<leader><space>", "<cmd>lua Snacks.picker.buffers()<cr>", desc = "find buffers" },
   { "<leader>:", "<cmd>lua Snacks.picker.command_history()<cr>", desc = "Command History" },
 
   { "<leader>h", "<cmd>nohlsearch<CR>", desc = "No Highlight" },
@@ -131,7 +131,7 @@ wk.add({
   { "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", desc = "Next Hunk" },
   { "<leader>gk", "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", desc = "Prev Hunk" },
   { "<leader>gl", "<cmd>lua require 'gitsigns'.blame_line()<cr>", desc = "Blame" },
-  { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open changed file" },
+  { "<leader>go", "<cmd>lua Snacks.picker.git_status()<cr>", desc = "Open changed file" },
   { "<leader>gp", "<cmd>lua require 'gitsigns'.preview_hunk_inline()<cr>", desc = "Preview Hunk" },
   { "<leader>gr", "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = "Reset Hunk" },
   { "<leader>gs", "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", desc = "Stage Hunk" },
@@ -227,7 +227,6 @@ wk.add({
   { "<leader>ji", "<cmd>lua require('harpoon'):list():add()<cr>", desc = "Add file" },
   { "<leader>jm", "<cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<cr>", desc = "Toggle menu" },
   { "<leader>js", "<cmd>lua require('harpoon'):list():select(3)<cr>", desc = "Index 3" },
-  -- { "<leader>jr", "<cmd>lua _G.harpoon_telescope(require('harpoon'):list())<cr>", desc = "Telescope Harpoon" },
 
   { "<leader>l", group = "lsp zero" },
   { "<leader>lW", desc = "workspace symbols" },
@@ -246,11 +245,10 @@ wk.add({
   { "<leader>ms", "<cmd>AutoSession save<CR>",group = "Save session for auto session root dir" },
 
   { "<leader>s", group = "Search" },
-  { "<leader>sl", "<cmd>Telescope current_buffer_fuzzy_find theme=ivy<cr>", desc = "Current buffer fuzzy find" },
-  { "<leader>sc", "<cmd>Telescope grep_string<cr>", desc = "Find Text under cursor" },
-  { "<leader>sf", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>", desc = "Find files" },
+  { "<leader>sl", "<cmd>lua Snacks.picker.lines()<cr>", desc = "Current buffer fuzzy find" },
+  { "<leader>sc", "<cmd>lua Snacks.picker.grep_word()<cr>", desc = "Find Text under cursor" },
   { "<leader>sh", "<cmd>lua Snacks.picker.pickers()<cr>", desc = "Find pickers" },
-  { "<leader>st", "<cmd>Telescope live_grep<cr>", desc = "Find Text" },
+  { "<leader>st", "<cmd>lua Snacks.picker.grep()<cr>", desc = "Find Text" },
   { "<leader>ss", "<cmd>lua Snacks.picker.spelling()<cr>", desc = "Spelling" },
   { "<leader>sn", "<cmd>NoiceAll<cr>", desc = "open Notification in window" },
   { "<leader>su", "<cmd>lua Snacks.picker.undo()<cr>", desc = "Undo History" },
