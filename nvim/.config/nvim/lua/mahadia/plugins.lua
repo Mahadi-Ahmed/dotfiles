@@ -60,7 +60,6 @@ local plugins = {
     dependencies = {
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-      { "debugloop/telescope-undo.nvim" },
     },
     cmd = 'Telescope',
     config = function ()

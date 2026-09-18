@@ -47,7 +47,7 @@ wk.setup(setup)
 -- Mappings
 wk.add({
   { "<leader><space>", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>" , desc = "find buffers" }, -- NOTE: Prefer telescope, snacks does not handle last_used well
-  { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+  { "<leader>:", "<cmd>lua Snacks.picker.command_history()<cr>", desc = "Command History" },
 
   { "<leader>h", "<cmd>nohlsearch<CR>", desc = "No Highlight" },
   { "<leader>q", "<cmd>qa<CR>", desc = "Quit" },
@@ -253,7 +253,7 @@ wk.add({
   { "<leader>st", "<cmd>Telescope live_grep<cr>", desc = "Find Text" },
   { "<leader>ss", "<cmd>Telescope spell_suggest theme=cursor<cr>", desc = "Spelling" },
   { "<leader>sn", "<cmd>NoiceAll<cr>", desc = "open Notification in window" },
-  { "<leader>su", "<cmd>Telescope undo<cr>", desc = "Undo History" },
+  { "<leader>su", "<cmd>lua Snacks.picker.undo()<cr>", desc = "Undo History" },
   { "<leader>sj", "<cmd>lua Snacks.picker.jumps()<cr>", desc = "Jumps" },
   { "<leader>sr", "<cmd>lua Snacks.picker.recent()<cr>", desc = "Recent files" },
   { "<leader>sg", "<cmd>lua require('grug-far').open({ transient = true })<cr>", desc = "Grug far" },
