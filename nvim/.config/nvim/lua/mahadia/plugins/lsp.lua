@@ -71,13 +71,12 @@ mason_lspconfig.setup({
     'emmet_language_server',
     'cssls',
     'taplo',
-    'tsgo'
+    'tsc'
   },
   automatic_installation = false,
   automatic_enable = true,
 })
 
-vim.lsp.enable('tsgo')
 -- vim.lsp.config('vtsls', {
 --   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 --   root_markers = {
