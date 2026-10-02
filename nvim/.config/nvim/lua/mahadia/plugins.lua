@@ -291,12 +291,14 @@ local plugins = {
 		end,
 	},
 	{
-		"OXY2DEV/markview.nvim",
-		-- NOTE: Markview to toggle md preview
-		event = "LazyFile",
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = "markdown",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" },
 		opts = {
-			preview = {
-				enable = false, -- disable rendering by default, toggle with :Markview
+			enabled = false, -- disable rendering by default
+			pipe_table = {
+				preset = "round",
+				cell = "padded", -- pad every cell to the column's widest cell
 			},
 		},
 	},

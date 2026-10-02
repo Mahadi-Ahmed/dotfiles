@@ -1,4 +1,4 @@
-- [ ] Find a better markdown viewer plugin
+- [x] Find a better markdown viewer plugin
 - [x] Look into tsgo lsp
 - [x] Use native undotree instead of plugin
 - [x] Look into codelenses
