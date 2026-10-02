@@ -69,6 +69,9 @@ alias moveSc='/Users/mahadiahmed/Code/mahadia/Util-Scripts/screenshot_mover/scre
 alias v='fd --hidden --exclude .git | fzf-tmux -p --height 40% --layout=reverse --border --preview "bat --style=numbers --color=always --line-range :500 {}" | xargs nvim'
 alias vp='fd --hidden --exclude .git | fzf --height 40% --layout=reverse --border --preview "bat --style=numbers --color=always --line-range :500 {}" | xargs nvim'
 
+# Stripe
+alias stripe-listen-devbox="stripe listen -p \"mahadi's sandbox\" --all-snapshot --forward-to http://localhost:9292/payment-services/webhooks"
+
 # Git aliases
 alias glg='git log -n 40 --graph --decorate'
 alias gp='git pull'
