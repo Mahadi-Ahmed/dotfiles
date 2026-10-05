@@ -32,6 +32,7 @@ export MANWIDTH=999
 # Default editor
 export EDITOR="nvim"
 export VISUAL="nvim"
+export SUDO_EDITOR=nvim
 bindkey -e  # Use emacs keybindings (prevent zsh auto-enabling vi mode from EDITOR=nvim)
 export TERMINFO_DIRS=$TERMINFO_DIRS:$HOME/.local/share/terminfo
 

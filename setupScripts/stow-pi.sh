@@ -5,7 +5,6 @@ if [ -f ~/.zshrc ]; then
   mv ~/.zshrc ~/.zshrc.bootstrap.backup
 fi
 
-stow -vt ~ nvim
 stow -vt ~ bat
 stow -vt ~ starship
 stow -vt ~ tmux
