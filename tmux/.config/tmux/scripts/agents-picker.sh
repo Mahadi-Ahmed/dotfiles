@@ -4,7 +4,7 @@
 # / shows the filter input; esc hides it again and goes back to navigating.
 pane=$("$HOME/.config/tmux/scripts/agents.sh" |
   fzf --ansi --header-lines 1 --delimiter '\t' --with-nth 1 --no-sort \
-    --no-border --list-border --input-border --header-border --color 16 \
+    --no-border --list-border --input-border --header-border --color '16,hl:3:bold,hl+:11:bold' \
     --prompt '🤖  ' \
     --no-input \
     --bind 'j:down,k:up,q:abort' \
