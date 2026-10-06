@@ -46,7 +46,7 @@ wk.setup(setup)
 
 -- Mappings
 wk.add({
-	{ "<leader><space>", "<cmd>lua Snacks.picker.buffers()<cr>", desc = "find buffers" },
+	{ "<leader><space>", "<cmd>lua Snacks.picker.buffers({ focus = 'list' })<cr>", desc = "find buffers" },
 	{ "<leader>:", "<cmd>lua Snacks.picker.command_history()<cr>", desc = "Command History" },
 
 	{ "<leader>h", "<cmd>nohlsearch<CR>", desc = "No Highlight" },
