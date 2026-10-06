@@ -55,9 +55,17 @@ run = 'layout floating'
 if.app-name-regex-substring = '1Password'
 run = 'layout floating'
 
+# Slack's screen-share drawing overlay has an empty title; float it so it
+# doesn't get tiled or cause workspace toggling (see AeroSpace discussion #1667)
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+if.window-title-regex-substring = '^$'
+run = 'layout floating'
+
+# Force tiling so huddle pop-outs join the tree and are reachable with focus
 [[on-window-detected]]
 if.app-name-regex-substring = 'Slack'
-run = 'move-node-to-workspace 1'
+run = ['layout tiling', 'move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Spotify'
