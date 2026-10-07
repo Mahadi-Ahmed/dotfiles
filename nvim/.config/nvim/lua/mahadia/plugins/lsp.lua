@@ -1,11 +1,6 @@
 local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
 
--- Increase LSP timeout for large monorepos (30 seconds)
--- Note: The timeout is set per LSP request in milliseconds
--- vim.lsp.set_log_level('OFF') -- Disable LSP logging for better performance
--- vim.g.lsp_timeout = 30000
-
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('mahadia-lsp-attach', { clear = true }),
   callback = function(event)
@@ -65,7 +60,6 @@ mason_lspconfig.setup({
     'eslint',
     'lua_ls',
     'gopls',
-    -- 'vtsls',
     'vue_ls',
     'jsonls',
     'emmet_language_server',
@@ -77,77 +71,6 @@ mason_lspconfig.setup({
   automatic_enable = true,
 })
 
--- vim.lsp.config('vtsls', {
---   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
---   root_markers = {
---     "tsconfig.json",
---     "tsconfig.base.json",
---     "package.json",
---     ".git"
---   },
---   capabilities = capabilities,
---   settings = {
---     vtsls = {
---       tsserver = {
---         globalPlugins = {},
---         -- Increase memory limit for large monorepos (in MB)
---         maxTsServerMemory = 8192,
---       },
---       autoUseWorkspaceTsdk = true,
---       experimental = {
---         completion = {
---           enableServerSideFuzzyMatch = true,
---         },
---       },
---     },
---     typescript = {
---       updateImportsOnFileMove = { enabled = 'always' },
---       suggest = {
---         completeFunctionCalls = true,
---       },
---       referencesCodeLens = { enabled = true },
---       implementationsCodeLens = { enabled = true },
---       preferences = {
---         importModuleSpecifier = 'non-relative',
---       },
---       tsserver = {
---         maxTsServerMemory = 8192,
---         watchOptions = {
---           watchFile = 'useFsEventsOnParentDirectory',
---           watchDirectory = 'useFsEvents',
---           excludeDirectories = { '**/node_modules', '**/.git' },
---         },
---       },
---       inlayHints = {
---         parameterNames = { enabled = 'literals' },
---         parameterTypes = { enabled = true },
---         variableTypes = { enabled = false },
---         propertyDeclarationTypes = { enabled = true },
---         functionLikeReturnTypes = { enabled = true },
---         enumMemberValues = { enabled = true },
---       },
---     },
---     javascript = {
---       updateImportsOnFileMove = { enabled = 'always' },
---       suggest = {
---         completeFunctionCalls = true,
---       },
---     }
---   },
---   before_init = function(_, config)
---     table.insert(config.settings.vtsls.tsserver.globalPlugins, {
---       name = '@vue/typescript-plugin',
---       location = vim.fn.expand('$MASON/packages/vue-language-server/node_modules/@vue/language-server'),
---       languages = { 'vue' },
---       configNamespace = 'typescript',
---       enableForWorkspaceTypeScriptVersions = true,
---     })
---   end,
---   on_attach = function(client)
---     client.server_capabilities.documentFormattingProvider = false
---     client.server_capabilities.documentRangeFormattingProvider = false
---   end,
--- })
 
 vim.lsp.config('tailwindcss', {
   root_markers = {
@@ -304,6 +227,25 @@ vim.lsp.config('taplo', {
   --     },
   --   },
   -- },
+})
+
+vim.lsp.config("jsonls", {
+	capabilities = capabilities,
+	settings = {
+		json = {
+			schemas = {
+				{
+					fileMatch = { "**/.claude/settings.json", "**/.claude/settings.local.json" },
+					url = "https://json.schemastore.org/claude-code-settings.json",
+				},
+				{
+					fileMatch = { "**/.claude/keybindings.json" },
+					url = "https://json.schemastore.org/claude-code-keybindings.json",
+				},
+			},
+			validate = { enable = true },
+		},
+	},
 })
 
 Icons = require('mahadia.plugins.icons')

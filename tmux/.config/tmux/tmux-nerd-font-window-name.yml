@@ -3,6 +3,9 @@ config:
   multi-pane-icon: ""
   show-name: false        # This enables showing the name alongside the icon
   icon-position: "left"  # Shows the icon to the left of the name
+  # Claude Code's native binary runs as its version (pane_current_command = "2.1.292"),
+  # so it can't be matched by name; this icon applies to any semver-named command
+  sem-version-icon: "󰚩"
 
 icons:
   alacritty: ""
