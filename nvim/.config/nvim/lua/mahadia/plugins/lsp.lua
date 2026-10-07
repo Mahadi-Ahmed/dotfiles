@@ -229,23 +229,25 @@ vim.lsp.config('taplo', {
   -- },
 })
 
+-- /Users/mahadiahmed/.claude-work
+
 vim.lsp.config("jsonls", {
-	capabilities = capabilities,
-	settings = {
-		json = {
-			schemas = {
-				{
-					fileMatch = { "**/.claude/settings.json", "**/.claude/settings.local.json" },
-					url = "https://json.schemastore.org/claude-code-settings.json",
-				},
-				{
-					fileMatch = { "**/.claude/keybindings.json" },
-					url = "https://json.schemastore.org/claude-code-keybindings.json",
-				},
-			},
-			validate = { enable = true },
-		},
-	},
+  capabilities = capabilities,
+  settings = {
+    json = {
+      schemas = {
+        {
+          fileMatch = { "**/.claude/settings.json", "**/.claude-work/settings.json","**/.claude/settings.local.json" },
+          url = "https://json.schemastore.org/claude-code-settings.json",
+        },
+        {
+          fileMatch = { "**/.claude/keybindings.json" },
+          url = "https://json.schemastore.org/claude-code-keybindings.json",
+        },
+      },
+      validate = { enable = true },
+    },
+  },
 })
 
 Icons = require('mahadia.plugins.icons')

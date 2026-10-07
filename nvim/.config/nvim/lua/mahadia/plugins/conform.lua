@@ -49,6 +49,23 @@ conform.setup({
 		eslint = {
 			require_cwd = true,
 		},
+		-- conform's range end is inclusive but stylua's --range-end is exclusive,
+		-- so the last char (e.g. the closing `)`) falls outside and stylua skips the statement
+		stylua = {
+			range_args = function(_, ctx)
+				local start_offset, end_offset = require("conform.util").get_offsets_from_range(ctx.buf, ctx.range)
+				return {
+					"--search-parent-directories",
+					"--stdin-filepath",
+					"$FILENAME",
+					"--range-start",
+					tostring(start_offset),
+					"--range-end",
+					tostring(end_offset + 1),
+					"-",
+				}
+			end,
+		},
 	},
 
 	default_format_opts = {
