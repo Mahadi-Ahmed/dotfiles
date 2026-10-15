@@ -1,6 +1,7 @@
 #!/bin/sh
-# Lists tmux panes that have a Claude Code agent status, most urgent first.
-# Status is written by ~/.claude/hooks/agent-status.sh into the pane options
+# Lists tmux panes that have an agent status, most urgent first.
+# Status is written by ~/.claude/hooks/agent-status.sh (Claude Code) and the
+# opencode/.config/opencode/plugins/agent-status plugin (OpenCode) into the pane options
 # @agent_status (waiting|done|working|idle) and @agent_status_at (epoch seconds).
 # Output: a header row, then per pane the display columns, a tab and the
 # pane id (for fzf to jump to). Use with fzf --header-lines 1.

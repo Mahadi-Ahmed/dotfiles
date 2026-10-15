@@ -3,7 +3,7 @@
 | Script | Used by | What it does |
 |---|---|---|
 | `git-repo-name.sh` | status line, `agents.sh` | Prints the git repo name for a directory |
-| `agents.sh` | `agents-picker.sh` | Lists every Claude Code session running in tmux, with its state |
+| `agents.sh` | `agents-picker.sh` | Lists every Claude Code / OpenCode session running in tmux, with its state |
 | `agents-picker.sh` | `C-Space a` | fzf popup over `agents.sh`; `enter` jumps to the agent's pane |
 
 The rest of this file covers the **agent overview** (`agents.sh` + `agents-picker.sh`).
@@ -12,7 +12,7 @@ The rest of this file covers the **agent overview** (`agents.sh` + `agents-picke
 
 ## Agent overview
 
-`C-Space a` opens a popup listing every Claude Code session across all tmux sessions, sorted by urgency:
+`C-Space a` opens a popup listing every Claude Code and OpenCode session across all tmux sessions, sorted by urgency:
 
 | State | Meaning |
 |---|---|
@@ -25,15 +25,24 @@ The rest of this file covers the **agent overview** (`agents.sh` + `agents-picke
 
 ### How it works
 
-Claude Code hooks write the state onto the agent's own tmux pane as pane options (`@agent_status`, `@agent_status_at`). `agents.sh` reads those options from all panes. Nothing is written to disk and there's no daemon or polling.
+Each agent writes its state onto its own tmux pane as pane options (`@agent_status`, `@agent_status_at`): Claude Code through hooks, OpenCode through a plugin. `agents.sh` reads those options from all panes and doesn't care which agent wrote them. Nothing is written to disk and there's no daemon.
 
 ```
-Claude hook ──► agent-status.sh <state> ──► tmux pane option on $TMUX_PANE
-                                                     │
-C-Space a ──► agents-picker.sh ──► agents.sh ◄───────┘  (tmux list-panes -a)
+Claude hook ──► agent-status.sh <state> ──┐
+                                          ├──► tmux pane option on $TMUX_PANE
+OpenCode event ──► plugin tui.ts ─────────┘               │
+                                                          │
+C-Space a ──► agents-picker.sh ──► agents.sh ◄────────────┘  (tmux list-panes -a)
                     │
                     └─► fzf ──► tmux switch-client -t %<pane_id>
 ```
+
+The pane option contract, for anything that wants to show up here:
+
+| Option | Value |
+|---|---|
+| `@agent_status` | `waiting` \| `done` \| `working` \| `idle`. Unset = not listed |
+| `@agent_status_at` | Epoch seconds the state started. Drives the age and the sort within a state |
 
 ---
 
@@ -43,7 +52,9 @@ C-Space a ──► agents-picker.sh ──► agents.sh ◄──────�
 
 - tmux with `focus-events on` (already set in `tmux.conf`)
 - fzf ≥ 0.59 (for `--no-input` / `show-input` / `$FZF_INPUT_STATE`)
-- Claude Code must be **started inside a tmux pane**. The hook relies on `$TMUX_PANE`, so sessions started outside tmux are ignored.
+- The agent must be **started inside a tmux pane**. Both writers rely on `$TMUX_PANE`, so sessions started outside tmux are ignored.
+
+Steps 2–4 are the Claude Code side. For OpenCode, see [the plugin README](../../../../opencode/.config/opencode/plugins/agent-status/README.md); stowing `opencode` is the whole setup.
 
 ### 1. tmux side
 
@@ -173,9 +184,13 @@ jq empty ~/.claude/settings.json && jq '.hooks | keys' ~/.claude/settings.json
 
 ## Known behaviour
 
+Claude Code:
+
 - **Esc interrupt keeps the previous state** (often **waiting** if you escaped a dialog). No hook fires on interrupt. The next prompt resets it.
 - **A pane you're looking at when it finishes stays done** until you leave and come back (`pane-focus-in` only fires on arrival).
 - **The working age is time since the last tool call**, not since the prompt. A large age on a working row suggests a stuck agent.
+
+OpenCode doesn't have these gaps: Esc goes to idle, a focused pane turns idle as soon as it finishes, and the working age counts from the prompt (or your last answer). One pane can hold several sessions (tabs); the row shows the most urgent one, and `enter` jumps to the pane, not the tab.
 
 ---
 
@@ -200,5 +215,6 @@ jq empty ~/.claude/settings.json && jq '.hooks | keys' ~/.claude/settings.json
 2. `rm ~/.claude/hooks/agent-status.sh`
 3. Remove the `pane-focus-in` hook and the `a` binding from `tmux.conf`, then `tmux set-hook -gu pane-focus-in; tmux unbind a`.
 4. Delete `agents.sh` and `agents-picker.sh`.
+5. OpenCode: `stow -vDt ~ opencode` (see the plugin README).
 
 Pane options disappear with their panes; nothing stays on disk.

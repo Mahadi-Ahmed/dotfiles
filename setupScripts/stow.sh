@@ -5,6 +5,10 @@ if [ -f ~/.zshrc ]; then
   mv ~/.zshrc ~/.zshrc.bootstrap.backup
 fi
 
+# ~/.config/opencode is managed by the work tooling. --no-folding links files
+# only, so no folder there can become a symlink into this repo.
+stow --no-folding -vt ~ opencode
+
 stow -vt ~ nvim
 stow -vt ~ aerospace
 stow -vt ~ bat
