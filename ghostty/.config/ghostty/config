@@ -19,6 +19,7 @@ macos-window-shadow = true
 # Ghostty doesn't have cursor trail like Kitty, but we can style the cursor
 cursor-style = block
 cursor-style-blink = true
+mouse-hide-while-typing = true
 
 # ===== Shell Integration =====
 shell-integration = zsh
