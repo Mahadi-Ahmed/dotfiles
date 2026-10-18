@@ -97,6 +97,15 @@ vim.api.nvim_create_autocmd("User", {
     snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>ts")
     snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>tw")
     snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>tL")
+    snacks.toggle.new({
+      name = "Markdown render",
+      get = function()
+        return require("render-markdown").get()
+      end,
+      set = function(state)
+        require("render-markdown").set(state)
+      end,
+    }):map("<leader>tm")
     snacks.toggle.diagnostics():map("<leader>tdd")
 
     snacks.toggle.treesitter():map("<leader>tT")
