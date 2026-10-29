@@ -65,7 +65,8 @@ mason_lspconfig.setup({
     'emmet_language_server',
     'cssls',
     'taplo',
-    'tsc'
+    'tsc',
+    'markdown_oxide'
   },
   automatic_installation = false,
   automatic_enable = true,
@@ -227,6 +228,13 @@ vim.lsp.config('taplo', {
   --     },
   --   },
   -- },
+})
+
+vim.lsp.config('markdown_oxide', {
+  -- Lets the server notice notes created/renamed outside Neovim (e.g. in Obsidian)
+  capabilities = vim.tbl_deep_extend('force', capabilities, {
+    workspace = { didChangeWatchedFiles = { dynamicRegistration = true } },
+  }),
 })
 
 -- /Users/mahadiahmed/.claude-work
