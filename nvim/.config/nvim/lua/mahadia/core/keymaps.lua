@@ -84,4 +84,17 @@ end
 keymap("n", "<leader>yf", yank_file_reference, { desc = "Yank file:line reference", silent = true })
 keymap("v", "<leader>yf", yank_file_reference_range, { desc = "Yank file:line-line reference", silent = true })
 
+-- Reveal current buffer's file in macOS Finder (like `open -a Finder ./`, but selects the file)
+local function reveal_in_finder()
+	local path = vim.fn.expand("%:p")
+	if path == "" or vim.fn.filereadable(path) == 0 then
+		-- Unnamed/scratch/nvim-tree buffer: fall back to opening cwd
+		vim.system({ "open", vim.fn.getcwd() })
+		return
+	end
+	vim.system({ "open", "-R", path })
+end
+
+keymap("n", "<leader>bf", reveal_in_finder, { desc = "Reveal file in Finder", silent = true })
+
 keymap('n', 's', '<Nop>', { noremap = true, silent = true })
