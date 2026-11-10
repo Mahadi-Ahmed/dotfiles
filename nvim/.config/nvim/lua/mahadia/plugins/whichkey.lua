@@ -227,6 +227,53 @@ wk.add({
 		desc = "Diff current file vs another file",
 	},
 
+	-- Trial: diffbandit.nvim (mirrors <leader>gd*)
+	{ "<leader>gD", group = "DiffBandit (trial)" },
+	{ "<leader>gDd", "<cmd>DiffBanditGitCurrent<cr>", desc = "Diff file vs HEAD" },
+	{ "<leader>gDD", "<cmd>DiffBanditGit<cr>", desc = "Changed files (all)" },
+	{ "<leader>gDl", "<cmd>DiffBanditGitLog<cr>", desc = "Commit log" },
+	{ "<leader>gDp", "<cmd>DiffBanditCommitPanel<cr>", desc = "Commit panel" },
+	{ "<leader>gDm", "<cmd>DiffBanditGit --current --base main<cr>", desc = "Diff file vs main" },
+	{
+		"<leader>gDr",
+		function()
+			local rev1 = vim.fn.input("First revision (e.g., main): ")
+			if rev1 == "" then
+				return
+			end
+			local rev2 = vim.fn.input("Second revision (e.g., HEAD): ")
+			if rev2 == "" then
+				return
+			end
+			vim.cmd("DiffBanditGitCompare " .. rev1 .. " " .. rev2)
+		end,
+		desc = "Compare two branches/commits",
+	},
+	{
+		"<leader>gDf",
+		function()
+			local current_file = vim.api.nvim_buf_get_name(0)
+			if current_file == "" then
+				vim.notify("No file in current buffer", vim.log.levels.WARN)
+				return
+			end
+			Snacks.picker.files({
+				hidden = true,
+				follow = true,
+				confirm = function(picker, item)
+					picker:close()
+					if item then
+						local compare_file = item.file or item.path or item[1]
+						vim.cmd(
+							"DiffBandit " .. vim.fn.fnameescape(current_file) .. " " .. vim.fn.fnameescape(compare_file)
+						)
+					end
+				end,
+			})
+		end,
+		desc = "Diff current file vs another file",
+	},
+
 	{ "<leader>gh", group = "GitHub" },
 	{ "<leader>ghp", "<cmd>lua Snacks.picker.gh_pr()<cr>", desc = "List open PRs" },
 	{ "<leader>ghm", "<cmd>lua Snacks.picker.gh_pr({ author = '@me' })<cr>", desc = "My PRs" },

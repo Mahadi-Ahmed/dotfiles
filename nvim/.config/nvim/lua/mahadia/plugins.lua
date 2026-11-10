@@ -330,6 +330,27 @@ local plugins = {
 			require("mahadia.plugins.codediff")
 		end,
 	},
+	-- Trial: running alongside codediff (keymaps under <leader>gD)
+	{
+		"CoreyKaylor/diffbandit.nvim",
+		cmd = {
+			"DiffBandit",
+			"DiffBanditBuffers",
+			"DiffBanditFolderDiff",
+			"DiffBanditGit",
+			"DiffBanditGitCurrent",
+			"DiffBanditGitMenu",
+			"DiffBanditGitLog",
+			"DiffBanditGitCommit",
+			"DiffBanditGitCompare",
+			"DiffBanditMerge",
+			"DiffBanditCommitPanel",
+			"DiffBanditClose",
+		},
+		config = function()
+			require("mahadia.plugins.diffbandit")
+		end,
+	},
 	{
 		"tpope/vim-dadbod",
 		dependencies = {
